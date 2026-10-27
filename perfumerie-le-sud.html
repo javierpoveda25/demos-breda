@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perfumerie Le Sud – Parfumerie in Ginneken, Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Perfumerie Le Sud aan de Wilhelminastraat in Breda: een geurenkiezer en persoonlijk advies.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&family=Outfit:wght@300;400;500;600&display=swap');
+/* DESIGN: parfumerie met zuidelijke ziel. Kleur: lavendel (#6F5BA8), mimosa (#F0D24A), middellandse zee (#1F4E6B), kiezel (#ECEAF1), olijf (#6B7A4B), dieppruim (#2B2140).
+   Type: Bodoni Moda (hoog contrast, als op een flaconetiket) + Outfit (licht, helder).
+   STRUCTUUR: grote wordmark die over een opkomende zon heen valt (overlap), geurenkiezer met een aura die van kleur verandert en een geurpiramide, asymmetrisch cadeau-blok.
+   MOTION: (1) geuraura + geurpiramide die bij elke keuze vloeiend veranderen, (2) zon die bij het laden opkomt, (3) scroll-reveal. Reduced motion gerespecteerd. */
+:root{--lav:#6F5BA8;--mimosa:#F0D24A;--sea:#1F4E6B;--pebble:#ECEAF1;--olive:#6B7A4B;--plum:#2B2140;--white:#fff;--aura:#6F5BA8}
+html{overflow-x:hidden}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--pebble);color:var(--plum);font-size:17px;line-height:1.65;overflow-x:hidden;font-weight:400}
+h1,h2,h3{font-family:'Bodoni Moda',Georgia,serif;font-weight:600;line-height:1.05;color:var(--plum)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--lav);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;font-weight:500;text-decoration:none;border:1.5px solid var(--plum);font:inherit;font-weight:500;cursor:pointer;transition:background .25s,color .25s,transform .2s}
+.btn-main{background:var(--plum);color:#fff}.btn-main:hover{background:var(--lav);border-color:var(--lav)}
+.btn-line{background:transparent;color:var(--plum)}.btn-line:hover{background:var(--plum);color:#fff}
+.demo{background:var(--plum);color:var(--pebble);font-size:.85rem;text-align:center;padding:8px 16px}
+header.top{position:sticky;top:0;z-index:50;background:rgba(236,234,241,.93);backdrop-filter:blur(10px);border-bottom:1px solid #d6d2e1}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:66px}
+.logo{font-family:'Bodoni Moda',serif;font-weight:600;font-size:1.4rem;text-decoration:none}
+.top nav{display:flex;gap:26px;align-items:center}.top nav a{text-decoration:none;font-weight:500;font-size:.95rem}.top nav a:not(.btn):hover{color:var(--lav)}
+.top .btn{padding:9px 18px;font-size:.9rem}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--mimosa);z-index:90}
+
+/* HERO */
+.hero{position:relative;padding:60px 0 120px;overflow:hidden}
+.sun{position:absolute;right:6%;top:30px;width:min(46vw,460px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fbe98a,var(--mimosa) 60%,#e5bd2c);animation:rise 1.6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{transform:translateY(120px);opacity:0}}
+.hero .in{position:relative;z-index:2}
+.hero h1{font-size:clamp(4.6rem,15vw,12rem);letter-spacing:-.03em;line-height:.88;color:var(--sea)}
+.hero p.lead{max-width:26em;margin:26px 0 30px;font-size:1.2rem;font-weight:300}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.rows{position:absolute;left:0;right:0;bottom:0;height:90px;z-index:1}
+.rows svg{width:100%;height:100%}
+
+section{padding:90px 0}
+.sec-head{max-width:32em;margin-bottom:36px}.sec-head h2{font-size:clamp(2.2rem,4.6vw,3.4rem);margin-bottom:12px}
+
+/* GEURENKIEZER */
+.finder{display:grid;grid-template-columns:.85fr 1.15fr;gap:0;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 30px 60px -30px rgba(43,33,64,.35)}
+.tabs{display:flex;flex-direction:column;border-right:1px solid #e4e0ee}
+.tabs button{all:unset;cursor:pointer;padding:22px 28px;border-bottom:1px solid #e4e0ee;font-family:'Bodoni Moda';font-size:1.45rem;font-weight:600;display:flex;justify-content:space-between;align-items:center;transition:background .3s,padding .3s}
+.tabs button:last-child{border-bottom:0}
+.tabs button:hover{background:#f6f4fa;padding-left:36px}
+.tabs button[aria-selected="true"]{background:var(--plum);color:#fff;padding-left:36px}
+.tabs button:focus-visible{outline:3px solid var(--mimosa);outline-offset:-3px}
+.tabs small{font-family:'Outfit';font-weight:300;font-size:.82rem;opacity:.8}
+.stage{padding:34px;position:relative;overflow:hidden;min-height:480px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;background:var(--aura);transition:background .8s}
+.aura{position:absolute;inset:-20%;background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.35),transparent 45%),radial-gradient(circle at 20% 80%,rgba(0,0,0,.25),transparent 50%);animation:breathe 9s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(1) rotate(0)}to{transform:scale(1.12) rotate(8deg)}}
+.stage>*{position:relative;z-index:1}
+.stage h3{color:#fff;font-size:clamp(2rem,4vw,3rem);margin-bottom:8px}
+.stage p{max-width:30em}
+.pyr{margin-top:22px;display:grid;gap:10px}
+.lvl{display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center;font-size:.92rem}
+.lvl b{font-weight:600}
+.bar{height:34px;border-radius:999px;background:rgba(255,255,255,.2);overflow:hidden}
+.bar i{display:flex;height:100%;align-items:center;padding:0 16px;background:rgba(255,255,255,.92);color:var(--plum);font-style:normal;font-weight:500;border-radius:999px;width:0;transition:width .8s cubic-bezier(.2,.8,.2,1);white-space:nowrap;overflow:hidden}
+
+/* CADEAU */
+.gift{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:start}
+.gcard{background:var(--sea);color:#fff;border-radius:28px;padding:36px;margin-top:-50px;position:relative;z-index:2}
+.gcard h2{color:#fff;font-size:clamp(2rem,4vw,2.8rem);margin-bottom:12px}
+.gcard fieldset{border:0;margin:16px 0}.gcard legend{font-weight:500;margin-bottom:8px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}.opts input{position:absolute;opacity:0}
+.opts label{padding:9px 18px;border:1.5px solid rgba(255,255,255,.6);border-radius:999px;cursor:pointer;transition:all .2s}
+.opts input:checked+label{background:var(--mimosa);color:var(--plum);border-color:var(--mimosa)}
+.opts input:focus-visible+label{outline:3px solid #fff;outline-offset:2px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.gcard label{display:block;font-weight:500;margin:6px 0 4px}.gcard input[type=text]{width:100%;padding:11px;border-radius:10px;border:0;font:inherit}
+.tip{background:rgba(255,255,255,.12);border-radius:14px;padding:18px;margin-top:14px}
+.tip b{font-family:'Bodoni Moda';font-size:1.3rem}
+.why{padding-top:40px}.why ul{list-style:none;display:grid;gap:16px}
+.why li{padding-left:30px;position:relative}.why li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:14px;border-radius:50% 0;background:var(--lav);transform:rotate(45deg)}
+.why b{display:block;font-family:'Bodoni Moda';font-size:1.25rem}
+
+.contact{background:var(--plum);color:var(--pebble);padding:70px 0}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact h2{color:#fff;font-size:2.6rem;margin-bottom:10px}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px}.contact dt{color:var(--mimosa);font-weight:500}
+.todo{background:rgba(255,255,255,.14);border-radius:6px;padding:1px 9px;font-size:.88rem}
+footer{background:#1d1630;color:#b8b0cc;font-size:.88rem;padding:18px 0}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s,transform .8s}.reveal.is-visible{opacity:1;transform:none}
+@media (max-width:800px){
+  .top nav a:not(.btn){display:none}
+  .finder,.gift,.contact .wrap{grid-template-columns:1fr}
+  .tabs{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid #e4e0ee}.tabs button{padding:16px 20px;border-bottom:0;white-space:nowrap;font-size:1.15rem}.tabs button small{display:none}.tabs button:hover,.tabs button[aria-selected="true"]{padding-left:20px}
+  .stage{min-height:420px;padding:24px}.gcard{margin-top:0;padding:26px}.hero{padding-bottom:100px}
+}
+@media (prefers-reduced-motion:reduce){.sun,.aura{animation:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.bar i,.stage{transition:none}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo">Demo-ontwerp als voorstel. Merken, foto's en tijden vullen we samen met de eigenaar in.</div>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#top">Perfumerie Le Sud</a>
+  <nav aria-label="Hoofdmenu"><a href="#geuren">Geurenkiezer</a><a href="#cadeau">Kom voorbereid</a><a href="#contact">Contact</a><a class="btn btn-main" href="#contact">Kom langs</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero">
+  <div class="sun" aria-hidden="true"></div>
+  <div class="wrap in">
+    <h1>Le Sud</h1>
+    <p class="lead">Een parfumerie in Ginneken waar u rustig kunt ruiken, vragen en kiezen. Voor uzelf, of voor iemand die u een geur gunt.</p>
+    <div class="cta"><a class="btn btn-main" href="#geuren">Vind uw geurfamilie</a><a class="btn btn-line" href="tel:+31763031209">Bel 076 303 1209</a></div>
+  </div>
+  <div class="rows" aria-hidden="true"><svg id="lav" viewBox="0 0 1200 90" preserveAspectRatio="none"></svg></div>
+</section>
+
+<section id="geuren" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Welke geur past bij u?</h2><p>Kies een geurfamilie en zie hoe zo'n geur is opgebouwd: wat u meteen ruikt, wat daarna komt en wat blijft hangen. In de winkel proeft u het echt.</p></div>
+    <div class="finder reveal">
+      <div class="tabs" role="tablist" aria-label="Geurfamilies" id="tabs"></div>
+      <div class="stage" id="stage" role="tabpanel"><div class="aura"></div>
+        <h3 id="sn"></h3><p id="sd"></p>
+        <div class="pyr" id="pyr"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cadeau" style="padding-top:20px">
+  <div class="wrap gift">
+    <div class="why reveal">
+      <h2 style="font-size:clamp(2.2rem,4.4vw,3.2rem);margin-bottom:18px">Waarom eerst ruiken in de winkel</h2>
+      <ul>
+        <li><b>Een geur ruikt op iedereen anders</b>Op uw huid verandert hij. Daarom laten we u eerst proberen.</li>
+        <li><b>Neem de tijd</b>Eén of twee geuren tegelijk, dan een kop koffie en terugkomen.</li>
+        <li><b>Cadeau zonder gokken</b>Vertel wie het wordt en wat u uitgeeft, dan zoeken we samen verder.</li>
+      </ul>
+    </div>
+    <div class="gcard reveal">
+      <h2>Kom voorbereid binnen</h2>
+      <p>Vertel kort wat u zoekt. Wij leggen alvast een paar geuren klaar, dan hoeft u niet te wachten.</p>
+      <fieldset><legend>Voor wie is de geur?</legend><div class="opts" id="g1"></div></fieldset>
+      <fieldset><legend>Welke families spreken u aan? (meerdere mogelijk)</legend><div class="opts" id="g2"></div></fieldset>
+      <fieldset><legend>Budget</legend><div class="opts" id="g3"></div></fieldset>
+      <div class="r2"><div><label for="gn">Uw naam</label><input type="text" id="gn" autocomplete="name"></div><div><label for="gd">Wanneer komt u?</label><input type="text" id="gd" placeholder="Bijvoorbeeld zaterdagmiddag"></div></div>
+      <div class="tip" id="tip" aria-live="polite"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button type="button" class="btn btn-main" id="copy" style="background:var(--mimosa);color:var(--plum);border-color:var(--mimosa)">Kopieer mijn bericht</button><a class="btn btn-line" style="color:#fff;border-color:#fff" href="https://instagram.com/perfumerielesud" rel="noopener" target="_blank">Open Instagram</a><a class="btn btn-line" style="color:#fff;border-color:#fff" href="tel:+31763031209">Bel ons</a></div>
+      <p id="cp" style="margin-top:10px;font-size:.9rem;min-height:1.4em" aria-live="polite"></p>
+      <p style="font-size:.85rem;opacity:.85"><span class="todo">Bestellen en afspraken via mail volgen zodra het adres bekend is</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact"><div class="wrap">
+  <div class="reveal"><h2>Wilhelminastraat 25</h2><p>Midden in Ginneken, Breda.</p></div>
+  <dl class="reveal">
+    <dt>Adres</dt><dd>Wilhelminastraat 25, Breda</dd>
+    <dt>Telefoon</dt><dd><a href="tel:+31763031209">076 303 1209</a></dd>
+    <dt>Instagram</dt><dd><a href="https://instagram.com/perfumerielesud" rel="noopener">@perfumerielesud</a></dd>
+    <dt>Openingstijden</dt><dd><span class="todo">Nog in te vullen</span></dd>
+    <dt>Merken</dt><dd><span class="todo">Overzicht volgt van de eigenaar</span></dd>
+  </dl>
+</div></section>
+</main>
+<footer><div class="wrap">Perfumerie Le Sud, Wilhelminastraat 25, Breda. Demo-ontwerp, geen officiële website van het bedrijf.</div></footer>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Lavendelrijen onderaan de hero */
+  var s=document.getElementById('lav'),h='';
+  for(var i=0;i<60;i++){var x=i*20+((i%3)*4),hh=34+((i*37)%30);h+='<path d="M'+x+' 90 C '+(x+3)+' '+(90-hh/2)+' '+(x-2)+' '+(90-hh)+' '+x+' '+(90-hh-6)+'" stroke="#6B7A4B" stroke-width="2" fill="none"/>';
+    for(var k=0;k<5;k++){h+='<ellipse cx="'+(x+(k%2?3:-3))+'" cy="'+(90-hh+k*6-4)+'" rx="3.2" ry="5" fill="#6F5BA8" opacity="'+(0.9-k*0.08)+'"/>';}}
+  s.innerHTML=h;
+  /* Geurenkiezer */
+  var F=[
+   {n:'Fleurig',sub:'jasmijn, roos, pioen',c:'#8A5FA8',d:'Zacht en romantisch. Geuren als een boeket, van tuinrozen tot witte bloemen.',t:['bergamot','roos'],hh:['jasmijn','pioen'],b:['musk','sandelhout']},
+   {n:'Fris',sub:'citrus, zee, groene thee',c:'#2E86A5',d:'Licht en helder. Denk aan citrusschil, zeewind en vers gesneden gras.',t:['citroen','mandarijn'],hh:['groene thee','lavendel'],b:['witte musk','cederhout']},
+   {n:'Houtig',sub:'ceder, vetiver, patchoeli',c:'#5E6B3E',d:'Warm en aards. Geuren die doen denken aan een bos na regen.',t:['grapefruit','peper'],hh:['vetiver','iris'],b:['cederhout','patchoeli']},
+   {n:'Gourmand',sub:'vanille, tonka, karamel',c:'#B0693A',d:'Zoet en omarmend. Geuren met een vleugje dessert, voor wie van behaaglijk houdt.',t:['peer','amandel'],hh:['vanille','tonkaboon'],b:['karamel','amber']},
+   {n:'Oriëntaals',sub:'amber, wierook, specerijen',c:'#7A2F4F',d:'Rijk en diep. Specerijen, hars en amber voor een avond die blijft hangen.',t:['saffraan','kardemom'],hh:['roos','wierook'],b:['amber','oud']}
+  ];
+  var tabs=document.getElementById('tabs'),stage=document.getElementById('stage'),cur=0;
+  F.forEach(function(f,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.innerHTML='<span>'+f.n+'<br><small>'+f.sub+'</small></span><span aria-hidden="true">+</span>';b.addEventListener('click',function(){show(i);});b.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowRight'){show((i+1)%F.length);tabs.children[(i+1)%F.length].focus();}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){show((i+F.length-1)%F.length);tabs.children[(i+F.length-1)%F.length].focus();}});tabs.appendChild(b);});
+  function show(i){
+    cur=i;var f=F[i];[].forEach.call(tabs.children,function(b,k){b.setAttribute('aria-selected',k===i);});
+    stage.style.setProperty('--aura',f.c);
+    document.getElementById('sn').textContent=f.n;document.getElementById('sd').textContent=f.d;
+    var p=document.getElementById('pyr');
+    p.innerHTML=[['Kop',f.t,'Eerste indruk'],['Hart',f.hh,'Na een kwartier'],['Basis',f.b,'Blijft uren']].map(function(r){return '<div class="lvl"><b>'+r[0]+'</b><div class="bar"><i>'+r[1].join(', ')+'</i></div></div>';}).join('');
+    var w=[40,64,92];requestAnimationFrame(function(){requestAnimationFrame(function(){[].forEach.call(p.querySelectorAll('.bar i'),function(el,k){el.style.width=w[k]+'%';});});});
+  }
+  show(0);
+  /* Geurprofiel: bericht dat de winkel helpt om alvast geuren klaar te leggen */
+  var G1=['Mezelf','Mijn partner','Een vriend of vriendin','Familie','Zakelijk cadeau'],G3=['Tot 50 euro','50 tot 100 euro','Meer dan 100 euro','Weet ik nog niet'];
+  var gb=1;
+  function mkr(id,list,single){var box=document.getElementById(id);list.forEach(function(t,i){var inp=document.createElement('input'),lb=document.createElement('label'),k=id+i;inp.type=single?'radio':'checkbox';inp.name=id;inp.id=k;inp.value=t;inp.checked=single&&i===0;lb.htmlFor=k;lb.textContent=t;inp.addEventListener('change',tip);box.appendChild(inp);box.appendChild(lb);});}
+  mkr('g1',G1,true);mkr('g2',F.map(function(f){return f.n;}),false);mkr('g3',G3,true);
+  document.getElementById('gn').addEventListener('input',tip);document.getElementById('gd').addEventListener('input',tip);
+  function pick(id){return [].map.call(document.querySelectorAll('#'+id+' input:checked'),function(i){return i.value;});}
+  function msg(){var fam=pick('g2');return 'Hallo Perfumerie Le Sud,\n\nIk kom graag langs'+(document.getElementById('gd').value?' ('+document.getElementById('gd').value+')':'')+'. Ik zoek een geur voor: '+pick('g1')[0].toLowerCase()+'.\nGeurfamilies die me aanspreken: '+(fam.length?fam.join(', ').toLowerCase():'nog geen voorkeur')+'.\nBudget: '+pick('g3')[0].toLowerCase()+'.\n\nGroet,\n'+(document.getElementById('gn').value||'(naam)');}
+  function tip(){document.getElementById('tip').innerHTML='<b>Uw bericht</b><p style="white-space:pre-line;font-size:.92rem">'+msg().replace(/</g,'&lt;')+'</p>';}
+  tip();
+  document.getElementById('copy').addEventListener('click',function(){var t=msg(),o=document.getElementById('cp');function ok(){o.textContent='Gekopieerd. Plak het in een bericht op Instagram of lees het voor aan de telefoon.';}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){o.textContent='Kopiëren lukt hier niet. Selecteer de tekst hierboven.';});}else{o.textContent='Kopiëren lukt hier niet. Selecteer de tekst hierboven.';}});
+  var rev=[].slice.call(document.querySelectorAll('.reveal'));
+  if(reduce||!('IntersectionObserver' in window)){rev.forEach(function(e){e.classList.add('is-visible');});}
+  else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var sb=[].slice.call(e.target.parentNode.children).filter(function(x){return x.classList.contains('reveal');});setTimeout(function(){e.target.classList.add('is-visible');},Math.max(0,sb.indexOf(e.target))*100);io.unobserve(e.target);}});},{threshold:.12});rev.forEach(function(e){io.observe(e);});}
+  var pg=document.getElementById('pg');addEventListener('scroll',function(){var e=document.documentElement;pg.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';},{passive:true});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reparola Breda – Pasta bar aan de Wilhelminastraat (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Reparola in Breda: pasta bar met een bord om zelf samen te stellen en online reserveren.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rammetto+One&family=DM+Sans:wght@400;500;700&display=swap');
+/* DESIGN: pasta bar. Kleur: durum (#E8B84A), basilicum (#2F5E3E), pomodoro (#D5382A), marmer (#F4F5F2), espresso (#2A1F1A), olijf (#8A9A5B).
+   Type: Rammetto One (retro uithangbord) + DM Sans (tekst).
+   STRUCTUUR: een spaghettislinger die tijdens het scrollen over de hele pagina wordt getekend (achter de inhoud), schuine lint met pastasoorten, bordbouwer als hoofdattractie.
+   MOTION: (1) scroll-gekoppelde spaghettilijn, (2) lint met pastasoorten, (3) scroll-reveal. Reduced motion gerespecteerd. */
+:root{--durum:#E8B84A;--basil:#2F5E3E;--tomato:#D5382A;--marble:#F4F5F2;--esp:#2A1F1A;--olive:#8A9A5B;--white:#fff}
+html{overflow-x:hidden}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--marble);color:var(--esp);font-size:17px;line-height:1.6;overflow-x:hidden;position:relative}
+h1,h2,h3{font-family:'Rammetto One',Impact,sans-serif;font-weight:400;line-height:1.05;color:var(--basil)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--tomato);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+.btn{display:inline-block;padding:14px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:3px solid var(--esp);font:inherit;font-weight:700;cursor:pointer;transition:transform .2s,background .2s,color .2s}
+.btn-red{background:var(--tomato);color:#fff;border-color:var(--tomato)}.btn-red:hover{transform:rotate(-2deg) scale(1.03)}
+.btn-line{background:transparent;color:var(--esp)}.btn-line:hover{background:var(--esp);color:#fff}
+.demo{background:var(--esp);color:var(--marble);font-size:.85rem;text-align:center;padding:8px 16px;position:relative;z-index:5}
+header.top{position:sticky;top:0;z-index:50;background:rgba(244,245,242,.94);backdrop-filter:blur(8px);border-bottom:3px solid var(--esp)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-family:'Rammetto One';font-size:1.4rem;color:var(--tomato);text-decoration:none}
+.top nav{display:flex;gap:22px;align-items:center}.top nav a{text-decoration:none;font-weight:500;font-size:.95rem}.top nav a:not(.btn):hover{color:var(--tomato)}
+.top .btn{padding:8px 16px;font-size:.9rem;border-width:2px}
+.pg{position:fixed;top:0;left:0;height:4px;width:0;background:var(--tomato);z-index:90}
+#line{position:absolute;left:0;top:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
+#line{opacity:.55}
+#line path{fill:none;stroke:var(--durum);stroke-width:8;stroke-linecap:round;vector-effect:non-scaling-stroke}
+
+.hero{padding:70px 0 100px}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(3rem,7.4vw,6rem)}
+.hero p.lead{max-width:28em;margin:22px 0 28px;font-size:1.15rem}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.sign{background:var(--tomato);color:#fff;border-radius:50%;width:min(100%,360px);aspect-ratio:1;margin:0 auto;display:grid;place-items:center;text-align:center;padding:30px;transform:rotate(6deg);box-shadow:0 0 0 10px var(--marble),0 0 0 14px var(--tomato)}
+.sign b{font-family:'Rammetto One';font-weight:400;font-size:2.2rem;line-height:1.05;display:block}
+.sign span{font-size:1rem;display:block;margin-top:8px}
+
+.ribbon{background:var(--basil);color:#fff;transform:rotate(-2deg);margin:0 -20px;padding:14px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:3;border-block:4px solid var(--durum)}
+.rtrack{display:inline-flex;animation:mq 30s linear infinite}
+.rtrack span{font-family:'Rammetto One';font-size:1.4rem;padding:0 26px;display:inline-flex;gap:52px;align-items:center}
+.rtrack span::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--durum)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{padding:90px 0;position:relative}
+.sec-head{max-width:32em;margin-bottom:34px}.sec-head h2{font-size:clamp(2rem,4.2vw,3rem);margin-bottom:12px}
+
+/* BORDBOUWER */
+.builder{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;background:var(--white);border:3px solid var(--esp);border-radius:28px;padding:34px;box-shadow:10px 10px 0 var(--esp)}
+.plate{width:100%;max-width:380px;margin:0 auto;display:block}
+.plate .sauce,.plate .noodle,.plate .top{transition:fill .5s,stroke .5s}
+.q{border:0;margin-bottom:18px}.q legend{font-family:'Rammetto One';color:var(--basil);margin-bottom:8px;font-size:1.05rem}
+.opts{display:flex;gap:8px;flex-wrap:wrap}.opts input{position:absolute;opacity:0}
+.opts label{padding:8px 16px;border:2px solid var(--esp);border-radius:999px;cursor:pointer;font-weight:500;transition:all .2s}
+.opts input:checked+label{background:var(--esp);color:#fff;transform:rotate(-1.5deg)}
+.opts input:focus-visible+label{outline:3px solid var(--tomato);outline-offset:2px}
+.your{margin-top:6px;background:var(--durum);border-radius:12px;padding:14px 18px;font-weight:700}
+.note{font-size:.88rem;margin-top:10px}
+
+/* RESERVEREN */
+.res{background:var(--basil);color:#fff;border-radius:28px;padding:40px;display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;position:relative;margin-top:-30px}
+.res h2{color:var(--durum);font-size:clamp(2rem,4vw,2.8rem);margin-bottom:10px}
+.res label{display:block;font-weight:700;margin:12px 0 5px}
+.res input,.res select{width:100%;padding:12px;border-radius:10px;border:0;font:inherit}
+.res .r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.res .opts label{border-color:#fff;color:#fff}.res .opts input:checked+label{background:var(--durum);color:var(--esp);border-color:var(--durum);transform:none}
+.res .wens b{display:block;margin-bottom:8px}
+.res .out{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.res .btn-line{color:#fff;border-color:#fff}.res .btn-line:hover{background:#fff;color:var(--basil)}
+.grpform{background:#fff;border:3px solid var(--esp);border-radius:24px;padding:28px;box-shadow:8px 8px 0 var(--esp)}
+.grpform label{display:block;font-weight:700;margin:8px 0 5px}.grpform input,.grpform select{width:100%;padding:12px;border-radius:10px;border:2px solid var(--esp);font:inherit;background:#fff}
+.r3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.res textarea{margin-bottom:0}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.fact{background:#fff;border:3px solid var(--esp);border-radius:16px;padding:20px}.fact h3{font-size:1.15rem;margin-bottom:6px;color:var(--tomato)}
+
+.contact{background:var(--esp);color:var(--marble);padding:70px 0}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact h2{color:var(--durum);font-size:2.4rem;margin-bottom:10px}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px}.contact dt{color:var(--durum);font-weight:700}
+.todo{background:rgba(255,255,255,.15);border-radius:6px;padding:1px 9px;font-size:.88rem}
+footer{background:#1b1410;color:#b9aca4;font-size:.88rem;padding:18px 0;position:relative;z-index:2}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s}.reveal.is-visible{opacity:1;transform:none}
+@media (max-width:800px){
+  .top nav a:not(.btn){display:none}
+  .hero .grid,.res,.contact .wrap,.facts,.r3{grid-template-columns:1fr}
+  .sign{width:70%}.builder{padding:22px;box-shadow:6px 6px 0 var(--esp)}.res{padding:26px}
+}
+@media (prefers-reduced-motion:reduce){.rtrack{animation:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.plate *{transition:none}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<svg id="line" aria-hidden="true" preserveAspectRatio="none"><path id="spag" d=""/></svg>
+<div class="demo">Demo-ontwerp als voorstel. De echte kaart, foto's en tijden vullen we samen met Reparola in.</div>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#top">Reparola</a>
+  <nav aria-label="Hoofdmenu"><a href="#reserveer">Reserveren</a><a href="#groepen">Groepen</a><a href="#contact">Contact</a><a class="btn btn-red" href="#reserveer">Reserveer</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap grid">
+  <div class="reveal">
+    <h1>Pasta bar in het hart van Ginneken</h1>
+    <p class="lead">Aan de Wilhelminastraat in Breda. Verse pasta, een gezellige bar en een tafel voor wie komt eten met vrienden.</p>
+    <div class="cta"><a class="btn btn-red" href="#reserveer">Reserveer een tafel</a><a class="btn btn-line" href="#groepen">Groepen en borrels</a></div>
+  </div>
+  <div class="sign reveal" aria-hidden="true"><div><b>Pasta<br>bar</b><span>Wilhelminastraat 15, Breda</span></div></div>
+</div></section>
+
+<div class="ribbon" aria-hidden="true"><div class="rtrack" id="rt"></div></div>
+
+<section id="reserveer" style="padding-top:60px">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Reserveer in een minuut</h2><p>Vertel meteen wat het restaurant moet weten: allergieën, een kinderstoel of een verjaardag. Dan hoeft er niet teruggebeld te worden.</p></div>
+    <form class="res reveal" onsubmit="return false" style="margin-top:0">
+      <div>
+        <h2>Een tafel voor jullie</h2>
+        <p>Je verstuurt een verzoek per e-mail. Reparola bevestigt per mail of telefoon.</p>
+        <p class="note" style="margin-top:12px"><span class="todo">Tafelindeling en tijden te bevestigen met Reparola</span></p>
+        <div class="wens" id="wens" style="margin-top:20px"><b>Laat ons weten</b>
+          <div class="opts" id="o-wens"></div></div>
+      </div>
+      <div>
+        <div class="r2"><div><label for="dat">Datum</label><input type="date" id="dat"></div><div><label for="tijd">Tijd</label><input type="time" id="tijd" value="18:30"></div></div>
+        <div class="r2"><div><label for="pers">Personen</label><select id="pers"></select></div><div><label for="naam">Naam</label><input type="text" id="naam" autocomplete="name"></div></div>
+        <label for="tel">Telefoonnummer (voor bevestiging)</label><input type="tel" id="tel" autocomplete="tel">
+        <label for="toel">Toelichting</label><textarea id="toel" rows="2" style="width:100%;padding:12px;border-radius:10px;border:0;font:inherit" placeholder="Bijvoorbeeld welke allergie, of voor wie de verjaardag is"></textarea>
+        <p class="warn" id="grp" style="display:none;margin-top:10px;background:var(--durum);color:var(--esp);border-radius:10px;padding:10px 14px;font-weight:700">Vanaf 8 personen? Kijk ook bij Groepen en borrels hieronder, dan regelen we het samen.</p>
+        <div class="out"><a class="btn btn-red" id="mail" href="#">Verstuur per e-mail</a><a class="btn btn-line" href="tel:+31763038771">Bel 076 303 8771</a></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="groepen" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Groepen, borrels en feesten</h2><p>Een verjaardag, een teamuitje of een afscheid. Geef de basis door en Reparola komt met een voorstel.</p></div>
+    <form class="grpform reveal" onsubmit="return false">
+      <div class="r3">
+        <div><label for="gp">Hoeveel mensen?</label><input type="number" id="gp" min="8" max="60" value="12"></div>
+        <div><label for="gd">Gewenste datum</label><input type="date" id="gd"></div>
+        <div><label for="gb">Budget per persoon</label><select id="gb"><option>Nog geen idee</option><option>tot 25 euro</option><option>25 tot 40 euro</option><option>meer dan 40 euro</option></select></div>
+      </div>
+      <fieldset class="q" style="margin-top:14px"><legend>Wat past erbij?</legend><div class="opts" id="o-gr"></div></fieldset>
+      <div class="r3"><div><label for="gn">Naam</label><input type="text" id="gn"></div><div><label for="gt">Telefoonnummer</label><input type="tel" id="gt"></div><div style="display:flex;align-items:flex-end"><a class="btn btn-red" id="gm" href="#" style="width:100%;text-align:center">Vraag een voorstel aan</a></div></div>
+      <p class="note"><span class="todo">Groepsmenu's en prijzen te bevestigen met Reparola</span></p>
+    </form>
+    <div class="facts">
+      <div class="fact reveal"><h3>Allergieën en dieet</h3><p>Geef het bij je reservering door. Een allergenenoverzicht komt op deze pagina.</p></div>
+      <div class="fact reveal"><h3>Aan de bar of aan tafel</h3><p>Even snel of de hele avond.</p></div>
+      <div class="fact reveal"><h3>In Ginneken</h3><p>Tussen de winkels en cafés van de Wilhelminastraat.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact" style="padding:70px 0"><div class="wrap">
+  <div class="reveal"><h2>Kom eten</h2><p>Wilhelminastraat 15, Breda.</p></div>
+  <dl class="reveal">
+    <dt>Telefoon</dt><dd><a href="tel:+31763038771">076 303 8771</a></dd>
+    <dt>E-mail</dt><dd><a href="mailto:breda@reparola.nl">breda@reparola.nl</a></dd>
+    <dt>Instagram</dt><dd><a href="https://instagram.com/reparola_pasta_bar" rel="noopener">@reparola_pasta_bar</a></dd>
+    <dt>Openingstijden</dt><dd><span class="todo">Nog in te vullen</span></dd>
+    <dt>Kaart</dt><dd><span class="todo">Link naar de actuele kaart</span></dd>
+  </dl>
+</div></section>
+</main>
+<footer><div class="wrap" style="padding:0 24px">Reparola Breda, Wilhelminastraat 15. Demo-ontwerp, geen officiële website van het bedrijf.</div></footer>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Lint */
+  var items=['Spaghetti','Penne','Tagliatelle','Rigatoni','Gnocchi','Fusilli'],h='';for(var r=0;r<2;r++)items.forEach(function(t){h+='<span>'+t+'</span>';});document.getElementById('rt').innerHTML=h;
+  /* Spaghettilijn: slingert over de hele pagina, getekend op scrollvoortgang */
+  var svg=document.getElementById('line'),path=document.getElementById('spag'),len=0;
+  function layout(){
+    var H=document.body.scrollHeight,W=document.body.clientWidth;svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.style.height=H+'px';
+    var d='M '+(W*0.46)+' 40',y=40,i=0,side=1;
+    while(y<H-200){var ny=y+520;var cx=side>0?W*0.97:W*0.03;d+=' C '+cx+' '+(y+130)+' '+cx+' '+(ny-130)+' '+(W*0.5+(side>0?-W*0.12:W*0.12))+' '+ny;y=ny;side*=-1;i++;}
+    path.setAttribute('d',d);len=path.getTotalLength();path.style.strokeDasharray=len;update();
+  }
+  function update(){var e=document.documentElement,p=reduce?1:Math.min(1,(e.scrollTop+innerHeight*0.7)/e.scrollHeight);path.style.strokeDashoffset=len*(1-p);}
+  addEventListener('scroll',update,{passive:true});addEventListener('resize',layout);
+  /* Reservering: gestructureerd bericht zodat het restaurant niet hoeft terug te bellen */
+  var ps=document.getElementById('pers');for(var n=1;n<=14;n++){var o=document.createElement('option');o.value=n;o.textContent=n+(n===1?' persoon':' personen');if(n===2)o.selected=true;ps.appendChild(o);}
+  var d=document.getElementById('dat'),gd=document.getElementById('gd'),tm=new Date();d.min=gd.min=tm.toISOString().slice(0,10);tm.setDate(tm.getDate()+2);d.value=tm.toISOString().slice(0,10);
+  function chips(id,list,cb){var box=document.getElementById(id);list.forEach(function(t,i){var inp=document.createElement('input'),lb=document.createElement('label'),k=id+i;inp.type='checkbox';inp.id=k;inp.value=t;lb.htmlFor=k;lb.textContent=t;inp.addEventListener('change',cb);box.appendChild(inp);box.appendChild(lb);});}
+  chips('o-wens',['Allergie of dieet','Kinderstoel','Verjaardag of feest','Rolstoel of buggy','Zitten bij het raam'],build);
+  chips('o-gr',['Borrel met hapjes','Diner met vaste menu','Teamuitje','Verjaardag','Afscheid of receptie'],buildG);
+  function checked(id){return [].map.call(document.querySelectorAll('#'+id+' input:checked'),function(i){return i.value.toLowerCase();});}
+  function build(){
+    var w=checked('o-wens'),n=+ps.value;document.getElementById('grp').style.display=n>=8?'block':'none';
+    var t='Hallo Reparola,\n\nIk wil graag reserveren op '+d.value+' om '+document.getElementById('tijd').value+' voor '+n+' personen.'+(w.length?'\nLaat weten: '+w.join(', ')+'.':'')+(document.getElementById('toel').value?'\nToelichting: '+document.getElementById('toel').value:'')+'\n\nGroet,\n'+(document.getElementById('naam').value||'(naam)')+(document.getElementById('tel').value?'\nTel: '+document.getElementById('tel').value:'');
+    document.getElementById('mail').href='mailto:breda@reparola.nl?subject='+encodeURIComponent('Reservering '+n+' personen')+'&body='+encodeURIComponent(t);
+  }
+  function buildG(){
+    var w=checked('o-gr'),t='Hallo Reparola,\n\nWij zoeken een plek voor een groep van '+document.getElementById('gp').value+' personen'+(gd.value?' op '+gd.value:'')+'.\nBudget per persoon: '+document.getElementById('gb').value.toLowerCase()+'.'+(w.length?'\nHet gaat om: '+w.join(', ')+'.':'')+'\nKunnen jullie een voorstel doen?\n\nGroet,\n'+(document.getElementById('gn').value||'(naam)')+(document.getElementById('gt').value?'\nTel: '+document.getElementById('gt').value:'');
+    document.getElementById('gm').href='mailto:breda@reparola.nl?subject='+encodeURIComponent('Aanvraag groep')+'&body='+encodeURIComponent(t);
+  }
+  ['dat','tijd','pers','naam','tel','toel'].forEach(function(i){document.getElementById(i).addEventListener('input',build);});
+  ['gp','gd','gb','gn','gt'].forEach(function(i){document.getElementById(i).addEventListener('input',buildG);});
+  build();buildG();layout();addEventListener('load',layout);
+  /* Reveal + voortgang */
+  var rev=[].slice.call(document.querySelectorAll('.reveal'));
+  if(reduce||!('IntersectionObserver' in window)){rev.forEach(function(e){e.classList.add('is-visible');});}
+  else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var s=[].slice.call(e.target.parentNode.children).filter(function(x){return x.classList.contains('reveal');});setTimeout(function(){e.target.classList.add('is-visible');},Math.max(0,s.indexOf(e.target))*100);io.unobserve(e.target);}});},{threshold:.12});rev.forEach(function(e){io.observe(e);});}
+  var pg=document.getElementById('pg');addEventListener('scroll',function(){var e=document.documentElement;pg.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';},{passive:true});
+})();
+</script>
+</body>
+</html>

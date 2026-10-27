@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>De Sleutelspecialist van den Acker – Sleutels en sloten in Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor De Sleutelspecialist van den Acker aan de Ginnekenweg in Breda: sleutels bijmaken, sloten en hulp bij buitensluiting.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap');
+/* DESIGN: sleutelspecialist, functioneel en snel. Kleur: staal (#24384F), messing (#B8862B), zink (#E8ECEF), marine-inkt (#14202B), sein-oranje alleen voor de belknop (#E2582B).
+   Type: Barlow Condensed 700 (gegraveerd, als op een sleutelplaatje) + Barlow.
+   STRUCTUUR: schuine snede onder de hero, bento met één grote tegel, vaste belbalk onderaan op mobiel.
+   MOTION: (1) cilinderslot: sleutel schuift erin en draait bij het laden, (2) scroll-reveal met stagger. Verder bewust rustig: de bezoeker moet snel kunnen bellen. */
+:root{--steel:#24384F;--brass:#B8862B;--zinc:#E8ECEF;--ink:#14202B;--alert:#E2582B;--white:#fff}
+html{overflow-x:hidden}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',system-ui,sans-serif;background:var(--zinc);color:var(--ink);font-size:17px;line-height:1.55;overflow-x:hidden}
+h1,h2,h3{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;line-height:1;text-transform:none;letter-spacing:.005em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brass);outline-offset:3px;border-radius:3px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;padding:14px 24px;border-radius:4px;font-weight:600;text-decoration:none;border:2px solid transparent;font:inherit;font-weight:600;cursor:pointer;transition:transform .15s,background .2s}
+.btn-call{background:var(--alert);color:#fff}.btn-call:hover{background:#c94a22}
+.btn-line{border-color:#fff;color:#fff}.btn-line:hover{background:#fff;color:var(--steel)}
+.btn-steel{background:var(--steel);color:#fff}.btn-steel:hover{background:var(--ink)}
+.demo{background:var(--ink);color:var(--zinc);font-size:.85rem;text-align:center;padding:8px 16px}
+header.top{position:sticky;top:0;z-index:40;background:var(--steel);color:#fff}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:62px;gap:14px}
+.logo{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.35rem;text-decoration:none;line-height:1.05}
+.logo small{display:block;font-family:'Barlow';font-weight:500;font-size:.72rem;opacity:.8}
+.top nav{display:flex;gap:22px;align-items:center}
+.top nav a{text-decoration:none;font-weight:500;font-size:.95rem}.top nav a:not(.btn):hover{color:#e5c46e}
+.top .btn{padding:9px 16px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--brass);z-index:90}
+
+/* HERO */
+.hero{background:var(--steel);color:#fff;clip-path:polygon(0 0,100% 0,100% calc(100% - 5vw),0 100%);padding:70px 0 calc(90px + 5vw)}
+.hero .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(240px,.9fr);gap:30px;align-items:center}
+.hero h1{font-size:clamp(3.2rem,6.4vw,5.8rem)}
+.hero p.lead{max-width:28em;margin:20px 0 28px;font-size:1.15rem;opacity:.95}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero .meta{margin-top:30px;font-size:.95rem;opacity:.85}
+.lock{width:100%;max-width:420px;margin:0 auto;display:block}
+.lock .plate{fill:#d9c27e;stroke:#8d6a22;stroke-width:3}
+.lock .ring{fill:#2c4663;stroke:#b8862b;stroke-width:4}
+.lock .bar{fill:#14202b}
+.key{transform-box:view-box;transform-origin:200px 200px;animation:keyin 1.1s cubic-bezier(.3,.9,.3,1) .3s both,turn .7s cubic-bezier(.6,0,.3,1) 1.5s forwards}
+.key .k{fill:#e9e2d0;stroke:#8d6a22;stroke-width:3}
+@keyframes keyin{from{transform:translateX(160px)}to{transform:translateX(0)}}
+@keyframes turn{to{transform:rotate(-90deg)}}
+.click{opacity:0;animation:fade .4s 2.1s forwards;fill:#fff;font-family:'Barlow Condensed';font-weight:700;font-size:22px;letter-spacing:.06em}
+@keyframes fade{to{opacity:1}}
+
+/* DIENSTEN BENTO */
+section{padding:80px 0}
+.sec-head{max-width:32em;margin-bottom:34px}.sec-head h2{font-size:clamp(2.4rem,5vw,3.6rem);margin-bottom:10px}
+.bento{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-auto-rows:minmax(150px,auto);gap:14px}
+.t{background:#fff;border-radius:6px;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;border-left:6px solid var(--brass);transition:transform .25s}
+.t:hover{transform:translateY(-3px)}
+.t h3{font-size:1.9rem;margin-bottom:6px}.t p{font-size:.97rem}
+.t.big{grid-row:span 2;background:var(--steel);color:#fff;border-left-color:var(--alert)}
+.t.big h3{font-size:2.6rem}
+.note{margin-top:16px;font-size:.9rem}
+.todo{background:#d6dde3;border-radius:5px;padding:1px 9px;font-size:.88rem}
+
+/* BUITENGESLOTEN */
+.help{background:#fff;border-radius:10px;padding:34px;display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;border-top:6px solid var(--alert)}
+.help h2{font-size:clamp(2.2rem,4.4vw,3.2rem);margin-bottom:10px}
+.q{margin-bottom:18px}.q legend{font-weight:600;margin-bottom:8px}.q{border:0;padding:0}
+.opts{display:flex;gap:10px;flex-wrap:wrap}
+.opts input{position:absolute;opacity:0}
+.opts label{padding:10px 18px;border:2px solid #b9c4cf;border-radius:4px;cursor:pointer;font-weight:500;transition:all .15s}
+.opts input:checked+label{background:var(--steel);border-color:var(--steel);color:#fff}
+.opts input:focus-visible+label{outline:3px solid var(--brass);outline-offset:2px}
+.adv{background:var(--zinc);border-radius:8px;padding:22px;animation:fade2 .4s both}
+@keyframes fade2{from{opacity:0;transform:translateY(8px)}}
+.adv h3{font-size:1.8rem;margin-bottom:8px}.adv ul{padding-left:1.1em;margin:8px 0 16px}.adv li{margin:5px 0}
+
+/* WERKWIJZE + CONTACT */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.fact{border-top:4px solid var(--steel);padding-top:14px}.fact h3{font-size:1.6rem;margin-bottom:4px}
+.contact{background:var(--ink);color:#fff;padding:70px 0 90px}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact h2{font-size:3rem;margin-bottom:10px}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px}.contact dt{color:#e5c46e;font-weight:600}
+.contact .todo{background:rgba(255,255,255,.14)}
+footer{background:#0d151d;color:#a9b4c0;font-size:.88rem;padding:18px 0 80px}
+.callbar{display:none}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}.reveal.is-visible{opacity:1;transform:none}
+@media (max-width:800px){
+  .top nav a:not(.btn){display:none}
+  .hero .grid,.help,.contact .wrap,.facts{grid-template-columns:minmax(0,1fr)}.lock{max-width:260px}
+  .bento{grid-template-columns:1fr}.t.big{grid-row:auto}
+  .hero{clip-path:polygon(0 0,100% 0,100% calc(100% - 7vw),0 100%);padding-bottom:calc(60px + 7vw)}
+  .callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--alert);color:#fff;text-decoration:none;font-family:'Barlow Condensed';font-weight:700;font-size:1.5rem;justify-content:center;align-items:center;height:58px;box-shadow:0 -4px 16px rgba(0,0,0,.25)}
+}
+@media (prefers-reduced-motion:reduce){.key{animation:none;transform:rotate(-90deg)}.click{animation:none;opacity:1}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.adv{animation:none}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo">Demo-ontwerp als voorstel. Diensten en teksten worden samen met de eigenaar bevestigd.</div>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#top">De Sleutelspecialist<small>van den Acker, Breda</small></a>
+  <nav aria-label="Hoofdmenu"><a href="#diensten">Diensten</a><a href="#buitengesloten">Buitengesloten?</a><a href="#contact">Contact</a><a class="btn btn-call" href="tel:+31765142561">Bel 076 514 2561</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap grid">
+  <div>
+    <h1>Sleutel kwijt of buitengesloten?</h1>
+    <p class="lead">Sleutels, sloten en beveiliging aan de Ginnekenweg in Breda. Bel ons, dan kijken we wat er nodig is.</p>
+    <div class="cta"><a class="btn btn-call" href="tel:+31765142561">Bel 076 514 2561</a><a class="btn btn-line" href="#buitengesloten">Wat kan ik zelf doen?</a></div>
+    <p class="meta">Ginnekenweg 56, Breda. Openingstijden: <span class="todo" style="background:rgba(255,255,255,.16)">nog in te vullen</span></p>
+  </div>
+  <svg class="lock" viewBox="0 0 400 400" role="img" aria-label="Cilinderslot waarin een sleutel draait">
+    <circle class="plate" cx="200" cy="200" r="170"/>
+    <circle class="ring" cx="200" cy="200" r="112"/>
+    <rect class="bar" x="186" y="150" width="28" height="100" rx="12"/>
+    <g class="key"><rect class="k" x="196" y="192" width="126" height="16" rx="4"/><path class="k" d="M236 208v14h12v-14M262 208v10h12v-10M288 208v18h12v-18"/><circle class="k" cx="338" cy="200" r="26"/><circle cx="338" cy="200" r="10" fill="#24384F"/></g>
+    <text class="click" x="200" y="330" text-anchor="middle">Klik. Open.</text>
+  </svg>
+</div></section>
+
+<section id="diensten" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2>Waarmee wij helpen</h2><p>Een voorbeeld van het aanbod. We stemmen de lijst af met de eigenaar.</p></div>
+    <div class="bento">
+      <article class="t big reveal"><h3>Buitengesloten</h3><p>Rustig blijven, niet forceren en bellen. Hoe sneller we weten om wat voor deur en slot het gaat, hoe beter we kunnen helpen.</p></article>
+      <article class="t reveal"><h3>Sleutels bijmaken</h3><p>Van een gewone huissleutel tot een speciale.</p></article>
+      <article class="t reveal"><h3>Cilinders vervangen</h3><p>Nieuwe sloten na verhuizing of verlies van een sleutel.</p></article>
+      <article class="t reveal"><h3>Inbraakpreventie</h3><p>Advies over sloten die inbrekers tegenhouden.</p></article>
+      <article class="t reveal"><h3>Kluizen en brandkasten</h3><p>Voor wie waardevolle spullen veilig wil bewaren.</p></article>
+    </div>
+    <p class="note"><span class="todo">Aanbod en tarieven te bevestigen met De Sleutelspecialist</span></p>
+  </div>
+</section>
+
+<section id="buitengesloten">
+  <div class="wrap">
+    <div class="help reveal">
+      <div>
+        <h2>Buitengesloten? Eerst dit</h2>
+        <p>Beantwoord twee vragen. U krijgt direct tips, en een knop om ons te bellen.</p>
+      </div>
+      <div>
+        <fieldset class="q"><legend>Om welke deur gaat het?</legend><div class="opts" id="q1">
+          <input type="radio" name="deur" id="d1" value="voor" checked><label for="d1">Voordeur</label>
+          <input type="radio" name="deur" id="d2" value="achter"><label for="d2">Achter- of tuindeur</label>
+          <input type="radio" name="deur" id="d3" value="werk"><label for="d3">Bedrijf of kantoor</label>
+        </div></fieldset>
+        <fieldset class="q"><legend>Zit de sleutel nog aan de binnenkant in het slot?</legend><div class="opts" id="q2">
+          <input type="radio" name="sl" id="s1" value="ja" checked><label for="s1">Ja</label>
+          <input type="radio" name="sl" id="s2" value="nee"><label for="s2">Nee, weg of kwijt</label>
+          <input type="radio" name="sl" id="s3" value="weet"><label for="s3">Weet ik niet</label>
+        </div></fieldset>
+        <div class="adv" id="adv" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:10px">
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact reveal"><h3>Gewoon bellen</h3><p>Geen formulier nodig. Een telefoontje is de snelste weg.</p></div>
+      <div class="fact reveal"><h3>Lokaal in Ginneken</h3><p>Ginnekenweg 56, tussen de winkels en cafés.</p></div>
+      <div class="fact reveal"><h3>Duidelijk vooraf</h3><p>We zeggen wat het kost voordat we beginnen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact"><div class="wrap">
+  <div class="reveal"><h2>Kom langs of bel</h2><p>Ginnekenweg 56, Breda.</p></div>
+  <dl class="reveal">
+    <dt>Telefoon</dt><dd><a href="tel:+31765142561">076 514 2561</a></dd>
+    <dt>E-mail</dt><dd><a href="mailto:info@keyspecialistbreda.nl">info@keyspecialistbreda.nl</a></dd>
+    <dt>Adres</dt><dd>Ginnekenweg 56, Breda</dd>
+    <dt>Openingstijden</dt><dd><span class="todo">Nog in te vullen</span></dd>
+    <dt>Spoedservice</dt><dd><span class="todo">Te bevestigen met de eigenaar</span></dd>
+  </dl>
+</div></section>
+</main>
+<footer><div class="wrap">De Sleutelspecialist van den Acker, Ginnekenweg 56, Breda. Demo-ontwerp, geen officiële website van het bedrijf.</div></footer>
+<a class="callbar" href="tel:+31765142561">Bel 076 514 2561</a>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function v(n){return document.querySelector('input[name='+n+']:checked').value;}
+  function advice(){
+    var d=v('deur'),s=v('sl'),L=[],t='Dit kunt u eerst proberen';
+    L.push('Controleer of een andere deur of een raam openstaat. Forceer nooit door een raam te breken.');
+    L.push('Heeft een buur, familielid of huisgenoot een reservesleutel? Even bellen kost niets.');
+    if(s==='ja')L.push('Zit de sleutel aan de binnenkant in het slot, zeg het ons dan meteen aan de telefoon. Dat maakt het openen vaak eenvoudiger.');
+    if(s==='nee')L.push('Is de sleutel kwijt? Laat het slot daarna vervangen, zeker als uw adres op de sleutel stond of in de tas zat.');
+    if(d==='werk')L.push('Bij een bedrijfspand: houd uw bedrijfsnaam en het adres bij de hand voor de telefoon.');
+    L.push('Duw of trek niet met kracht aan het slot en gebruik geen mes of kaart. Dat beschadigt de cilinder vaak.');
+    document.getElementById('adv').innerHTML='<h3>'+t+'</h3><ul>'+L.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><a class="btn btn-call" href="tel:+31765142561">Bel 076 514 2561</a>';
+  }
+  document.querySelectorAll('#q1 input,#q2 input').forEach(function(i){i.addEventListener('change',advice);});advice();
+  var rev=[].slice.call(document.querySelectorAll('.reveal'));
+  if(reduce||!('IntersectionObserver' in window)){rev.forEach(function(e){e.classList.add('is-visible');});}
+  else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var s=[].slice.call(e.target.parentNode.children).filter(function(x){return x.classList.contains('reveal');});setTimeout(function(){e.target.classList.add('is-visible');},Math.max(0,s.indexOf(e.target))*90);io.unobserve(e.target);}});},{threshold:.12});rev.forEach(function(e){io.observe(e);});}
+  var pg=document.getElementById('pg');addEventListener('scroll',function(){var e=document.documentElement;pg.style.width=(e.scrollTop/(e.scrollHeight-e.clientHeight)*100)+'%';},{passive:true});
+})();
+</script>
+</body>
+</html>
