@@ -192,7 +192,6 @@ footer{background:var(--bark);color:var(--mist);padding:30px 0;font-size:.9rem}
 
 <main id="top">
 <section class="hero" style="padding-bottom:96px">
-  <div class="hero-art" aria-hidden="true"><svg id="art" viewBox="0 0 640 700" preserveAspectRatio="xMidYMid slice"></svg></div>
   <div class="wrap">
     <h1>Een tuin die elk seizoen iets nieuws laat zien</h1>
     <p class="lead">Hoveniersbedrijf en kwekerij in Bavel. Wij ontwerpen, leggen aan en onderhouden uw tuin, en kweken zelf een deel van de planten en bomen die we daarvoor gebruiken.</p>
@@ -376,23 +375,6 @@ footer{background:var(--bark);color:var(--mist);padding:30px 0;font-size:.9rem}
 /* MOTION: tak tekent zichzelf (1 moment), scroll-reveal met stagger, marquee (CSS). Reduced motion gerespecteerd. */
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* Hero-illustratie: één tak met bladeren en bloesem */
-  var svg = document.getElementById('art'), NS='http://www.w3.org/2000/svg';
-  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
-  var stem = el('path',{d:'M330 700 C 300 560, 360 440, 320 320 S 260 130, 340 20',class:'draw',pathLength:'1'});
-  stem.style.animationDelay='.1s'; stem.style.strokeWidth='3'; svg.appendChild(stem);
-  var leaves=[[322,560,-40,1.2],[312,500,200,1.1],[345,430,-30,1],[330,380,205,1.05],[318,310,-35,.95],[300,255,210,.9],[312,200,-30,.85],[330,150,200,.75],[338,90,-25,.65]];
-  leaves.forEach(function(L,i){
-    var g=el('g',{transform:'translate('+L[0]+' '+L[1]+') rotate('+L[2]+') scale('+L[3]+')'});
-    var leaf=el('path',{d:'M0 0 C 40 -52, 130 -52, 170 0 C 130 52, 40 52, 0 0 Z',class:'draw fill-leaf',pathLength:'1'});
-    var rib=el('path',{d:'M0 0 L 150 0 M50 0 L 90 -22 M50 0 L 90 22 M95 0 L 125 -14 M95 0 L 125 14',class:'draw rib',pathLength:'1'});
-    var d=(.5+i*.16)+'s'; leaf.style.animationDelay=d+','+d; rib.style.animationDelay=(.7+i*.16)+'s';
-    g.appendChild(leaf); g.appendChild(rib); svg.appendChild(g);
-  });
-  [[350,28,16,2.2],[300,70,11,2.4],[372,120,9,2.6]].forEach(function(b){
-    var c=el('circle',{cx:b[0],cy:b[1],r:b[2],class:'blossom'}); c.style.animationDelay=b[3]+'s'; svg.appendChild(c);
-  });
 
   /* Marquee */
   var items=['Ontwerp','Aanleg','Onderhoud','Boomverzorging','Overkappingen','Buitenkeukens','Tuinbanken','Zwembaden','Kwekerij'];

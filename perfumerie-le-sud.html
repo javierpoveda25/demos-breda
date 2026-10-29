@@ -108,13 +108,11 @@ footer{background:#1d1630;color:#b8b0cc;font-size:.88rem;padding:18px 0}
 
 <main id="top">
 <section class="hero">
-  <div class="sun" aria-hidden="true"></div>
   <div class="wrap in">
     <h1>Le Sud</h1>
     <p class="lead">Een parfumerie in Ginneken waar u rustig kunt ruiken, vragen en kiezen. Voor uzelf, of voor iemand die u een geur gunt.</p>
     <div class="cta"><a class="btn btn-main" href="#geuren">Vind uw geurfamilie</a><a class="btn btn-line" href="tel:+31763031209">Bel 076 303 1209</a></div>
   </div>
-  <div class="rows" aria-hidden="true"><svg id="lav" viewBox="0 0 1200 90" preserveAspectRatio="none"></svg></div>
 </section>
 
 <section id="geuren" style="padding-top:40px">
@@ -171,11 +169,6 @@ footer{background:#1d1630;color:#b8b0cc;font-size:.88rem;padding:18px 0}
 <script>
 (function(){
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  /* Lavendelrijen onderaan de hero */
-  var s=document.getElementById('lav'),h='';
-  for(var i=0;i<60;i++){var x=i*20+((i%3)*4),hh=34+((i*37)%30);h+='<path d="M'+x+' 90 C '+(x+3)+' '+(90-hh/2)+' '+(x-2)+' '+(90-hh)+' '+x+' '+(90-hh-6)+'" stroke="#6B7A4B" stroke-width="2" fill="none"/>';
-    for(var k=0;k<5;k++){h+='<ellipse cx="'+(x+(k%2?3:-3))+'" cy="'+(90-hh+k*6-4)+'" rx="3.2" ry="5" fill="#6F5BA8" opacity="'+(0.9-k*0.08)+'"/>';}}
-  s.innerHTML=h;
   /* Geurenkiezer */
   var F=[
    {n:'Fleurig',sub:'jasmijn, roos, pioen',c:'#8A5FA8',d:'Zacht en romantisch. Geuren als een boeket, van tuinrozen tot witte bloemen.',t:['bergamot','roos'],hh:['jasmijn','pioen'],b:['musk','sandelhout']},

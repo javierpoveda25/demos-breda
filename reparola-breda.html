@@ -98,7 +98,6 @@ footer{background:#1b1410;color:#b9aca4;font-size:.88rem;padding:18px 0;position
 </head>
 <body>
 <div class="pg" id="pg"></div>
-<svg id="line" aria-hidden="true" preserveAspectRatio="none"><path id="spag" d=""/></svg>
 <div class="demo">Demo-ontwerp als voorstel. De echte kaart, foto's en tijden vullen we samen met Reparola in.</div>
 <header class="top"><div class="wrap">
   <a class="logo" href="#top">Reparola</a>
@@ -178,16 +177,6 @@ footer{background:#1b1410;color:#b9aca4;font-size:.88rem;padding:18px 0;position
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* Lint */
   var items=['Spaghetti','Penne','Tagliatelle','Rigatoni','Gnocchi','Fusilli'],h='';for(var r=0;r<2;r++)items.forEach(function(t){h+='<span>'+t+'</span>';});document.getElementById('rt').innerHTML=h;
-  /* Spaghettilijn: slingert over de hele pagina, getekend op scrollvoortgang */
-  var svg=document.getElementById('line'),path=document.getElementById('spag'),len=0;
-  function layout(){
-    var H=document.body.scrollHeight,W=document.body.clientWidth;svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.style.height=H+'px';
-    var d='M '+(W*0.46)+' 40',y=40,i=0,side=1;
-    while(y<H-200){var ny=y+520;var cx=side>0?W*0.97:W*0.03;d+=' C '+cx+' '+(y+130)+' '+cx+' '+(ny-130)+' '+(W*0.5+(side>0?-W*0.12:W*0.12))+' '+ny;y=ny;side*=-1;i++;}
-    path.setAttribute('d',d);len=path.getTotalLength();path.style.strokeDasharray=len;update();
-  }
-  function update(){var e=document.documentElement,p=reduce?1:Math.min(1,(e.scrollTop+innerHeight*0.7)/e.scrollHeight);path.style.strokeDashoffset=len*(1-p);}
-  addEventListener('scroll',update,{passive:true});addEventListener('resize',layout);
   /* Reservering: gestructureerd bericht zodat het restaurant niet hoeft terug te bellen */
   var ps=document.getElementById('pers');for(var n=1;n<=14;n++){var o=document.createElement('option');o.value=n;o.textContent=n+(n===1?' persoon':' personen');if(n===2)o.selected=true;ps.appendChild(o);}
   var d=document.getElementById('dat'),gd=document.getElementById('gd'),tm=new Date();d.min=gd.min=tm.toISOString().slice(0,10);tm.setDate(tm.getDate()+2);d.value=tm.toISOString().slice(0,10);
@@ -206,7 +195,7 @@ footer{background:#1b1410;color:#b9aca4;font-size:.88rem;padding:18px 0;position
   }
   ['dat','tijd','pers','naam','tel','toel'].forEach(function(i){document.getElementById(i).addEventListener('input',build);});
   ['gp','gd','gb','gn','gt'].forEach(function(i){document.getElementById(i).addEventListener('input',buildG);});
-  build();buildG();layout();addEventListener('load',layout);
+  build();buildG();
   /* Reveal + voortgang */
   var rev=[].slice.call(document.querySelectorAll('.reveal'));
   if(reduce||!('IntersectionObserver' in window)){rev.forEach(function(e){e.classList.add('is-visible');});}

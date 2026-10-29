@@ -39,7 +39,7 @@ header.top{position:sticky;top:0;z-index:40;background:rgba(242,245,244,.94);bac
 .hero h1{font-size:clamp(2.8rem,6.6vw,5.4rem);letter-spacing:-.01em}
 .hero p.lead{max-width:30em;margin:22px 0 30px;font-size:1.12rem}
 .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
-.collage{position:relative;height:480px}
+.collage{position:relative;height:260px}
 .piece{position:absolute;border-radius:10px;box-shadow:0 8px 0 rgba(36,64,61,.12);display:grid;place-items:center;transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
 .piece svg{width:62%;height:62%;stroke:var(--deep);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .p1{left:2%;top:6%;width:48%;height:44%;background:var(--rose);transform:rotate(-5deg)}
@@ -48,7 +48,7 @@ header.top{position:sticky;top:0;z-index:40;background:rgba(242,245,244,.94);bac
 .p4{right:2%;top:38%;width:34%;height:30%;background:var(--white);transform:rotate(-4deg)}
 .p3 svg{stroke:#fff}
 .collage:hover .p1{transform:rotate(-1deg)}.collage:hover .p2{transform:rotate(1deg)}.collage:hover .p3{transform:rotate(0)}.collage:hover .p4{transform:rotate(-1deg)}
-.tag{position:absolute;right:8%;top:-40px;z-index:5;transform-origin:50% 0;animation:sway 5s ease-in-out infinite alternate}
+.tag{position:absolute;right:22%;top:10px;z-index:5;transform-origin:50% 0;animation:sway 5s ease-in-out infinite alternate}
 .tag::before{content:"";position:absolute;left:50%;top:-30px;width:2px;height:40px;background:var(--plum);transform:translateX(-50%)}
 .tag .card{background:#fff;border:2px solid var(--plum);border-radius:6px 6px 14px 14px;padding:18px 20px 14px;text-align:center;min-width:150px;position:relative;margin-top:10px}
 .tag .card::before{content:"";position:absolute;left:50%;top:8px;width:10px;height:10px;border-radius:50%;border:2px solid var(--plum);transform:translateX(-50%)}
@@ -131,10 +131,6 @@ footer{background:#241823;color:#cdbfc9;font-size:.88rem;padding:20px 0}
     </div>
     <div class="collage" aria-hidden="true">
       <div class="tag" id="tag"><div class="card"><small>Vandaag</small><b id="st">...</b><small id="st2"></small></div></div>
-      <div class="piece p1"><svg viewBox="0 0 64 64"><path d="M12 28h36v8a14 14 0 0 1-14 14h-8A14 14 0 0 1 12 36z"/><path d="M48 31h4a5 5 0 0 1 0 10h-5"/><path d="M22 16c0 4 4 4 4 8M32 14c0 4 4 4 4 8"/></svg></div>
-      <div class="piece p2"><svg viewBox="0 0 64 64"><path d="M10 50h44M16 50l4-24h24l4 24"/><path d="M20 26c0-8 24-8 24 0"/><circle cx="32" cy="14" r="3"/></svg></div>
-      <div class="piece p3"><svg viewBox="0 0 64 64"><rect x="12" y="10" width="40" height="44" rx="3"/><rect x="18" y="16" width="28" height="32" rx="2"/><path d="M22 42l8-10 6 7 4-4 4 7"/></svg></div>
-      <div class="piece p4"><svg viewBox="0 0 64 64"><path d="M14 46h36M18 46c0-14 28-14 28 0M32 22v10M26 26h12"/></svg></div>
     </div>
   </div>
 </section>
