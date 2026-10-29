@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sans Trop Pay – Dameskleding in Ginneken (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Sans Trop Pay: kleurrijke dameskleding en accessoires aan de Ginnekenweg in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rozha+One&family=Albert+Sans:wght@400;500;600;700&display=swap');
+/* DESIGN: retro printjes, gezellige winkel. Kleuren: mandarijn (#E7861F), petrol (#14656B), roze (#D9487B), room (#FFF5E3), aubergine (#3A1B3C), olijf (#8A9A3B).
+   Type: Rozha One (titels, vet en retro) + Albert Sans (tekst).
+   STRUCTUUR: rozet-patroon dat zich opbouwt, lopende band met printnamen, schuine banden, stylingaanvraag die de maat en gelegenheid meeneemt.
+   MOTION: (1) rozet bloeit open uit cirkels, (2) scroll-reveal met stagger, (3) lopende band. Reduced motion gerespecteerd. */
+:root{--tang:#E7861F;--teal:#14656B;--pink:#D9487B;--cream:#FFF5E3;--aub:#3A1B3C;--olive:#8A9A3B;--line:rgba(58,27,60,.16)}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Albert Sans',system-ui,sans-serif;background:var(--cream);color:var(--aub);font-size:17px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:'Rozha One',serif;font-weight:400;line-height:1.06}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;font:inherit;font-weight:700;text-decoration:none;border:2px solid var(--aub);cursor:pointer;transition:transform .2s,background .2s,color .2s}
+.btn-main{background:var(--pink);color:#fff;border-color:var(--pink)}.btn-main:hover{background:var(--aub);border-color:var(--aub);transform:translateY(-2px)}
+.btn-line{background:transparent}.btn-line:hover{background:var(--aub);color:var(--cream)}
+.pg{position:fixed;top:0;left:0;height:4px;width:0;background:var(--tang);z-index:90}
+.demo{background:var(--aub);color:var(--tang);font-size:.85rem;text-align:center;padding:8px 16px}
+header.top{position:sticky;top:0;z-index:40;background:rgba(255,245,227,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Rozha One',serif;font-size:1.5rem;text-decoration:none;color:var(--teal)}
+.top nav{display:flex;gap:22px;align-items:center}
+.top nav a:not(.btn){text-decoration:none;font-weight:600;font-size:.95rem}
+.top nav a:not(.btn):hover{color:var(--pink)}
+.top .btn{padding:9px 18px;font-size:.9rem}
+
+.hero{padding:56px 0 100px;position:relative}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(2.8rem,6.6vw,5.4rem);color:var(--teal)}
+.hero h1 span{color:var(--pink)}
+.hero p.lead{max-width:30em;margin:22px 0 28px;font-size:1.12rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.ros{width:100%;max-width:460px;display:block;margin:0 auto}
+.ros .pet{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(0);animation:bloom .8s cubic-bezier(.3,1.6,.5,1) forwards}
+@keyframes bloom{to{opacity:1;transform:scale(1)}}
+.ros .spin{transform-origin:230px 230px;animation:rot 40s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+.marq{background:var(--aub);color:var(--cream);overflow:hidden;transform:rotate(-1.4deg);margin:-30px -20px 0;position:relative;z-index:2;border-top:4px solid var(--tang);border-bottom:4px solid var(--tang)}
+.marq div{display:flex;gap:44px;white-space:nowrap;padding:14px 0;width:max-content;animation:mq 30s linear infinite;font-family:'Rozha One',serif;font-size:1.4rem}
+.marq i{color:var(--tang);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{padding:84px 0}
+.sec-head{max-width:36em;margin-bottom:36px}
+.sec-head h2{font-size:clamp(2rem,4.2vw,3.1rem);color:var(--teal);margin-bottom:10px}
+.tbc{display:inline-block;background:rgba(58,27,60,.08);border-radius:6px;padding:1px 8px;font-size:.82rem}
+
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.cd{border-radius:26px;padding:28px;position:relative;overflow:hidden}
+.cd h3{font-size:1.55rem;margin-bottom:8px}
+.k1{grid-column:span 3;background:var(--teal);color:#fff}.k2{grid-column:span 3;background:var(--tang);color:var(--aub)}
+.k3{grid-column:span 2;background:#fff;border:2px solid var(--aub)}.k4{grid-column:span 2;background:var(--pink);color:#fff}.k5{grid-column:span 2;background:var(--olive);color:#fff}
+.cd .dots{position:absolute;right:-20px;bottom:-20px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35) 0 6px,transparent 7px) 0 0/22px 22px;opacity:.7}
+
+.tools{background:var(--aub);color:var(--cream);clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%);padding:calc(84px + 4vw) 0}
+.tools h2{color:#fff;font-size:clamp(2rem,4.2vw,3.1rem);margin-bottom:10px}
+.tl{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start;margin-top:28px}
+.box{background:var(--cream);color:var(--aub);border-radius:26px;padding:28px}
+.box h3{font-size:1.6rem;margin-bottom:4px;color:var(--teal)}
+.box .sub{font-size:.93rem;opacity:.75}
+label.t{display:block;font-weight:700;margin:16px 0 6px;font-size:.93rem}
+.box input[type=text],.box input[type=tel],.box input[type=number],.box select,.box textarea{width:100%;padding:11px 12px;border:2px solid var(--aub);border-radius:12px;font:inherit;background:#fff}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0}
+.chips label{padding:8px 14px;border:2px solid var(--aub);border-radius:999px;cursor:pointer;font-weight:600;font-size:.92rem;background:#fff}
+.chips input:checked+label{background:var(--aub);color:var(--tang)}
+.chips input:focus-visible+label{outline:3px solid var(--pink);outline-offset:2px}
+table.mt{width:100%;border-collapse:collapse;margin-top:12px;font-size:.93rem}
+.mt th,.mt td{padding:7px 8px;text-align:center;border-bottom:1px dashed var(--line)}
+.mt th{font-weight:700;color:var(--teal)}
+.mt tr.on td{background:var(--tang);color:var(--aub);font-weight:700}
+.res{margin-top:14px;background:var(--cream);border-left:5px solid var(--pink);padding:12px 16px;border-radius:0 12px 12px 0}
+.res b{font-family:'Rozha One',serif;font-size:1.5rem;font-weight:400;color:var(--pink)}
+.out{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+.contact{padding:70px 0}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact h2{font-size:2.2rem;color:var(--teal);margin-bottom:10px}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px}
+.contact dt{font-weight:700;color:var(--pink)}
+footer{background:var(--aub);color:#cdb9cf;font-size:.88rem;padding:18px 0}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
+.reveal.is-visible{opacity:1;transform:none}
+@media (max-width:800px){
+ .top nav a:not(.btn){display:none}
+ .hero .grid,.tl,.contact .wrap{grid-template-columns:1fr}
+ .bento{grid-template-columns:1fr}.bento>*{grid-column:auto!important}
+ .tools{clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%);padding:calc(60px + 3vw) 0}
+ .row2{grid-template-columns:1fr}.marq{margin:-10px -20px 0}
+}
+@media (prefers-reduced-motion:reduce){.ros .pet{animation:none;opacity:1;transform:none}.ros .spin,.marq div{animation:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo">Demo-ontwerp als voorstel. Teksten, foto's en collectie worden samen met u ingevuld.</div>
+<header class="top"><div class="wrap">
+ <a class="logo" href="#top">Sans Trop Pay</a>
+ <nav aria-label="Hoofdmenu"><a href="#aanbod">Winkel</a><a href="#hulp">Maten en advies</a><a href="#contact">Contact</a><a class="btn btn-main" href="#hulp">Stylingadvies</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap grid">
+ <div>
+  <h1>Kleur, print en een jurk die je <span>blij</span> maakt</h1>
+  <p class="lead">Gezellige dameskleding en accessoires in Ginneken. Een beetje retro, een beetje speels, en met persoonlijk advies als je er even niet uitkomt.</p>
+  <div class="cta"><a class="btn btn-main" href="#hulp">Vraag advies aan</a><a class="btn btn-line" href="tel:+31765310080">Bel 076 531 0080</a></div>
+ </div>
+ <svg class="ros" viewBox="0 0 460 460" role="img" aria-label="Retro bloempatroon in kleuren van de winkel">
+  <g class="spin" id="ros"></g>
+  <circle class="pet" cx="230" cy="230" r="34" fill="#3A1B3C" style="animation-delay:1.7s"/>
+  <circle class="pet" cx="230" cy="230" r="14" fill="#FFF5E3" style="animation-delay:1.9s"/>
+ </svg>
+</div></section>
+
+<div class="marq" aria-hidden="true"><div id="mq"></div></div>
+
+<section id="aanbod"><div class="wrap">
+ <div class="sec-head reveal"><h2>In de winkel</h2><p>Kleding en accessoires voor vrouwen die van kleur en een knipoog naar vroeger houden. Het aanbod verandert met het seizoen.</p></div>
+ <div class="bento">
+  <div class="cd k1 reveal"><h3>Jurken, vesten en broeken</h3><p>Casual en draagbaar, vaak met een kleurrijke print.</p><div class="dots"></div></div>
+  <div class="cd k2 reveal" style="--d:.1s"><h3>Sieraden, sjaals en schoenen</h3><p>Het laatste detail dat de outfit maakt.</p></div>
+  <div class="cd k3 reveal"><h3>Merken</h3><p>Onder andere King Louie. Volledige lijst <span class="tbc">nog in te vullen</span></p></div>
+  <div class="cd k4 reveal" style="--d:.1s"><h3>Advies</h3><p>Monique en het team denken graag mee bij een kleur, maat of gelegenheid.</p></div>
+  <div class="cd k5 reveal" style="--d:.2s"><h3>Cadeaus</h3><p>Cadeaubon of een accessoire. <span class="tbc" style="background:rgba(255,255,255,.2)">te bevestigen</span></p></div>
+ </div>
+</div></section>
+
+<div class="tools" id="hulp"><div class="wrap">
+ <h2 class="reveal">Weet je welke maat?</h2>
+ <p class="reveal" style="max-width:36em">Maten verschillen per merk. Gebruik de tabel als richtlijn en vraag in de winkel altijd om te passen.</p>
+ <div class="tl">
+  <div class="box reveal">
+   <h3>Maatomrekening</h3><p class="sub">Kies je gebruikelijke Nederlandse maat.</p>
+   <label class="t" for="nl">Mijn maat (NL)</label>
+   <select id="nl"></select>
+   <table class="mt" id="mt"><thead><tr><th>NL</th><th>Letter</th><th>Heup (cm)</th></tr></thead><tbody></tbody></table>
+   <div class="res"><b id="m1">-</b><div id="m2" style="font-size:.9rem;opacity:.8"></div></div>
+  </div>
+  <div class="box reveal" style="--d:.15s">
+   <h3>Stylingadvies aanvragen</h3><p class="sub">Beschrijf waar je naar zoekt. Het team bereidt het voor, zodat je niet met lege handen staat.</p>
+   <label class="t">Gelegenheid</label><div class="chips" id="occ"></div>
+   <label class="t">Kleuren die ik graag draag</label><div class="chips" id="col"></div>
+   <div class="row2"><div><label class="t" for="bud">Budget</label><select id="bud"><option>Maakt niet uit</option><option>Tot 50 euro</option><option>50 tot 100 euro</option><option>Meer dan 100 euro</option></select></div>
+   <div><label class="t" for="wie">Voor wie?</label><select id="wie"><option>Voor mezelf</option><option>Cadeau voor iemand</option></select></div></div>
+   <div class="row2"><div><label class="t" for="nm">Naam</label><input type="text" id="nm" autocomplete="name"></div><div><label class="t" for="tl2">Telefoon</label><input type="tel" id="tl2" autocomplete="tel"></div></div>
+   <label class="t" for="dag">Wanneer past het?</label><input type="text" id="dag" placeholder="bijv. zaterdagmiddag">
+   <div class="res" id="sumq" style="white-space:pre-line;font-size:.93rem;border-left-color:var(--tang)">-</div>
+   <div class="out"><button class="btn btn-main" id="copy" type="button">Kopieer bericht</button><a class="btn btn-line" href="tel:+31765310080">Bel de winkel</a></div>
+   <p class="sub" style="margin-top:10px">Kopieer het bericht en stuur het via Instagram of Facebook, of lees het voor aan de telefoon. E-mailadres: <span class="tbc">nog in te vullen</span></p>
+  </div>
+ </div>
+</div></div>
+
+<section class="contact" id="contact"><div class="wrap">
+ <div><h2>Kom langs op de Ginnekenweg</h2><p>Een rondje door de winkel kost niks. Passen mag, advies ook.</p></div>
+ <dl>
+  <dt>Adres</dt><dd>Ginnekenweg 70, 4818 JH Breda</dd>
+  <dt>Telefoon</dt><dd><a href="tel:+31765310080">076 531 0080</a></dd>
+  <dt>Instagram</dt><dd>@sanstroppay</dd>
+  <dt>Openingstijden</dt><dd><span class="tbc">nog in te vullen</span></dd>
+ </dl>
+</div></section>
+</main>
+<footer><div class="wrap">Demo-ontwerp, geen officiële website. Gemaakt als voorstel voor Sans Trop Pay.</div></footer>
+
+<script>
+(function(){
+ var $=function(i){return document.getElementById(i)};
+ var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.15});
+ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+ /* rozet: 3 ringen van cirkels */
+ var cols=['#E7861F','#D9487B','#14656B','#8A9A3B'],g=$('ros'),NS='http://www.w3.org/2000/svg',k=0;
+ [[16,150,44],[12,100,36],[8,58,28]].forEach(function(r,ri){
+  for(var i=0;i<r[0];i++){var a=i/r[0]*Math.PI*2,c=document.createElementNS(NS,'circle');
+   c.setAttribute('cx',(230+Math.cos(a)*r[1]).toFixed(1));c.setAttribute('cy',(230+Math.sin(a)*r[1]).toFixed(1));c.setAttribute('r',r[2]);
+   c.setAttribute('fill',cols[(i+ri)%4]);c.setAttribute('class','pet');c.style.animationDelay=(ri*0.35+i*0.04).toFixed(2)+'s';
+   if(ri===1){c.setAttribute('fill-opacity','.92')}g.appendChild(c)}
+ });
+ var names=['Bloemenprint','Stippen','Retro','Strepen','Jurken','Vesten','Sjaals','Sieraden','Schoenen'],h='';
+ for(var j=0;j<2;j++)names.forEach(function(n){h+='<span>'+n+'</span><i>●</i>'});
+ $('mq').innerHTML=h+h;
+
+ /* maattabel */
+ var rows=[[34,'XS',92],[36,'XS',94],[38,'S',98],[40,'M',102],[42,'L',106],[44,'XL',110],[46,'XXL',114],[48,'XXL',118]];
+ rows.forEach(function(r){var o=document.createElement('option');o.value=r[0];o.textContent=r[0];$('nl').appendChild(o)});
+ $('nl').value=40;
+ function sz(){var v=+$('nl').value,tb=document.querySelector('#mt tbody');tb.innerHTML='';
+  rows.forEach(function(r){var tr=document.createElement('tr');if(r[0]===v)tr.className='on';tr.innerHTML='<td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td>';tb.appendChild(tr)});
+  var r=rows.filter(function(x){return x[0]===v})[0];$('m1').textContent='NL '+v+' is meestal '+r[1];
+  $('m2').textContent='Heupmaat ca. '+r[2]+' cm. Valt een merk klein, kies een maat groter.'}
+ $('nl').addEventListener('change',sz);sz();
+
+ /* styling */
+ function chips(id,name,items,type){items.forEach(function(t,i){$(id).insertAdjacentHTML('beforeend','<input type="'+type+'" name="'+name+'" id="'+name+i+'" value="'+t+'"><label for="'+name+i+'">'+t+'</label>')});$(id).addEventListener('change',sum)}
+ chips('occ','occ',['Elke dag','Werk','Feest of bruiloft','Vakantie','Cadeau'],'checkbox');
+ chips('col','col',['Warm: oranje, geel','Koel: blauw, groen','Roze en rood','Neutraal','Print'],'checkbox');
+ ['bud','wie','nm','tl2','dag'].forEach(function(i){$(i).addEventListener('input',sum)});
+ var txt='';
+ function pick(n){var a=[].map.call(document.querySelectorAll('input[name='+n+']:checked'),function(x){return x.value});return a.length?a.join(', '):'-'}
+ function sum(){
+  txt=['Stylingadvies','Voor: '+$('wie').value,'Gelegenheid: '+pick('occ'),'Kleuren: '+pick('col'),'Budget: '+$('bud').value,'Maat (NL): '+$('nl').value,'Wanneer: '+($('dag').value||'-'),'Naam: '+($('nm').value||'-')+' ('+($('tl2').value||'-')+')'].join('\n');
+  $('sumq').textContent=txt}
+ $('nl').addEventListener('change',sum);
+ $('copy').onclick=function(){var b=this,d=function(){b.textContent='Gekopieerd';setTimeout(function(){b.textContent='Kopieer bericht'},1800)};if(navigator.clipboard)navigator.clipboard.writeText(txt).then(d,d);else d()};
+ sum();
+})();
+</script>
+</body>
+</html>

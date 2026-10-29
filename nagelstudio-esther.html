@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nagelstudio Esther – Nagels in Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Nagelstudio Esther: nagelbehandelingen aan de Sluissingel in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Jost:wght@400;500;600&display=swap');
+/* DESIGN: rustig en verzorgd, met één kleurmoment. Kleuren: blush (#F6E6E1), orchidee (#8A4A7B), inkt-pruim (#2A1830), goud (#B8975A), munt (#C6E2D8), perzik (#F0B8A4).
+   Type: Italiana (titels, elegant en open) + Jost (tekst).
+   STRUCTUUR: hand met vijf nagels die kleur krijgen, asymmetrische behandelkaarten, planner voor de volgende afspraak, boeking via WhatsApp.
+   MOTION: (1) nagellak wordt per nagel aangebracht, (2) scroll-reveal met stagger, (3) kleurkeuze verandert de nagels live. Reduced motion gerespecteerd. */
+:root{--blush:#F6E6E1;--orch:#8A4A7B;--ink:#2A1830;--gold:#B8975A;--mint:#C6E2D8;--peach:#F0B8A4;--paper:#FFFAF7;--line:rgba(42,24,48,.15);--nail:#D9487B}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Jost',system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:17px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:'Italiana',serif;font-weight:400;line-height:1.06}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--orch);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;font:inherit;font-weight:500;text-decoration:none;border:1.5px solid var(--ink);cursor:pointer;transition:transform .2s,background .2s,color .2s}
+.btn-main{background:var(--ink);color:#fff}.btn-main:hover{background:var(--orch);border-color:var(--orch);transform:translateY(-2px)}
+.btn-line{background:transparent}.btn-line:hover{background:var(--ink);color:#fff}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--gold);z-index:90}
+.demo{background:var(--ink);color:var(--peach);font-size:.85rem;text-align:center;padding:8px 16px}
+header.top{position:sticky;top:0;z-index:40;background:rgba(255,250,247,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Italiana',serif;font-size:1.6rem;text-decoration:none}
+.top nav{display:flex;gap:22px;align-items:center}
+.top nav a:not(.btn){text-decoration:none;font-weight:500;font-size:.95rem}
+.top nav a:not(.btn):hover{color:var(--orch)}
+.top .btn{padding:9px 18px;font-size:.9rem}
+
+.hero{padding:50px 0 100px;background:linear-gradient(180deg,var(--blush),var(--paper))}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(2.9rem,6.8vw,5.6rem)}
+.hero h1 em{font-style:normal;color:var(--orch)}
+.hero p.lead{max-width:30em;margin:22px 0 28px;font-size:1.12rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.hand{width:100%;max-width:420px;margin:0 auto;display:block}
+.hand .bare{fill:#F9E3D8}.hand .nail{fill:var(--nail);transition:fill .5s}
+.hand .coat{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);animation:paint .7s ease-out forwards}
+@keyframes paint{to{transform:scaleY(1)}}
+.sw{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.sw button{width:36px;height:36px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px var(--ink);cursor:pointer;transition:transform .2s}
+.sw button:hover,.sw button[aria-pressed=true]{transform:scale(1.2)}
+.sw button[aria-pressed=true]{box-shadow:0 0 0 3px var(--ink)}
+
+section{padding:84px 0}
+.sec-head{max-width:36em;margin-bottom:36px}
+.sec-head h2{font-size:clamp(2.1rem,4.4vw,3.3rem);margin-bottom:10px}
+.tbc{display:inline-block;background:rgba(42,24,48,.07);border-radius:6px;padding:1px 8px;font-size:.82rem}
+
+.menu{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.mc{border-radius:24px;padding:28px;position:relative;overflow:hidden}
+.mc h3{font-size:1.7rem;margin-bottom:6px}
+.mc .min{display:inline-block;margin-top:10px;font-size:.88rem;font-weight:500;border:1px solid currentColor;border-radius:999px;padding:2px 12px}
+.m1{grid-column:span 5;background:var(--orch);color:#fff;grid-row:span 2}.m2{grid-column:span 4;background:var(--blush)}.m3{grid-column:span 3;background:var(--mint)}
+.m4{grid-column:span 4;background:var(--peach)}.m5{grid-column:span 3;background:#fff;border:1.5px solid var(--ink)}
+.m1 h3{font-size:2.3rem}
+
+.plan{background:var(--ink);color:var(--paper);clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%);padding:calc(84px + 4vw) 0}
+.plan h2{color:#fff;font-size:clamp(2.1rem,4.4vw,3.3rem);margin-bottom:10px}
+.pl{display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:start;margin-top:28px}
+.box{background:var(--paper);color:var(--ink);border-radius:24px;padding:28px}
+.box h3{font-size:1.7rem;margin-bottom:4px;color:var(--orch)}
+.box .sub{font-size:.93rem;opacity:.75}
+label.t{display:block;font-weight:600;margin:16px 0 6px;font-size:.93rem}
+.box input[type=text],.box input[type=date],.box select,.box textarea{width:100%;padding:11px 12px;border:1.5px solid var(--ink);border-radius:12px;font:inherit;background:#fff}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0}
+.chips label{padding:8px 14px;border:1.5px solid var(--ink);border-radius:999px;cursor:pointer;font-weight:500;font-size:.92rem;background:#fff}
+.chips input:checked+label{background:var(--ink);color:var(--peach)}
+.chips input:focus-visible+label{outline:3px solid var(--orch);outline-offset:2px}
+.res{margin-top:14px;background:var(--blush);border-left:5px solid var(--gold);padding:12px 16px;border-radius:0 12px 12px 0}
+.res b{font-family:'Italiana',serif;font-size:1.7rem;font-weight:400;color:var(--orch)}
+.res small{display:block;opacity:.8}
+.out{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+.contact{padding:70px 0}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact h2{font-size:2.4rem;color:var(--orch);margin-bottom:10px}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px}
+.contact dt{font-weight:600;color:var(--gold)}
+footer{background:var(--ink);color:#cbbad0;font-size:.88rem;padding:18px 0}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
+.reveal.is-visible{opacity:1;transform:none}
+@media (max-width:800px){
+ .top nav a:not(.btn){display:none}
+ .hero .grid,.pl,.contact .wrap{grid-template-columns:1fr}
+ .menu{grid-template-columns:1fr}.menu>*{grid-column:auto!important;grid-row:auto!important}
+ .plan{clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%);padding:calc(60px + 3vw) 0}
+ .row2{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.hand .coat{animation:none;transform:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo">Demo-ontwerp als voorstel. Teksten, foto's en prijzen worden samen met u ingevuld.</div>
+<header class="top"><div class="wrap">
+ <a class="logo" href="#top">Nagelstudio Esther</a>
+ <nav aria-label="Hoofdmenu"><a href="#behandelingen">Behandelingen</a><a href="#afspraak">Afspraak</a><a href="#contact">Contact</a><a class="btn btn-main" href="#afspraak">Afspraak aanvragen</a></nav>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap grid">
+ <div>
+  <h1>Verzorgde nagels, <em>jouw</em> kleur</h1>
+  <p class="lead">Nagelstudio aan de Sluissingel in Breda. Kies wat je wilt laten doen, geef je voorkeur door en stuur het in één bericht, zodat je afspraak sneller rond is.</p>
+  <div class="cta"><a class="btn btn-main" href="#afspraak">Plan een afspraak</a><a class="btn btn-line" href="tel:+31612614990">Bel 06 12 61 49 90</a></div>
+ </div>
+ <div>
+  <svg class="hand" viewBox="0 0 400 420" role="img" aria-label="Hand met vijf nagels waarvan de kleur te kiezen is">
+   <path d="M90 410 V250 Q90 214 120 214 Q132 214 140 222 V120 Q140 96 158 96 Q176 96 176 120 V200 V70 Q176 46 196 46 Q216 46 216 70 V200 V90 Q216 66 236 66 Q256 66 256 90 V210 V130 Q256 106 276 106 Q296 106 296 130 V260 L330 220 Q344 206 358 220 Q368 232 356 246 L300 330 V410Z" fill="#F4D3C4" stroke="#2A1830" stroke-width="4" stroke-linejoin="round"/>
+   <g id="nails">
+    <g><rect class="bare" x="146" y="102" width="24" height="34" rx="12" /><rect class="coat nail" x="146" y="102" width="24" height="34" rx="12" style="animation-delay:.3s"/></g>
+    <g><rect class="bare" x="184" y="52" width="24" height="36" rx="12"/><rect class="coat nail" x="184" y="52" width="24" height="36" rx="12" style="animation-delay:.6s"/></g>
+    <g><rect class="bare" x="224" y="72" width="24" height="36" rx="12"/><rect class="coat nail" x="224" y="72" width="24" height="36" rx="12" style="animation-delay:.9s"/></g>
+    <g><rect class="bare" x="264" y="112" width="24" height="34" rx="12"/><rect class="coat nail" x="264" y="112" width="24" height="34" rx="12" style="animation-delay:1.2s"/></g>
+    <g transform="rotate(44 342 226)"><rect class="bare" x="332" y="198" width="22" height="34" rx="11"/><rect class="coat nail" x="332" y="198" width="22" height="34" rx="11" style="animation-delay:1.5s"/></g>
+   </g>
+  </svg>
+  <div class="sw" id="sw" role="group" aria-label="Kies een kleur voor de nagels"></div>
+ </div>
+</div></section>
+
+<section id="behandelingen" style="padding-top:20px"><div class="wrap">
+ <div class="sec-head reveal"><h2>Behandelingen</h2><p>De exacte lijst en prijzen vullen we samen met u in. Dit is de indeling die klanten het snelst begrijpen.</p></div>
+ <div class="menu">
+  <div class="mc m1 reveal"><h3>Nieuwe set</h3><p>Een complete set op natuurlijke nagels, in de lengte en vorm die je kiest.</p><span class="min">circa 2 uur</span><br><span class="tbc" style="background:rgba(255,255,255,.18)">prijs nog in te vullen</span></div>
+  <div class="mc m2 reveal" style="--d:.1s"><h3>Bijvullen</h3><p>Onderhoud van een bestaande set, meestal na drie tot vier weken.</p><span class="min">circa 1,5 uur</span></div>
+  <div class="mc m3 reveal" style="--d:.2s"><h3>Gellak</h3><p>Kleur die weken blijft zitten.</p><span class="min">circa 1 uur</span></div>
+  <div class="mc m4 reveal" style="--d:.1s"><h3>Nail art</h3><p>Een accent, ombré of een eigen idee.</p><span class="min">+15 tot 30 min</span></div>
+  <div class="mc m5 reveal" style="--d:.2s"><h3>Verwijderen</h3><p>Voorzichtig eraf halen.</p><span class="min">circa 30 min</span></div>
+ </div>
+ <p style="margin-top:14px;font-size:.9rem;opacity:.7">Tijden zijn richtlijnen en worden bevestigd door het team. <span class="tbc">te bevestigen</span></p>
+</div></section>
+
+<div class="plan" id="afspraak"><div class="wrap">
+ <h2 class="reveal">Afspraak in twee stappen</h2>
+ <p class="reveal" style="max-width:36em">Eerst weten wanneer je weer aan de beurt bent, daarna je voorkeur doorgeven via WhatsApp.</p>
+ <div class="pl">
+  <div class="box reveal">
+   <h3>Wanneer weer?</h3><p class="sub">Vul je laatste afspraak in.</p>
+   <label class="t" for="last">Laatste afspraak</label><input type="date" id="last">
+   <label class="t" for="beh">Wat heb je laten doen?</label>
+   <select id="beh"><option value="21">Nieuwe set of bijvullen (3 weken)</option><option value="28">Nieuwe set, rustig tempo (4 weken)</option><option value="14">Gellak (2 weken)</option></select>
+   <div class="res" aria-live="polite"><b id="nx">-</b><small id="nx2">Kies een datum om te zien wanneer bijvullen het beste past.</small></div>
+  </div>
+  <div class="box reveal" style="--d:.15s">
+   <h3>Je voorkeur doorgeven</h3><p class="sub">Het bericht wordt klaargezet in WhatsApp.</p>
+   <label class="t">Behandeling</label><div class="chips" id="b"></div>
+   <div class="row2"><div><label class="t" for="vorm">Vorm</label><select id="vorm"><option>Weet ik nog niet</option><option>Rond</option><option>Vierkant</option><option>Amandel</option><option>Stiletto</option></select></div>
+   <div><label class="t" for="len">Lengte</label><select id="len"><option>Natuurlijk kort</option><option>Gemiddeld</option><option>Lang</option></select></div></div>
+   <label class="t">Extra</label><div class="chips" id="x"></div>
+   <label class="t" for="kl">Kleur of idee</label><input type="text" id="kl" placeholder="bijv. nude met glitter op de ringvinger">
+   <div class="row2"><div><label class="t" for="dag">Voorkeursdag</label><input type="text" id="dag" placeholder="bijv. donderdagmiddag"></div><div><label class="t" for="nm">Naam</label><input type="text" id="nm" autocomplete="name"></div></div>
+   <div class="res" id="sumq" style="white-space:pre-line;font-size:.93rem">-</div>
+   <div class="out"><a class="btn btn-main" id="wa" href="#" target="_blank" rel="noopener">Stuur via WhatsApp</a><button class="btn btn-line" id="copy" type="button">Kopieer bericht</button></div>
+  </div>
+ </div>
+</div></div>
+
+<section class="contact" id="contact"><div class="wrap">
+ <div><h2>Bij Esther aan de Sluissingel</h2><p>Een afspraak maak je liefst vooraf, zodat er tijd voor je is.</p></div>
+ <dl>
+  <dt>Adres</dt><dd>Sluissingel 14, Breda</dd>
+  <dt>Telefoon en WhatsApp</dt><dd><a href="tel:+31612614990">06 12 61 49 90</a></dd>
+  <dt>Openingstijden</dt><dd><span class="tbc">nog in te vullen</span></dd>
+  <dt>E-mail</dt><dd><span class="tbc">nog in te vullen</span></dd>
+ </dl>
+</div></section>
+</main>
+<footer><div class="wrap">Demo-ontwerp, geen officiële website. Gemaakt als voorstel voor Nagelstudio Esther.</div></footer>
+
+<script>
+(function(){
+ var $=function(i){return document.getElementById(i)};
+ var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.15});
+ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+ var cols=[['Framboos','#D9487B'],['Nude','#E6B9A6'],['Orchidee','#8A4A7B'],['Munt','#8FCBB5'],['Goud','#C9A24F'],['Nachtblauw','#243B6B']];
+ cols.forEach(function(c,i){var b=document.createElement('button');b.type='button';b.style.background=c[1];b.setAttribute('aria-label',c[0]);b.setAttribute('aria-pressed',i===0);
+  b.onclick=function(){document.documentElement.style.setProperty('--nail',c[1]);[].forEach.call($('sw').children,function(x){x.setAttribute('aria-pressed',x===b)});kleur=c[0];sum()};$('sw').appendChild(b)});
+ var kleur='Framboos';
+
+ /* volgende afspraak */
+ var t=new Date();$('last').value=t.toISOString().slice(0,10);
+ function nxt(){var v=$('last').value;if(!v)return;var d=new Date(v+'T12:00');d.setDate(d.getDate()+(+$('beh').value));
+  var f=d.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'});
+  $('nx').textContent=f;$('nx2').textContent='Plan bij voorkeur in de week van deze datum. Wacht je langer, dan groeit de nagel uit en wordt bijvullen lastiger.'}
+ $('last').addEventListener('input',nxt);$('beh').addEventListener('change',nxt);nxt();
+
+ function chips(id,name,items,type,first){items.forEach(function(t,i){$(id).insertAdjacentHTML('beforeend','<input type="'+type+'" name="'+name+'" id="'+name+i+'" value="'+t+'"'+(i===0&&first?' checked':'')+'><label for="'+name+i+'">'+t+'</label>')});$(id).addEventListener('change',sum)}
+ chips('b','b',['Nieuwe set','Bijvullen','Gellak','Alleen verwijderen'],'radio',true);
+ chips('x','x',['Nail art','Oude set verwijderen','Reparatie van 1 nagel'],'checkbox');
+ ['vorm','len','kl','dag','nm'].forEach(function(i){$(i).addEventListener('input',sum)});
+ var txt='';
+ function sum(){
+  var x=[].map.call(document.querySelectorAll('input[name=x]:checked'),function(e){return e.value});
+  txt=['Hallo, ik wil graag een afspraak maken.','Behandeling: '+document.querySelector('input[name=b]:checked').value,'Vorm: '+$('vorm').value,'Lengte: '+$('len').value,'Kleur: '+($('kl').value||kleur),'Extra: '+(x.length?x.join(', '):'geen'),'Voorkeur: '+($('dag').value||'-'),'Naam: '+($('nm').value||'-')].join('\n');
+  $('sumq').textContent=txt;$('wa').href='https://wa.me/31612614990?text='+encodeURIComponent(txt)}
+ $('copy').onclick=function(){var b=this,d=function(){b.textContent='Gekopieerd';setTimeout(function(){b.textContent='Kopieer bericht'},1800)};if(navigator.clipboard)navigator.clipboard.writeText(txt).then(d,d);else d()};
+ sum();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kleij – Gordijnen en tapijten in Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Kleij: gordijnen en tapijten aan de Nieuwe Haagdijk in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@400;500;600&display=swap');
+/* DESIGN: stoffenwinkel. Kleuren: indigo (#24304F), linnen (#EBE4D4), roest (#B4583A), saliegroen (#7D8B6A), kalk (#F8F5EE), inkt (#1B1D26).
+   Type: Libre Caslon Text (titels, klassiek zonder stoffig te zijn) + Work Sans (tekst).
+   STRUCTUUR: gordijn dat opengaat in de hero, plooi-patroon als vlak, twee rekenhulpen naast elkaar, offerteformulier dat de uitkomst meeneemt.
+   MOTION: (1) gordijn schuift open bij laden, (2) scroll-reveal met stagger, (3) plooien in de rekenhulp bewegen mee met de breedte. Reduced motion gerespecteerd. */
+:root{--indigo:#24304F;--linen:#EBE4D4;--rust:#B4583A;--sage:#7D8B6A;--chalk:#F8F5EE;--ink:#1B1D26;--line:rgba(27,29,38,.15)}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Work Sans',system-ui,sans-serif;background:var(--chalk);color:var(--ink);font-size:17px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:'Libre Caslon Text',Georgia,serif;font-weight:400;line-height:1.1}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--rust);outline-offset:3px;border-radius:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;padding:14px 26px;border-radius:2px;font:inherit;font-weight:600;text-decoration:none;border:1.5px solid var(--indigo);cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.btn-main{background:var(--indigo);color:#fff}.btn-main:hover{background:var(--rust);border-color:var(--rust);transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--indigo)}.btn-line:hover{background:var(--indigo);color:#fff}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--rust);z-index:90}
+.demo{background:var(--ink);color:var(--linen);font-size:.85rem;text-align:center;padding:8px 16px}
+header.top{position:sticky;top:0;z-index:40;background:rgba(248,245,238,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:66px}
+.logo{font-family:'Libre Caslon Text',serif;font-size:1.6rem;text-decoration:none;color:var(--indigo)}
+.top nav{display:flex;gap:22px;align-items:center}
+.top nav a:not(.btn){text-decoration:none;font-size:.95rem;font-weight:500}
+.top nav a:not(.btn):hover{color:var(--rust)}
+.top .btn{padding:9px 16px;font-size:.9rem}
+
+/* HERO met gordijn */
+.hero{position:relative;overflow:hidden;background:var(--linen);min-height:560px;display:flex;align-items:center}
+.hero .in{position:relative;z-index:1;padding:80px 0}
+.hero h1{font-size:clamp(2.6rem,6vw,4.9rem);color:var(--indigo);max-width:11em}
+.hero h1 i{color:var(--rust)}
+.hero p.lead{max-width:31em;margin:20px 0 28px;font-size:1.12rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.cur{position:absolute;top:0;bottom:0;width:52%;z-index:3;background:
+ repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 3px,transparent 3px 34px,rgba(255,255,255,.08) 34px 37px,transparent 37px 68px),var(--indigo);
+ transition:transform 2.2s cubic-bezier(.65,.05,.25,1) .4s}
+.cur.l{left:0;transform-origin:left;border-right:3px solid rgba(255,255,255,.2)}
+.cur.r{right:0;transform-origin:right;border-left:3px solid rgba(255,255,255,.2)}
+.open .cur.l{transform:translateX(-86%)}.open .cur.r{transform:translateX(86%)}
+.rail{position:absolute;left:0;right:0;top:0;height:10px;background:var(--ink);z-index:4}
+.hero .sheer{position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,.5) 50%,transparent 60%);transform:translateX(-100%);animation:sheer 6s 2.6s ease-in-out infinite;z-index:2;pointer-events:none}
+@keyframes sheer{60%,100%{transform:translateX(100%)}}
+
+/* SECTIES */
+section{padding:88px 0}
+.sec-head{max-width:36em;margin-bottom:38px}
+.sec-head h2{font-size:clamp(2rem,4.2vw,3.1rem);color:var(--indigo);margin-bottom:10px}
+.fold{background:var(--indigo);color:var(--chalk);clip-path:polygon(0 4vw,100% 0,100% calc(100% - 4vw),0 100%);padding:calc(80px + 4vw) 0;position:relative}
+.fold h2{color:#fff;font-size:clamp(2rem,4.2vw,3.1rem);margin-bottom:30px}
+.assort{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:auto auto;gap:18px}
+.as{border:1px solid rgba(255,255,255,.3);padding:26px;border-radius:2px;position:relative;overflow:hidden;min-height:170px;transition:background .3s}
+.as:hover{background:rgba(255,255,255,.07)}
+.as h3{font-size:1.5rem;color:var(--linen);margin-bottom:8px}
+.as.big{grid-row:span 2;background:var(--rust);border-color:var(--rust)}
+.as.big:hover{background:#c0624a}
+.as.big h3{color:#fff;font-size:2rem}
+.as p{font-size:.95rem;opacity:.92}
+.tbc{display:inline-block;background:rgba(255,255,255,.15);border-radius:5px;padding:1px 8px;font-size:.82rem}
+.light .tbc{background:rgba(27,29,38,.08)}
+.pleats{position:absolute;right:0;bottom:0;width:60%;height:55%;opacity:.35;background:repeating-linear-gradient(90deg,#fff 0 2px,transparent 2px 22px)}
+
+/* REKENHULP */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.box{background:#fff;border:1px solid var(--line);border-top:5px solid var(--indigo);padding:28px}
+.box.t2{border-top-color:var(--sage)}
+.box h3{font-size:1.6rem;margin-bottom:4px;color:var(--indigo)}
+.box .sub{font-size:.93rem;opacity:.75;margin-bottom:6px}
+label.t{display:block;font-weight:600;margin:16px 0 6px;font-size:.93rem}
+.box input[type=number],.box input[type=text],.box input[type=email],.box input[type=tel],.box select,.box textarea{width:100%;padding:11px 12px;border:1.5px solid var(--ink);border-radius:2px;font:inherit;background:var(--chalk)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0}
+.chips label{padding:8px 14px;border:1.5px solid var(--indigo);border-radius:999px;cursor:pointer;font-weight:500;font-size:.92rem;background:var(--chalk)}
+.chips input:checked+label{background:var(--indigo);color:#fff}
+.chips input:focus-visible+label{outline:3px solid var(--rust);outline-offset:2px}
+.win{margin:18px 0 8px;position:relative;height:150px;background:#dfe8ee;border:6px solid var(--ink);border-radius:2px;overflow:hidden}
+.win .fab{position:absolute;top:0;bottom:0;left:0;background:repeating-linear-gradient(90deg,var(--indigo) 0 6px,#35446b 6px 14px);transition:width .35s}
+.win .fab.r{left:auto;right:0}
+.win span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.8rem;background:#fff;padding:2px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.res{margin-top:16px;background:var(--linen);padding:16px 18px;border-left:5px solid var(--rust)}
+.res b{font-family:'Libre Caslon Text',serif;font-size:1.7rem;color:var(--indigo);font-weight:700}
+.res small{display:block;opacity:.75;margin-top:2px}
+.btn-sm{margin-top:14px;padding:10px 16px;font-size:.9rem}
+
+/* MEETGIDS */
+.measure{background:var(--linen)}
+.mg{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+.mg svg{width:100%;height:auto;max-width:430px}
+.mg ol{margin:16px 0 0 1.2em}.mg li{margin-bottom:8px}
+
+/* OFFERTE */
+.q{background:#fff;border:1px solid var(--line);border-top:5px solid var(--rust);padding:30px;max-width:780px}
+.q h3{font-size:1.8rem;color:var(--indigo)}
+.out{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.contact{background:var(--ink);color:var(--linen);padding:70px 0}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact h2{color:#fff;font-size:2.2rem;margin-bottom:10px}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:8px 20px}
+.contact dt{color:var(--sage);font-weight:600}
+footer{background:#111218;color:#a9a79e;font-size:.88rem;padding:18px 0}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
+.reveal.is-visible{opacity:1;transform:none}
+@media (max-width:800px){
+ .top nav a:not(.btn){display:none}
+ .calc,.mg,.contact .wrap,.assort{grid-template-columns:1fr}
+ .as.big{grid-row:auto}
+ .fold{clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%);padding:calc(60px + 3vw) 0}
+ .row2{grid-template-columns:1fr}
+ .open .cur.l{transform:translateX(-92%)}.open .cur.r{transform:translateX(92%)}
+}
+@media (prefers-reduced-motion:reduce){.cur{transition:none}.hero .sheer{animation:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.win .fab{transition:none}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo">Demo-ontwerp als voorstel. Teksten, foto's en prijzen worden samen met u ingevuld.</div>
+<header class="top"><div class="wrap">
+ <a class="logo" href="#top">Kleij</a>
+ <nav aria-label="Hoofdmenu"><a href="#aanbod">Aanbod</a><a href="#reken">Rekenhulp</a><a href="#meten">Meten</a><a class="btn btn-main" href="#offerte">Vraag offerte aan</a></nav>
+</div></header>
+
+<main id="top">
+<div class="hero" id="hero">
+ <div class="rail"></div><div class="cur l"></div><div class="cur r"></div><div class="sheer"></div>
+ <div class="wrap in">
+  <h1>Gordijnen en tapijten die <i>passen</i> bij je huis</h1>
+  <p class="lead">Aan de Nieuwe Haagdijk in Breda. Kom langs om stoffen en kleden te voelen, of reken thuis alvast uit hoeveel je nodig hebt.</p>
+  <div class="cta"><a class="btn btn-main" href="#reken">Reken je ruimte door</a><a class="btn btn-line" href="tel:+31765215976">Bel 076 521 5976</a></div>
+ </div>
+</div>
+
+<div class="fold" id="aanbod"><div class="wrap">
+ <h2 class="reveal">Waar je terecht kunt</h2>
+ <div class="assort">
+  <div class="as big reveal"><h3>Gordijnen</h3><p>Op maat gemaakt, van lichte vitrage tot verduisterend. Kies de stof, de plooi en de ophanging.</p><div class="pleats"></div></div>
+  <div class="as reveal" style="--d:.1s"><h3>Tapijt en vloerkleden</h3><p>Vloerbedekking van muur tot muur of een kleed om een hoek te maken.</p></div>
+  <div class="as reveal" style="--d:.2s"><h3>Opmeten en ophangen</h3><p>Aan huis meten en plaatsen. <span class="tbc">service te bevestigen</span></p></div>
+  <div class="as reveal" style="--d:.3s"><h3>Merken en collecties</h3><p><span class="tbc">nog in te vullen</span></p></div>
+  <div class="as reveal" style="--d:.4s"><h3>Reparatie en aanpassen</h3><p>Korter, langer of nieuwe plooiband. <span class="tbc">te bevestigen</span></p></div>
+ </div>
+</div></div>
+
+<section id="reken" class="light"><div class="wrap">
+ <div class="sec-head reveal"><h2>Twee rekenhulpen</h2><p>Zodat je niet met een gok naar de winkel komt. De uitkomst gaat mee in je offerteaanvraag. Richtlijnen: de exacte maat bepalen we altijd samen.</p></div>
+ <div class="calc">
+  <div class="box reveal">
+   <h3>Gordijnen</h3><p class="sub">Hoeveel stof heb je nodig voor één raam?</p>
+   <div class="row2">
+    <div><label class="t" for="gb">Breedte rail of roede (cm)</label><input type="number" id="gb" value="240" min="40" max="900" inputmode="numeric"></div>
+    <div><label class="t" for="gh">Hoogte tot vloer of sill (cm)</label><input type="number" id="gh" value="250" min="40" max="400" inputmode="numeric"></div>
+   </div>
+   <label class="t" for="gp">Plooi</label>
+   <select id="gp"><option value="1.5">Ruim gerimpeld, 1,5 keer (strak)</option><option value="2" selected>Wave of gerimpeld, 2 keer (standaard)</option><option value="2.5">Extra volume, 2,5 keer</option></select>
+   <div class="win" aria-hidden="true"><div class="fab" id="fl"></div><div class="fab r" id="fr"></div><span id="wl">240 cm</span></div>
+   <div class="res"><b id="g1">-</b><small id="g2"></small></div>
+   <button class="btn btn-line btn-sm" type="button" id="gadd">Gebruik in offerte</button>
+  </div>
+  <div class="box t2 reveal" style="--d:.15s">
+   <h3>Tapijt en vloerbedekking</h3><p class="sub">Hoeveel m² moet je rekenen?</p>
+   <div class="row2">
+    <div><label class="t" for="tl">Lengte kamer (cm)</label><input type="number" id="tl" value="450" min="50" max="2000" inputmode="numeric"></div>
+    <div><label class="t" for="tb">Breedte kamer (cm)</label><input type="number" id="tb" value="360" min="50" max="2000" inputmode="numeric"></div>
+   </div>
+   <label class="t">Soort</label>
+   <div class="chips" id="tt"><input type="radio" name="tt" id="tt1" value="Vaste vloerbedekking" checked><label for="tt1">Vaste vloerbedekking</label><input type="radio" name="tt" id="tt2" value="Vloerkleed"><label for="tt2">Vloerkleed</label></div>
+   <div class="res"><b id="t1">-</b><small id="t2"></small></div>
+   <button class="btn btn-line btn-sm" type="button" id="tadd">Gebruik in offerte</button>
+  </div>
+ </div>
+</div></section>
+
+<section class="measure" id="meten"><div class="wrap mg">
+ <svg viewBox="0 0 430 360" role="img" aria-label="Schets van een raam met een gordijnroede en maataanduidingen voor breedte en hoogte" class="reveal">
+  <rect x="60" y="70" width="250" height="220" fill="#dfe8ee" stroke="#1B1D26" stroke-width="5"/>
+  <path d="M185 70v220M60 180h250" stroke="#1B1D26" stroke-width="3" opacity=".5"/>
+  <line x1="20" y1="48" x2="350" y2="48" stroke="#1B1D26" stroke-width="6" stroke-linecap="round"/><circle cx="20" cy="48" r="7" fill="#B4583A"/><circle cx="350" cy="48" r="7" fill="#B4583A"/>
+  <g stroke="#B4583A" stroke-width="2.5" fill="none"><path d="M20 28h330M20 22v12M350 22v12"/><path d="M392 48v250M386 48h12M386 298h12"/></g>
+  <text x="185" y="20" text-anchor="middle" font-size="15" fill="#B4583A" font-family="Work Sans" font-weight="600">A  breedte van de roede</text>
+  <text x="404" y="190" font-size="15" fill="#B4583A" font-family="Work Sans" font-weight="600" transform="rotate(90 404 190)" text-anchor="middle">B  hoogte</text>
+  <rect x="60" y="300" width="250" height="10" fill="#7D8B6A"/>
+ </svg>
+ <div class="reveal" style="--d:.1s">
+  <h2 style="font-size:clamp(1.8rem,3.6vw,2.6rem);color:var(--indigo);margin-bottom:12px">Zo meet je zelf</h2>
+  <ol>
+   <li><b>A.</b> Meet de breedte van de roede of rail. Gordijnen hangen ruim over het raam heen, zodat er overdag licht binnenkomt.</li>
+   <li><b>B.</b> Meet de hoogte van de roede tot waar het gordijn moet eindigen. Tot net boven de vloer is gebruikelijk.</li>
+   <li>Zit er een radiator of vensterbank? Noteer dat, het bepaalt de lengte.</li>
+   <li>Twijfel je? Stuur de maten mee, we laten weten of ze kloppen. <span class="tbc">Aan huis meten: te bevestigen</span></li>
+  </ol>
+ </div>
+</div></section>
+
+<section id="offerte"><div class="wrap">
+ <div class="q reveal">
+  <h3>Offerte aanvragen</h3>
+  <p class="sub" style="opacity:.75">Kies wat je zoekt. De uitkomsten van de rekenhulpen worden automatisch toegevoegd.</p>
+  <label class="t" style="display:block;font-weight:600;margin:16px 0 6px">Waar gaat het om?</label>
+  <div class="chips" id="wat"></div>
+  <div class="row2" style="margin-top:6px">
+   <div><label class="t" for="r">Ruimte</label><select id="r"><option>Woonkamer</option><option>Slaapkamer</option><option>Kinderkamer</option><option>Kantoor of winkel</option><option>Anders</option></select></div>
+   <div><label class="t" for="w">Wanneer?</label><select id="w"><option>Zo snel mogelijk</option><option>Binnen een maand</option><option>Ik oriënteer me</option></select></div>
+  </div>
+  <label class="t" for="m">Opmerking</label><textarea id="m" rows="3" placeholder="Stijl, kleuren, huisdieren, bestaande roede aanwezig..."></textarea>
+  <div class="row2">
+   <div><label class="t" for="n">Naam</label><input type="text" id="n" autocomplete="name"></div>
+   <div><label class="t" for="tel">Telefoon</label><input type="tel" id="tel" autocomplete="tel"></div>
+  </div>
+  <label class="t" for="pc">Postcode (voor aan huis meten)</label><input type="text" id="pc" autocomplete="postal-code" style="max-width:200px">
+  <div class="res" id="sumq" style="white-space:pre-line;font-size:.95rem">-</div>
+  <div class="out"><a class="btn btn-main" id="mail" href="#">Mail aanvraag</a><button class="btn btn-line" id="copy" type="button">Kopieer tekst</button></div>
+ </div>
+</div></section>
+
+<section class="contact" id="contact" style="padding:70px 0"><div class="wrap">
+ <div><h2>Kom langs en voel de stoffen</h2><p>Een kleur ziet er op een scherm altijd anders uit. In de winkel houd je het monster tegen het licht van je eigen raam.</p></div>
+ <dl>
+  <dt>Adres</dt><dd>Nieuwe Haagdijk 3, Breda</dd>
+  <dt>Telefoon</dt><dd><a href="tel:+31765215976">076 521 5976</a></dd>
+  <dt>E-mail</dt><dd><a href="mailto:info@kleij.com">info@kleij.com</a></dd>
+  <dt>Openingstijden</dt><dd><span class="tbc" style="background:rgba(255,255,255,.15)">nog in te vullen</span></dd>
+ </dl>
+</div></section>
+</main>
+<footer><div class="wrap">Demo-ontwerp, geen officiële website. Gemaakt als voorstel voor Kleij.</div></footer>
+
+<script>
+(function(){
+ var $=function(i){return document.getElementById(i)};
+ var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.15});
+ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+ requestAnimationFrame(function(){setTimeout(function(){$('hero').classList.add('open')},60)});
+
+ var gTxt='',tTxt='';
+ function calcG(){
+  var b=+$('gb').value||0,h=+$('gh').value||0,f=+$('gp').value;
+  var stof=b*f/100,baan=Math.ceil(stof/1.4);              /* stofbreedte 140 cm als richtlijn */
+  var hz=Math.round(h+25);                                  /* zoom/omslag richtlijn */
+  $('g1').textContent=stof.toFixed(1).replace('.',',')+' m plooibreedte';
+  $('g2').textContent='ca. '+baan+' banen van 140 cm, totaal ongeveer '+(baan*hz/100).toFixed(1).replace('.',',')+' m stof (afgeknipte lengte '+hz+' cm incl. zoom)';
+  var w=Math.min(48,Math.max(12,f*18));$('fl').style.width=w+'%';$('fr').style.width=w+'%';$('wl').textContent=b+' cm';
+  gTxt='Gordijnen: roede '+b+' cm, hoogte '+h+' cm, plooi '+f+'x, richtlijn '+baan+' banen van 140 cm';
+ }
+ function calcT(){
+  var l=+$('tl').value||0,b=+$('tb').value||0,a=l*b/10000;
+  var soort=document.querySelector('input[name=tt]:checked').value;
+  var tot=soort==='Vloerkleed'?a:a*1.1;
+  $('t1').textContent=tot.toFixed(1).replace('.',',')+' m²';
+  $('t2').textContent=soort==='Vloerkleed'?'Kamer '+a.toFixed(1).replace('.',',')+' m². Een kleed ligt meestal op ca. 60 tot 70% van de ruimte.':'Kamer '+a.toFixed(1).replace('.',',')+' m² plus 10% snijverlies.';
+  tTxt='Tapijt: '+soort+', kamer '+l+' x '+b+' cm, richtlijn '+tot.toFixed(1).replace('.',',')+' m²';
+ }
+ var useG=false,useT=false;
+ ['gb','gh','gp'].forEach(function(i){$(i).addEventListener('input',function(){calcG();sum()})});
+ ['tl','tb'].forEach(function(i){$(i).addEventListener('input',function(){calcT();sum()})});
+ $('tt').addEventListener('change',function(){calcT();sum()});
+ function jump(){document.getElementById('offerte').scrollIntoView({behavior:'smooth'})}
+ $('gadd').onclick=function(){useG=true;sum();jump()};$('tadd').onclick=function(){useT=true;sum();jump()};
+ var wat=['Gordijnen','Vitrage','Vloerbedekking','Vloerkleed','Opmeten aan huis','Ophangen'];
+ wat.forEach(function(t,i){$('wat').insertAdjacentHTML('beforeend','<input type="checkbox" name="wat" id="w'+i+'" value="'+t+'"'+(i===0?' checked':'')+'><label for="w'+i+'">'+t+'</label>')});
+ $('wat').addEventListener('change',sum);
+ ['r','w','m','n','tel','pc'].forEach(function(i){$(i).addEventListener('input',sum)});
+ var txt='';
+ function sum(){
+  var wv=[].map.call(document.querySelectorAll('input[name=wat]:checked'),function(x){return x.value}).join(', ')||'-';
+  var L=['Offerteaanvraag','Gaat om: '+wv,'Ruimte: '+$('r').value,'Wanneer: '+$('w').value];
+  if(useG)L.push(gTxt);if(useT)L.push(tTxt);
+  L.push('Opmerking: '+($('m').value||'-'),'Naam: '+($('n').value||'-')+' ('+($('tel').value||'-')+')','Postcode: '+($('pc').value||'-'));
+  txt=L.join('\n');$('sumq').textContent=txt;
+  $('mail').href='mailto:info@kleij.com?subject='+encodeURIComponent('Offerteaanvraag via website')+'&body='+encodeURIComponent(txt);
+ }
+ $('copy').onclick=function(){var b=this,d=function(){b.textContent='Gekopieerd';setTimeout(function(){b.textContent='Kopieer tekst'},1800)};if(navigator.clipboard)navigator.clipboard.writeText(txt).then(d,d);else d()};
+ calcG();calcT();sum();
+})();
+</script>
+</body>
+</html>
