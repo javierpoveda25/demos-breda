@@ -95,6 +95,31 @@ footer{background:var(--ink);color:#cbbad0;font-size:.88rem;padding:18px 0}
  .row2{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){.hand .coat{animation:none;transform:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* WIZARD */
+.strip{background:rgba(255,255,255,.1);border-radius:999px;padding:12px 22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:24px 0}
+.strip input{padding:8px 12px;border-radius:999px;border:0;font:inherit}
+.strip b{color:var(--peach);font-family:'Italiana',serif;font-size:1.4rem;font-weight:400}
+.wz{background:var(--paper);color:var(--ink);border-radius:30px;padding:34px;min-height:300px;position:relative}
+.wz .prog{display:flex;gap:10px;margin-bottom:22px}
+.wz .prog i{flex:1;height:5px;border-radius:3px;background:var(--line);transition:background .3s}.wz .prog i.on{background:var(--orch)}
+.wz h3{font-size:2rem;color:var(--orch);margin-bottom:18px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.tile{border:1.5px solid var(--ink);border-radius:22px;padding:22px 16px;background:#fff;font:inherit;cursor:pointer;text-align:left;transition:transform .2s,background .2s;animation:fi .45s both}
+.tile:hover{transform:translateY(-4px)}
+.tile b{display:block;font-family:'Italiana',serif;font-weight:400;font-size:1.5rem}.tile small{opacity:.7}
+.tile:nth-child(1){background:var(--blush)}.tile:nth-child(2){background:var(--mint)}.tile:nth-child(3){background:var(--peach)}.tile:nth-child(4){background:#fff}
+@keyframes fi{from{opacity:0;transform:translateY(14px)}}
+.shapes{display:flex;gap:18px;flex-wrap:wrap}
+.shp{border:0;background:none;cursor:pointer;text-align:center;font:inherit;font-weight:500}
+.shp svg{width:74px;height:110px;display:block;margin:0 auto 6px;transition:transform .25s}
+.shp svg path{fill:var(--nail);stroke:var(--ink);stroke-width:3}
+.shp:hover svg{transform:translateY(-6px)}
+.wz label.t{display:block;font-weight:600;margin:20px 0 6px}
+.wz input[type=range]{width:100%;accent-color:var(--orch);height:32px}
+.wz input[type=text]{width:100%;padding:12px 14px;border:1.5px solid var(--ink);border-radius:14px;font:inherit}
+.wz .chips{margin-top:6px}
+.back{background:none;border:0;font:inherit;font-weight:600;text-decoration:underline;cursor:pointer;margin-top:18px;color:var(--ink)}
 </style>
 </head>
 <body>
@@ -140,28 +165,10 @@ footer{background:var(--ink);color:#cbbad0;font-size:.88rem;padding:18px 0}
 </div></section>
 
 <div class="plan" id="afspraak"><div class="wrap">
- <h2 class="reveal">Afspraak in twee stappen</h2>
- <p class="reveal" style="max-width:36em">Eerst weten wanneer je weer aan de beurt bent, daarna je voorkeur doorgeven via WhatsApp.</p>
- <div class="pl">
-  <div class="box reveal">
-   <h3>Wanneer weer?</h3><p class="sub">Vul je laatste afspraak in.</p>
-   <label class="t" for="last">Laatste afspraak</label><input type="date" id="last">
-   <label class="t" for="beh">Wat heb je laten doen?</label>
-   <select id="beh"><option value="21">Nieuwe set of bijvullen (3 weken)</option><option value="28">Nieuwe set, rustig tempo (4 weken)</option><option value="14">Gellak (2 weken)</option></select>
-   <div class="res" aria-live="polite"><b id="nx">-</b><small id="nx2">Kies een datum om te zien wanneer bijvullen het beste past.</small></div>
-  </div>
-  <div class="box reveal" style="--d:.15s">
-   <h3>Je voorkeur doorgeven</h3><p class="sub">Het bericht wordt klaargezet in WhatsApp.</p>
-   <label class="t">Behandeling</label><div class="chips" id="b"></div>
-   <div class="row2"><div><label class="t" for="vorm">Vorm</label><select id="vorm"><option>Weet ik nog niet</option><option>Rond</option><option>Vierkant</option><option>Amandel</option><option>Stiletto</option></select></div>
-   <div><label class="t" for="len">Lengte</label><select id="len"><option>Natuurlijk kort</option><option>Gemiddeld</option><option>Lang</option></select></div></div>
-   <label class="t">Extra</label><div class="chips" id="x"></div>
-   <label class="t" for="kl">Kleur of idee</label><input type="text" id="kl" placeholder="bijv. nude met glitter op de ringvinger">
-   <div class="row2"><div><label class="t" for="dag">Voorkeursdag</label><input type="text" id="dag" placeholder="bijv. donderdagmiddag"></div><div><label class="t" for="nm">Naam</label><input type="text" id="nm" autocomplete="name"></div></div>
-   <div class="res" id="sumq" style="white-space:pre-line;font-size:.93rem">-</div>
-   <div class="out"><a class="btn btn-main" id="wa" href="#" target="_blank" rel="noopener">Stuur via WhatsApp</a><button class="btn btn-line" id="copy" type="button">Kopieer bericht</button></div>
-  </div>
- </div>
+ <h2 class="reveal">Afspraak in drie tikken</h2>
+ <p class="reveal" style="max-width:36em">Kies, tik, en het bericht staat klaar in WhatsApp.</p>
+ <div class="strip reveal"><span>Al klant? Laatste afspraak:</span><input type="date" id="last" aria-label="Datum laatste afspraak"><span>Weer aan de beurt rond <b id="nx">-</b></span></div>
+ <div class="wz reveal"><div class="prog" id="prog"><i></i><i></i><i></i></div><div id="wb"></div></div>
 </div></div>
 
 <section class="contact" id="contact"><div class="wrap">
@@ -185,27 +192,34 @@ footer{background:var(--ink);color:#cbbad0;font-size:.88rem;padding:18px 0}
 
  var cols=[['Framboos','#D9487B'],['Nude','#E6B9A6'],['Orchidee','#8A4A7B'],['Munt','#8FCBB5'],['Goud','#C9A24F'],['Nachtblauw','#243B6B']];
  cols.forEach(function(c,i){var b=document.createElement('button');b.type='button';b.style.background=c[1];b.setAttribute('aria-label',c[0]);b.setAttribute('aria-pressed',i===0);
-  b.onclick=function(){document.documentElement.style.setProperty('--nail',c[1]);[].forEach.call($('sw').children,function(x){x.setAttribute('aria-pressed',x===b)});kleur=c[0];sum()};$('sw').appendChild(b)});
+  b.onclick=function(){document.documentElement.style.setProperty('--nail',c[1]);[].forEach.call($('sw').children,function(x){x.setAttribute('aria-pressed',x===b)});kleur=c[0]};$('sw').appendChild(b)});
  var kleur='Framboos';
 
  /* volgende afspraak */
  var t=new Date();$('last').value=t.toISOString().slice(0,10);
- function nxt(){var v=$('last').value;if(!v)return;var d=new Date(v+'T12:00');d.setDate(d.getDate()+(+$('beh').value));
-  var f=d.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'});
-  $('nx').textContent=f;$('nx2').textContent='Plan bij voorkeur in de week van deze datum. Wacht je langer, dan groeit de nagel uit en wordt bijvullen lastiger.'}
- $('last').addEventListener('input',nxt);$('beh').addEventListener('change',nxt);nxt();
+ function nxt(){var v=$('last').value;if(!v)return;var d=new Date(v+'T12:00');d.setDate(d.getDate()+21);$('nx').textContent=d.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'})}
+ $('last').addEventListener('input',nxt);nxt();
 
- function chips(id,name,items,type,first){items.forEach(function(t,i){$(id).insertAdjacentHTML('beforeend','<input type="'+type+'" name="'+name+'" id="'+name+i+'" value="'+t+'"'+(i===0&&first?' checked':'')+'><label for="'+name+i+'">'+t+'</label>')});$(id).addEventListener('change',sum)}
- chips('b','b',['Nieuwe set','Bijvullen','Gellak','Alleen verwijderen'],'radio',true);
- chips('x','x',['Nail art','Oude set verwijderen','Reparatie van 1 nagel'],'checkbox');
- ['vorm','len','kl','dag','nm'].forEach(function(i){$(i).addEventListener('input',sum)});
- var txt='';
- function sum(){
-  var x=[].map.call(document.querySelectorAll('input[name=x]:checked'),function(e){return e.value});
-  txt=['Hallo, ik wil graag een afspraak maken.','Behandeling: '+document.querySelector('input[name=b]:checked').value,'Vorm: '+$('vorm').value,'Lengte: '+$('len').value,'Kleur: '+($('kl').value||kleur),'Extra: '+(x.length?x.join(', '):'geen'),'Voorkeur: '+($('dag').value||'-'),'Naam: '+($('nm').value||'-')].join('\n');
-  $('sumq').textContent=txt;$('wa').href='https://wa.me/31612614990?text='+encodeURIComponent(txt)}
- $('copy').onclick=function(){var b=this,d=function(){b.textContent='Gekopieerd';setTimeout(function(){b.textContent='Kopieer bericht'},1800)};if(navigator.clipboard)navigator.clipboard.writeText(txt).then(d,d);else d()};
- sum();
+ var T=[['Nieuwe set','circa 2 uur'],['Bijvullen','circa 1,5 uur'],['Gellak','circa 1 uur'],['Verwijderen','circa 30 min']];
+ var SH=[['Rond','M22 100V40Q22 10 37 10T52 40V100Z'],['Vierkant','M20 100V14H54V100Z'],['Amandel','M22 100V50Q22 24 37 6Q52 24 52 50V100Z'],['Stiletto','M25 100V54Q27 28 37 2Q47 28 49 54V100Z']];
+ var st=0,A={beh:'',vorm:'',len:2,dag:'Doordeweeks overdag',nm:''};
+ var LEN=['Natuurlijk kort','Gemiddeld','Lang','Extra lang'],DAG=['Doordeweeks overdag','Doordeweeks avond','Zaterdag','Maakt niet uit'];
+ function msg(){return ['Hallo, ik wil graag een afspraak maken.','Behandeling: '+A.beh,A.vorm?'Vorm: '+A.vorm:'','Lengte: '+LEN[A.len],'Kleur: '+kleur,'Voorkeur: '+A.dag,'Naam: '+(A.nm||'-')].filter(Boolean).join('\n')}
+ function render(){
+  [].forEach.call($('prog').children,function(d,i){d.className=i<=st?'on':''});var b=$('wb');b.innerHTML='';
+  if(st===0){b.innerHTML='<h3>Wat wil je laten doen?</h3><div class="tiles"></div>';
+   T.forEach(function(x,i){var e=document.createElement('button');e.type='button';e.className='tile';e.style.animationDelay=i*70+'ms';e.innerHTML='<b>'+x[0]+'</b><small>'+x[1]+'</small>';e.onclick=function(){A.beh=x[0];st=(x[0]==='Verwijderen'?2:1);render()};b.querySelector('.tiles').appendChild(e)})}
+  else if(st===1){b.innerHTML='<h3>Welke vorm?</h3><div class="shapes"></div><button class="back" type="button">Terug</button>';
+   SH.forEach(function(x){var e=document.createElement('button');e.type='button';e.className='shp';e.innerHTML='<svg viewBox="0 0 74 110"><path d="'+x[1]+'"/></svg>'+x[0];e.onclick=function(){A.vorm=x[0];st=2;render()};b.querySelector('.shapes').appendChild(e)});
+   b.querySelector('.back').onclick=function(){st=0;render()}}
+  else{b.innerHTML='<h3>Bijna klaar</h3><label class="t" for="lg">Lengte: <b id="lgt"></b></label><input type="range" id="lg" min="0" max="3" value="'+A.len+'"><div class="chips" id="dg"></div><label class="t" for="nm">Je naam</label><input type="text" id="nm" autocomplete="name"><div class="res" id="sumq" style="white-space:pre-line;font-size:.93rem;margin-top:16px"></div><div class="out"><a class="btn btn-main" id="wa" href="#" target="_blank" rel="noopener">Stuur via WhatsApp</a><button class="btn btn-line" id="copy" type="button">Kopieer</button></div><button class="back" type="button">Opnieuw beginnen</button>';
+   DAG.forEach(function(d,i){$('dg').insertAdjacentHTML('beforeend','<input type="radio" name="dg" id="dg'+i+'" value="'+d+'"'+(d===A.dag?' checked':'')+'><label for="dg'+i+'">'+d+'</label>')});
+   function up(){A.len=+$('lg').value;$('lgt').textContent=LEN[A.len];A.nm=$('nm').value;A.dag=document.querySelector('input[name=dg]:checked').value;var m=msg();$('sumq').textContent=m;$('wa').href='https://wa.me/31612614990?text='+encodeURIComponent(m)}
+   b.addEventListener('input',up);b.addEventListener('change',up);up();
+   $('copy').onclick=function(){var x=this,d=function(){x.textContent='Gekopieerd';setTimeout(function(){x.textContent='Kopieer'},1800)};if(navigator.clipboard)navigator.clipboard.writeText(msg()).then(d,d);else d()};
+   b.querySelector('.back').onclick=function(){st=0;A.vorm='';render()}}
+ }
+ render();
 })();
 </script>
 </body>

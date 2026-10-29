@@ -72,36 +72,36 @@ section{padding:84px 0}
 .c3{grid-column:span 2}.c4{grid-column:span 2;background:var(--tom);color:#fff}.c5{grid-column:span 2}
 .big{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:3.6rem;line-height:1}
 
-/* PLANNER */
+/* PLANNER: bestelbak met bonnetje */
 .planner{background:var(--mus);border-top:2px solid var(--coal);border-bottom:2px solid var(--coal)}
-.pl{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:start}
-.form{background:#fff;border:2px solid var(--coal);border-radius:20px;padding:28px}
-.form h3{font-size:1.6rem;margin-bottom:4px}
-.form label.t{display:block;font-weight:700;margin:16px 0 6px;font-size:.95rem}
-.form input[type=text],.form input[type=email],.form input[type=tel],.form input[type=date],.form select,.form textarea{width:100%;padding:11px 12px;border:2px solid var(--coal);border-radius:10px;font:inherit;background:var(--cream)}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.diets{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.step-in{display:flex;align-items:center;justify-content:space-between;border:2px solid var(--coal);border-radius:12px;padding:6px 8px 6px 14px;background:var(--cream)}
-.step-in span{font-weight:600;font-size:.93rem}
-.step-in .c{display:flex;align-items:center;gap:8px}
-.step-in button{width:34px;height:34px;border-radius:50%;border:2px solid var(--coal);background:#fff;font:inherit;font-weight:800;cursor:pointer}
-.step-in button:hover{background:var(--coal);color:#fff}
-.step-in output{min-width:28px;text-align:center;font-weight:800}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
+.pl{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:start}
+.tray{background:var(--cream);border:2px solid var(--coal);border-radius:26px;padding:30px;box-shadow:8px 8px 0 var(--coal)}
+.bign{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.bign output{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(4rem,10vw,7rem);line-height:.9;color:var(--tom)}
+.bign span{font-weight:700;font-size:1.2rem}
+input[type=range]{width:100%;accent-color:var(--tom);height:34px;cursor:pointer}
+.plate{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;min-height:64px;align-content:flex-start}
+.plate i{width:22px;height:14px;border-radius:7px 7px 4px 4px;background:var(--crust);border:2px solid var(--coal);animation:pop .35s both}
+.plate i.v{background:var(--leaf)}
+.plate.dense i{width:14px;height:10px;border-width:1.5px;border-radius:5px 5px 3px 3px}
+@keyframes pop{from{transform:scale(0)}}
+.mixl{display:flex;justify-content:space-between;font-weight:700;font-size:.95rem}
+.mixl small{font-weight:500;opacity:.7}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .chips input{position:absolute;opacity:0}
-.chips label{padding:8px 14px;border:2px solid var(--coal);border-radius:999px;cursor:pointer;font-weight:600;font-size:.92rem;background:var(--cream)}
-.chips input:checked+label{background:var(--coal);color:var(--cream)}
+.chips label{padding:10px 18px;border:2px solid var(--coal);border-radius:999px;cursor:pointer;font-weight:700;font-size:.95rem;background:#fff;transition:transform .15s}
+.chips label:hover{transform:translateY(-2px)}
+.chips input:checked+label{background:var(--coal);color:var(--mus)}
 .chips input:focus-visible+label{outline:3px solid var(--tom);outline-offset:2px}
-.sum{background:var(--coal);color:var(--cream);border-radius:20px;padding:26px;position:sticky;top:90px}
-.sum h3{color:var(--mus);font-size:1.3rem;margin-bottom:12px}
-.sum dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.95rem}
-.sum dt{opacity:.7}.sum dd{font-weight:700;text-align:right}
-.sum .hint{margin-top:14px;font-size:.85rem;opacity:.75}
-.sum .out{display:flex;flex-direction:column;gap:10px;margin-top:18px}
-.sum .btn{border-color:var(--mus);text-align:center}
-.sum .btn-main{background:var(--mus);color:var(--coal)}.sum .btn-main:hover{background:#fff;border-color:#fff}
-.sum .btn-line{color:var(--cream)}
-.warn{color:var(--tom);font-weight:700;font-size:.9rem;margin-top:8px;min-height:1.2em}
+.ticket{background:#fff;border:2px solid var(--coal);padding:26px 24px 30px;position:relative;font-family:'Figtree',monospace;transform:rotate(1.2deg);border-radius:6px 6px 2px 2px;border-bottom:8px dashed var(--coal);}
+.ticket h3{font-size:1.3rem;margin-bottom:12px;border-bottom:2px dashed var(--coal);padding-bottom:10px}
+.ticket dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.96rem}
+.ticket dt{opacity:.65}.ticket dd{font-weight:700;text-align:right}
+.ticket input{width:100%;padding:10px 12px;border:2px solid var(--coal);border-radius:10px;font:inherit;background:var(--cream);margin-top:10px}
+.ticket .hint{font-size:.82rem;opacity:.7;margin-top:12px}
+.ticket .out{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.ticket .btn{text-align:center;padding:12px 18px}
+.warn{color:var(--tom);font-weight:700;font-size:.9rem;min-height:1.2em;margin-top:8px}
 
 .contact{background:var(--coal);color:var(--cream);padding:70px 0}
 .contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px}
@@ -117,7 +117,7 @@ footer{background:#1b1510;color:#cbbfb3;font-size:.88rem;padding:18px 0}
  .steps{grid-template-columns:1fr 1fr}
  .bento{grid-template-columns:1fr}.bento>*{grid-column:auto!important}
  .band{clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%);padding:calc(60px + 3vw) 0}
- .row2,.diets{grid-template-columns:1fr}.sum{position:static}
+ .ticket{transform:none}
 }
 @media (prefers-reduced-motion:reduce){.sand .l,.sand .flag{animation:none;opacity:1;transform:none}.clock .dot{animation:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
@@ -171,44 +171,26 @@ footer{background:#1b1510;color:#cbbfb3;font-size:.88rem;padding:18px 0}
 </div></section>
 
 <section class="planner" id="plan"><div class="wrap">
- <div class="sec-head reveal"><h2>Bestelplanner</h2><p>Vul in wat je weet. Je krijgt een overzicht dat je met één klik naar ons mailt, zonder dat we nog hoeven te bellen.</p></div>
+ <div class="sec-head reveal"><h2>Stel je lunch samen</h2><p>Sleep, tik, klaar. Meer hoeven we nog niet te weten. De rest bespreken we na je bericht.</p></div>
  <div class="pl">
-  <form class="form" id="f" onsubmit="return false" aria-label="Bestelplanner">
-   <h3>Je lunch in een minuut</h3>
-   <label class="t" for="soort">Soort lunch</label>
-   <select id="soort"><option value="broodjes">Broodjes (per stuk)</option><option value="buffet">Lunchbuffet</option><option value="mix">Mix: broodjes en soep/zoet</option></select>
-   <div class="row2">
-    <div><label class="t" for="dat">Datum</label><input type="date" id="dat"></div>
-    <div><label class="t" for="tijd">Bezorgen om</label><select id="tijd"><option>08:30</option><option>09:00</option><option>09:30</option><option selected>11:30</option><option>12:00</option><option>12:30</option></select></div>
-   </div>
-   <label class="t">Aantal personen per wens</label>
-   <div class="diets" id="diets"></div>
-   <label class="t">Terugkerend?</label>
-   <div class="chips" id="rec"></div>
-   <label class="t">Extra</label>
-   <div class="chips" id="ex"></div>
-   <div class="row2">
-    <div><label class="t" for="bed">Bedrijf</label><input type="text" id="bed" autocomplete="organization"></div>
-    <div><label class="t" for="adr">Bezorgadres</label><input type="text" id="adr" autocomplete="street-address"></div>
-   </div>
-   <div class="row2">
-    <div><label class="t" for="naam">Contactpersoon</label><input type="text" id="naam" autocomplete="name"></div>
-    <div><label class="t" for="tel">Telefoon</label><input type="tel" id="tel" autocomplete="tel"></div>
-   </div>
-   <label class="t" for="opm">Opmerking</label><textarea id="opm" rows="3" placeholder="Bijvoorbeeld: toegang via de achterdeur, allergie noten"></textarea>
-  </form>
-  <aside class="sum" aria-live="polite">
-   <h3>Jouw overzicht</h3>
-   <dl>
-    <dt>Personen</dt><dd id="s_n">0</dd>
-    <dt>Soort</dt><dd id="s_t">-</dd>
-    <dt>Richtlijn</dt><dd id="s_r">-</dd>
-    <dt>Moment</dt><dd id="s_m">-</dd>
-    <dt>Terugkerend</dt><dd id="s_c">Nee</dd>
-   </dl>
-   <p class="hint">Richtlijn is een rekenhulp (1,5 broodje per persoon) en wordt bij bevestiging samen met u aangepast.</p>
+  <div class="tray reveal">
+   <div class="bign"><output id="n" for="rng">12</output><span>personen</span></div>
+   <input type="range" id="rng" min="4" max="150" value="12" aria-label="Aantal personen">
+   <div class="plate" id="plate" aria-hidden="true"></div>
+   <div class="mixl"><span>Vegetarisch of vegan</span><span id="vo">3 van 12</span></div>
+   <input type="range" id="veg" min="0" max="100" step="5" value="25" aria-label="Aandeel vegetarisch of vegan">
+   <div class="chips" id="dag" role="radiogroup" aria-label="Dag"></div>
+   <div class="chips" id="tijd" role="radiogroup" aria-label="Tijd"></div>
+   <div class="chips"><input type="checkbox" id="wk"><label for="wk">Elke week hetzelfde</label><input type="checkbox" id="gf"><label for="gf">Glutenvrij nodig</label></div>
+  </div>
+  <aside class="ticket reveal" style="--d:.15s" aria-live="polite">
+   <h3>Bonnetje</h3>
+   <dl><dt>Personen</dt><dd id="t_n"></dd><dt>Broodjes</dt><dd id="t_b"></dd><dt>Vega/vegan</dt><dd id="t_v"></dd><dt>Wanneer</dt><dd id="t_w"></dd><dt>Herhaling</dt><dd id="t_r"></dd></dl>
+   <input type="text" id="bed" placeholder="Bedrijf en adres" autocomplete="organization" aria-label="Bedrijf en adres">
+   <input type="tel" id="tel" placeholder="Telefoon" autocomplete="tel" aria-label="Telefoon">
    <div class="warn" id="w"></div>
-   <div class="out"><a class="btn btn-main" id="mail" href="#">Mail deze bestelling</a><button class="btn btn-line" id="copy" type="button">Kopieer overzicht</button></div>
+   <div class="out"><a class="btn btn-main" id="mail" href="#">Mail dit bonnetje</a><button class="btn btn-line" id="copy" type="button">Kopieer</button></div>
+   <p class="hint">Richtlijn: 1,5 broodje per persoon. Prijs en exacte aantallen bevestigen we per mail.</p>
   </aside>
  </div>
 </div></section>
@@ -247,35 +229,26 @@ footer{background:#1b1510;color:#cbbfb3;font-size:.88rem;padding:18px 0}
  tick();setInterval(tick,30000);
 
  /* planner */
- var diets=[['alles','Gewone broodjes',10],['vega','Vegetarisch',0],['vegan','Veganistisch',0],['gf','Glutenvrij',0]],cnt={};
- var dw=$('diets');
- diets.forEach(function(d){cnt[d[0]]=d[2];var w=document.createElement('div');w.className='step-in';
-  w.innerHTML='<span>'+d[1]+'</span><div class="c"><button type="button" aria-label="Minder '+d[1]+'" data-k="'+d[0]+'" data-s="-1">-</button><output id="o_'+d[0]+'">'+d[2]+'</output><button type="button" aria-label="Meer '+d[1]+'" data-k="'+d[0]+'" data-s="1">+</button></div>';dw.appendChild(w)});
- dw.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var k=b.dataset.k;cnt[k]=Math.max(0,Math.min(500,cnt[k]+(+b.dataset.s)*(e.shiftKey?5:1)));$('o_'+k).textContent=cnt[k];upd()});
- function chips(id,name,items,type){var el=$(id);items.forEach(function(t,i){var iid=name+i;el.insertAdjacentHTML('beforeend','<input type="'+type+'" name="'+name+'" id="'+iid+'" value="'+t+'"'+(type==='radio'&&i===0?' checked':'')+'><label for="'+iid+'">'+t+'</label>')});el.addEventListener('change',upd)}
- chips('rec','rec',['Eenmalig','Elke week','Om de week'],'radio');
- chips('ex','ex',['Soep erbij','Zoet erbij','Drinken erbij','Wegwerp serviesgoed','Op factuur'],'checkbox');
- var d0=new Date();d0.setDate(d0.getDate()+1);$('dat').value=d0.toISOString().slice(0,10);
- ['soort','dat','tijd','bed','adr','naam','tel','opm'].forEach(function(i){$(i).addEventListener('input',upd)});
+ var DAGEN=[['Morgen',1],['Overmorgen',2],['Volgende week',7]],TIJDEN=['08:30','10:00','12:00'];
+ DAGEN.forEach(function(d,i){$('dag').insertAdjacentHTML('beforeend','<input type="radio" name="dag" id="d'+i+'" value="'+d[1]+'"'+(i===0?' checked':'')+'><label for="d'+i+'">'+d[0]+'</label>')});
+ TIJDEN.forEach(function(t,i){$('tijd').insertAdjacentHTML('beforeend','<input type="radio" name="tijd" id="t'+i+'" value="'+t+'"'+(i===2?' checked':'')+'><label for="t'+i+'">'+t+'</label>')});
  var txt='';
  function upd(){
-  var n=0;for(var k in cnt)n+=cnt[k];
-  var soort=$('soort'),st=soort.options[soort.selectedIndex].text;
-  var per=soort.value==='buffet'?1:1.5,r=soort.value==='buffet'?'buffet voor '+n+' pers.':Math.ceil(n*per)+' broodjes';
-  var rec=document.querySelector('input[name=rec]:checked').value;
-  var ex=[].map.call(document.querySelectorAll('input[name=ex]:checked'),function(x){return x.value});
-  $('s_n').textContent=n;$('s_t').textContent=st;$('s_r').textContent=n?r:'-';
-  var dd=$('dat').value?new Date($('dat').value+'T12:00').toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'}):'-';
-  $('s_m').textContent=dd+', '+$('tijd').value;$('s_c').textContent=rec==='Eenmalig'?'Nee':rec;
-  var w='';if(n>=50)w='Vanaf 50 personen bellen we even om de details door te nemen.';if(!n)w='Voeg minimaal 1 persoon toe.';$('w').textContent=w;
-  var L=['Bestelling lunch','',
-   'Bedrijf: '+($('bed').value||'-'),'Contactpersoon: '+($('naam').value||'-')+' ('+($('tel').value||'-')+')','Bezorgadres: '+($('adr').value||'-'),
-   'Datum en tijd: '+dd+', '+$('tijd').value,'Soort: '+st,'Aantal personen: '+n+' ('+diets.map(function(d){return d[1]+' '+cnt[d[0]]}).join(', ')+')','Richtlijn: '+(n?r:'-'),
-   'Terugkerend: '+rec,'Extra: '+(ex.length?ex.join(', '):'geen'),'Opmerking: '+($('opm').value||'-')];
-  txt=L.join('\n');
+  var n=+$('rng').value,vp=+$('veg').value,v=Math.round(n*vp/100),b=Math.ceil(n*1.5);
+  $('n').textContent=n;$('vo').textContent=v+' van '+n;
+  var pl=$('plate');pl.className='plate'+(n>60?' dense':'');pl.innerHTML='';
+  for(var i=0;i<n;i++){var e=document.createElement('i');if(i>=n-v)e.className='v';e.style.animationDelay=Math.min(i*8,500)+'ms';pl.appendChild(e)}
+  var off=+document.querySelector('input[name=dag]:checked').value,d=new Date();d.setDate(d.getDate()+off);
+  var dd=d.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'}),tm=document.querySelector('input[name=tijd]:checked').value;
+  var rec=$('wk').checked?'Elke week':'Eenmalig',gf=$('gf').checked?' (glutenvrij nodig)':'';
+  $('t_n').textContent=n;$('t_b').textContent=b;$('t_v').textContent=v+gf;$('t_w').textContent=dd+', '+tm;$('t_r').textContent=rec;
+  $('w').textContent=n>=50?'Vanaf 50 personen bellen we even terug.':'';
+  txt=['Lunchbestelling','Personen: '+n,'Broodjes (richtlijn): '+b,'Vegetarisch of vegan: '+v+gf,'Wanneer: '+dd+', '+tm,'Herhaling: '+rec,'Bedrijf en adres: '+($('bed').value||'-'),'Telefoon: '+($('tel').value||'-')].join('\n');
   $('mail').href='mailto:info@belegvanbreda.nl?subject='+encodeURIComponent('Lunchbestelling '+dd)+'&body='+encodeURIComponent(txt);
  }
- $('copy').addEventListener('click',function(){var b=this;var done=function(){b.textContent='Gekopieerd';setTimeout(function(){b.textContent='Kopieer overzicht'},1800)};
+ document.querySelector('.tray').addEventListener('input',upd);document.querySelector('.tray').addEventListener('change',upd);
+ $('bed').addEventListener('input',upd);$('tel').addEventListener('input',upd);
+ $('copy').addEventListener('click',function(){var b=this;var done=function(){b.textContent='Gekopieerd';setTimeout(function(){b.textContent='Kopieer'},1800)};
   if(navigator.clipboard)navigator.clipboard.writeText(txt).then(done,done);else done()});
  upd();
 })();

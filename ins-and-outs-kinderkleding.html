@@ -100,6 +100,33 @@ footer{background:#0e2133;color:#a9b8c5;font-size:.88rem;padding:18px 0}
  .row2{grid-template-columns:1fr}.open-pill{position:static;display:inline-block;margin-bottom:10px}
 }
 @media (prefers-reduced-motion:reduce){.hg{animation:none}.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.sizes span{transition:none}}
+
+/* MEETLAT */
+.meet{background:var(--sea);color:#fff;border:2.5px solid var(--navy);border-radius:28px;box-shadow:6px 6px 0 var(--navy);display:grid;grid-template-columns:.8fr 1.2fr;overflow:hidden}
+.kid{background:var(--sun);position:relative;min-height:420px;display:flex;justify-content:center;align-items:flex-end;border-right:2.5px solid var(--navy)}
+.kid svg{height:400px;width:auto;display:block}
+.rule{position:absolute;left:0;top:20px;bottom:30px;width:34px;background:repeating-linear-gradient(180deg,var(--navy) 0 2px,transparent 2px 20px)}
+.mtxt{padding:34px}
+.mtxt .lab{font-weight:700;opacity:.85;margin-bottom:4px}
+.msize{font-family:'Fredoka',sans-serif;font-weight:700;font-size:clamp(4rem,9vw,6.4rem);line-height:.95;color:var(--sun)}
+.mage{font-weight:700;font-size:1.15rem;margin-bottom:14px}
+.mtxt input[type=range]{width:100%;height:34px;accent-color:var(--coral);cursor:pointer}
+.mnote{font-size:.95rem;opacity:.92;min-height:3em}
+.shoe{margin-top:20px;background:rgba(255,255,255,.14);border-radius:18px;padding:16px 18px}
+.shoe b{font-family:'Fredoka',sans-serif;font-size:1.3rem;color:var(--sun)}
+.shoe .row{display:flex;justify-content:space-between;font-weight:700}
+.chat{max-width:760px}
+.bub{background:#fff;border:2.5px solid var(--navy);border-radius:22px 22px 22px 6px;padding:14px 20px;display:inline-block;font-weight:700;box-shadow:4px 4px 0 var(--navy)}
+.ask{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.ask button{padding:12px 22px;border-radius:999px;border:2.5px solid var(--navy);background:var(--sun);font:inherit;font-weight:700;cursor:pointer;transition:transform .15s}
+.ask button:hover{transform:translateY(-3px) rotate(-1deg)}
+.ask button[aria-pressed=true]{background:var(--navy);color:var(--sun)}
+.reply{display:none;margin-left:auto;max-width:520px}
+.reply.on{display:block;animation:up .4s both}
+@keyframes up{from{opacity:0;transform:translateY(14px)}}
+.reply textarea,.reply input{width:100%;padding:12px 14px;border:2.5px solid var(--navy);border-radius:18px 18px 6px 18px;font:inherit;background:#fff;margin-bottom:10px}
+.reply .out{display:flex;gap:10px;flex-wrap:wrap}
+@media (max-width:800px){.meet{grid-template-columns:1fr}.kid{border-right:0;border-bottom:2.5px solid var(--navy);min-height:300px}.kid svg{height:280px}}
 </style>
 </head>
 <body>
@@ -142,44 +169,31 @@ footer{background:#0e2133;color:#a9b8c5;font-size:.88rem;padding:18px 0}
 </div></div>
 
 <section id="hulp"><div class="wrap">
- <div class="sec-head reveal"><h2>Maatwijzer voor ouders</h2><p>Kinderen vallen zelden precies in een maat. Dit is een richtlijn, passen blijft in de winkel de beste check.</p></div>
- <div class="tools">
-  <div class="box reveal">
-   <h3>Kleding</h3><p class="sub">Vul de lengte in, of kies de leeftijd.</p>
-   <div class="row2">
-    <div><label class="t" for="len">Lengte (cm)</label><input type="number" id="len" min="45" max="190" placeholder="bijv. 110" inputmode="numeric"></div>
-    <div><label class="t" for="age">Of leeftijd</label><select id="age"><option value="">Kies...</option></select></div>
-   </div>
-   <div class="sizes" id="sizes" aria-hidden="true"></div>
-   <div class="res" aria-live="polite"><b id="k1">-</b><small id="k2">Vul de lengte of leeftijd in.</small></div>
-  </div>
-  <div class="box reveal" style="--d:.15s">
-   <h3>Schoenen</h3><p class="sub">Meet de voet op een stuk papier, hiel tot langste teen.</p>
-   <label class="t" for="foot">Voetlengte (cm)</label><input type="number" id="foot" min="9" max="30" step="0.1" placeholder="bijv. 15,5" inputmode="decimal">
-   <div class="res" aria-live="polite"><b id="v1">-</b><small id="v2">Tel er ongeveer 1 tot 1,5 cm bij voor groeiruimte.</small></div>
-   <div class="out"><a class="btn btn-line" href="tel:+31765224952">Bel voor voorraad</a></div>
+ <div class="sec-head reveal"><h2>Welke maat heeft je kind?</h2><p>Schuif tot de lengte klopt. De richtlijn past, passen in de winkel blijft de beste check.</p></div>
+ <div class="meet reveal">
+  <div class="kid"><div class="rule" aria-hidden="true"></div>
+   <svg viewBox="0 0 200 360" aria-hidden="true"><g id="kidg"><circle cx="100" cy="40" r="30" fill="#F4D3C4" stroke="#16324A" stroke-width="5"/><path d="M72 32q28-34 56 0" fill="#16324A"/><rect x="62" y="74" width="76" height="130" rx="22" fill="#EF6A4C" stroke="#16324A" stroke-width="5"/><rect x="28" y="84" width="30" height="100" rx="14" fill="#EF6A4C" stroke="#16324A" stroke-width="5"/><rect x="142" y="84" width="30" height="100" rx="14" fill="#EF6A4C" stroke="#16324A" stroke-width="5"/><rect x="66" y="196" width="30" height="130" rx="12" fill="#2C7FA3" stroke="#16324A" stroke-width="5"/><rect x="104" y="196" width="30" height="130" rx="12" fill="#2C7FA3" stroke="#16324A" stroke-width="5"/><rect x="60" y="322" width="40" height="18" rx="8" fill="#16324A"/><rect x="100" y="322" width="40" height="18" rx="8" fill="#16324A"/></g></svg></div>
+  <div class="mtxt">
+   <div class="lab">Lengte van je kind</div>
+   <div class="msize" id="msize">Maat 110</div>
+   <div class="mage" id="mage">ongeveer 5 jaar</div>
+   <input type="range" id="len" min="50" max="176" value="110" aria-label="Lengte in centimeters">
+   <div class="mnote" id="mnote"></div>
+   <div class="shoe"><div class="row"><span>Voetlengte</span><span id="fo">15,0 cm</span></div>
+    <input type="range" id="foot" min="9" max="26" step="0.5" value="15" aria-label="Voetlengte in centimeters">
+    <div>Schoenmaat ongeveer <b id="sm">-</b></div></div>
   </div>
  </div>
 </div></section>
 
-<section id="inbrengen" style="padding-top:20px"><div class="wrap">
- <div class="box reveal" style="max-width:820px">
-  <h3>Kleding inbrengen of iets zoeken</h3><p class="sub">Maak het bericht af en mail het met een paar foto's. De winkel laat je weten wat mogelijk is. Voorwaarden: <span class="tbc">nog in te vullen</span></p>
-  <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-t="in">Ik wil inbrengen</button><button role="tab" aria-selected="false" data-t="zoek">Ik zoek iets</button></div>
-  <div class="panel" id="p_in">
-   <label class="t">Wat heb je?</label><div class="chips" id="cat"></div>
-   <div class="row2"><div><label class="t" for="aant">Ongeveer hoeveel stuks</label><select id="aant"><option>1 tot 10</option><option>10 tot 30</option><option>Meer dan 30</option></select></div>
-   <div><label class="t" for="sz">Maten</label><input type="text" id="sz" placeholder="bijv. 74 tot 92"></div></div>
-   <label class="t">Staat</label><div class="chips" id="st"></div>
-  </div>
-  <div class="panel" id="p_zoek" hidden>
-   <label class="t" for="zw">Wat zoek je?</label><input type="text" id="zw" placeholder="bijv. regenjas, dopen, voetbalschoenen">
-   <div class="row2"><div><label class="t" for="zm">Maat</label><input type="text" id="zm" placeholder="bijv. 116"></div>
-   <div><label class="t" for="zs">Seizoen</label><select id="zs"><option>Lente</option><option>Zomer</option><option>Herfst</option><option>Winter</option></select></div></div>
-  </div>
-  <div class="row2"><div><label class="t" for="nm">Naam</label><input type="text" id="nm" autocomplete="name"></div><div><label class="t" for="tl">Telefoon</label><input type="tel" id="tl" autocomplete="tel"></div></div>
-  <div class="res" id="sumq" style="white-space:pre-line;background:var(--sand);border:2px dashed var(--navy)">-</div>
-  <div class="out"><a class="btn btn-main" id="mail" href="#">Mail bericht</a><button class="btn btn-line" id="copy" type="button">Kopieer tekst</button></div>
+<section id="inbrengen" style="padding-top:10px"><div class="wrap chat">
+ <div class="bub reveal">Hoi! Waar kunnen we mee helpen?</div>
+ <div class="ask" id="ask"><button type="button" data-k="in">Ik wil kleding inbrengen</button><button type="button" data-k="zoek">Ik zoek iets</button><button type="button" data-k="vraag">Ik heb een vraag</button></div>
+ <div class="reply" id="reply">
+  <textarea id="msg" rows="3"></textarea>
+  <input type="text" id="nm" placeholder="Je naam" autocomplete="name" aria-label="Naam">
+  <div class="out"><a class="btn btn-main" id="mail" href="#">Mail ons</a><button class="btn btn-line" id="copy" type="button">Kopieer</button></div>
+  <p style="font-size:.85rem;opacity:.7;margin-top:8px">Bij inbrengen: stuur foto's mee. Voorwaarden <span class="tbc">nog in te vullen</span></p>
  </div>
 </div></section>
 
@@ -204,45 +218,24 @@ footer{background:#0e2133;color:#a9b8c5;font-size:.88rem;padding:18px 0}
  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
  $('pill').innerHTML='Openingstijden <b>nog in te vullen</b>';
 
- /* maatwijzer: gangbare Nederlandse maten (lengte in cm) */
+ /* maatwijzer */
  var S=[50,56,62,68,74,80,86,92,98,104,110,116,122,128,134,140,146,152,158,164,170,176];
- var ages=[['Pasgeboren',50],['1 tot 2 mnd',56],['3 mnd',62],['6 mnd',68],['9 mnd',74],['12 mnd',80],['18 mnd',86],['2 jaar',92],['3 jaar',98],['4 jaar',104],['5 jaar',110],['6 jaar',116],['7 jaar',122],['8 jaar',128],['9 jaar',134],['10 jaar',140],['11 jaar',146],['12 jaar',152],['13 jaar',158],['14 jaar',164],['15 jaar',170]];
- ages.forEach(function(a){var o=document.createElement('option');o.value=a[1];o.textContent=a[0];$('age').appendChild(o)});
- S.forEach(function(s){var sp=document.createElement('span');sp.textContent=s;sp.dataset.s=s;$('sizes').appendChild(sp)});
- function size(len){var b=S[0];for(var i=0;i<S.length;i++){if(S[i]<=len)b=S[i]}return b}
- function show(len){
-  var m=size(len),nxt=S[Math.min(S.indexOf(m)+1,S.length-1)];
-  [].forEach.call($('sizes').children,function(c){c.className=+c.dataset.s===m?'on':(+c.dataset.s===nxt?'near':'')});
-  $('k1').textContent='Maat '+m;
-  $('k2').textContent=(len-m>=4?'Zit tussen '+m+' en '+nxt+'. Nemen we ruimte? Kies '+nxt+'.':'Past bij '+len+' cm. Wil je groeiruimte, kijk ook naar '+nxt+'.');
- }
- $('len').addEventListener('input',function(){var v=+this.value;$('age').value='';if(v>=45)show(v);else{$('k1').textContent='-'}});
- $('age').addEventListener('change',function(){if(this.value){$('len').value=this.value;show(+this.value)}});
- $('foot').addEventListener('input',function(){
-  var f=parseFloat(this.value.replace(',','.'));if(!f){$('v1').textContent='-';return}
-  var eu=Math.round((f+1.5)*1.5);   /* richtlijn: (voet + 1,5 cm) x 1,5 */
-  $('v1').textContent='Schoenmaat ca. '+eu;$('v2').textContent='Met 1,5 cm groeiruimte. Een halve maat kleiner of groter kan beter zitten, pas altijd even.';
- });
+ var ages=[[50,'pasgeboren'],[56,'1 tot 2 maanden'],[62,'ongeveer 3 maanden'],[68,'ongeveer 6 maanden'],[74,'ongeveer 9 maanden'],[80,'ongeveer 1 jaar'],[86,'ongeveer 1,5 jaar'],[92,'ongeveer 2 jaar'],[98,'ongeveer 3 jaar'],[104,'ongeveer 4 jaar'],[110,'ongeveer 5 jaar'],[116,'ongeveer 6 jaar'],[122,'ongeveer 7 jaar'],[128,'ongeveer 8 jaar'],[134,'ongeveer 9 jaar'],[140,'ongeveer 10 jaar'],[146,'ongeveer 11 jaar'],[152,'ongeveer 12 jaar'],[158,'ongeveer 13 jaar'],[164,'ongeveer 14 jaar'],[170,'ongeveer 15 jaar'],[176,'15 jaar of ouder']];
+ function size(l){var b=S[0];S.forEach(function(x){if(x<=l)b=x});return b}
+ function sh(){var l=+$('len').value,m=size(l),nx=S[Math.min(S.indexOf(m)+1,S.length-1)];
+  $('msize').textContent='Maat '+m;$('mage').textContent=ages[S.indexOf(m)][1];
+  $('mnote').textContent=l-m>=4?'Zit tussen '+m+' en '+nx+'. Wil je groeiruimte, kies dan '+nx+'.':'Past bij '+l+' cm. Wil je groeiruimte, kijk ook naar '+nx+'.';
+  var sc=Math.max(.2,l/176);$('kidg').setAttribute('transform','translate(100 340) scale('+sc+') translate(-100 -340)')}
+ $('len').addEventListener('input',sh);sh();
+ function fs(){var f=+$('foot').value;$('fo').textContent=String(f).replace('.',',')+' cm';$('sm').textContent=Math.round((f+1.5)*1.5)}
+ $('foot').addEventListener('input',fs);fs();
 
- /* inbreng/zoek bericht */
- function chips(id,name,items,type,first){items.forEach(function(t,i){$(id).insertAdjacentHTML('beforeend','<input type="'+type+'" name="'+name+'" id="'+name+i+'" value="'+t+'"'+(i===0&&first?' checked':'')+'><label for="'+name+i+'">'+t+'</label>')});$(id).addEventListener('change',sum)}
- chips('cat','cat',['Babykleding','Jongens','Meisjes','Jassen','Schoenen','Feestkleding'],'checkbox',true);
- chips('st','st',['Als nieuw','Goed, kleine tekenen van gebruik','Wisselend'],'radio',true);
- var mode='in';
- document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){mode=b.dataset.t;document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected',x===b)});$('p_in').hidden=mode!=='in';$('p_zoek').hidden=mode!=='zoek';sum()})});
- ['aant','sz','zw','zm','zs','nm','tl'].forEach(function(i){$(i).addEventListener('input',sum)});
- var txt='';
- function sum(){
-  var L;
-  if(mode==='in'){var c=[].map.call(document.querySelectorAll('input[name=cat]:checked'),function(x){return x.value}).join(', ')||'-';
-   L=['Ik wil kleding inbrengen','Wat: '+c,'Aantal: '+$('aant').value,'Maten: '+($('sz').value||'-'),'Staat: '+document.querySelector('input[name=st]:checked').value,'Foto\'s volgen in deze mail']}
-  else L=['Ik zoek iets','Gezocht: '+($('zw').value||'-'),'Maat: '+($('zm').value||'-'),'Seizoen: '+$('zs').value];
-  L.push('Naam: '+($('nm').value||'-')+' ('+($('tl').value||'-')+')');
-  txt=L.join('\n');$('sumq').textContent=txt;
-  $('mail').href='mailto:info@insandoutsbreda.nl?subject='+encodeURIComponent(mode==='in'?'Kleding inbrengen':'Ik zoek kinderkleding')+'&body='+encodeURIComponent(txt);
- }
- $('copy').onclick=function(){var b=this,d=function(){b.textContent='Gekopieerd';setTimeout(function(){b.textContent='Kopieer tekst'},1800)};if(navigator.clipboard)navigator.clipboard.writeText(txt).then(d,d);else d()};
- sum();
+ /* bericht */
+ var K={in:['Kleding inbrengen','Wat wil je inbrengen? Bijvoorbeeld: 12 stuks babykleding, maat 62 tot 80, goede staat. Foto\'s stuur ik mee.'],zoek:['Ik zoek iets','Wat zoek je? Bijvoorbeeld: regenjas maat 116, of voetbalschoenen.'],vraag:['Vraag','Wat wil je weten?']},kk='in',txt='';
+ function sum(){txt=K[kk][0]+'\n\n'+($('msg').value||'-')+'\n\nNaam: '+($('nm').value||'-');$('mail').href='mailto:info@insandoutsbreda.nl?subject='+encodeURIComponent(K[kk][0])+'&body='+encodeURIComponent(txt)}
+ $('ask').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;kk=b.dataset.k;[].forEach.call($('ask').children,function(x){x.setAttribute('aria-pressed',x===b)});$('msg').placeholder=K[kk][1];$('reply').classList.add('on');sum();$('msg').focus({preventScroll:true})});
+ ['msg','nm'].forEach(function(i){$(i).addEventListener('input',sum)});
+ $('copy').onclick=function(){var b=this,d=function(){b.textContent='Gekopieerd';setTimeout(function(){b.textContent='Kopieer'},1800)};if(navigator.clipboard)navigator.clipboard.writeText(txt).then(d,d);else d()};
 })();
 </script>
 </body>
