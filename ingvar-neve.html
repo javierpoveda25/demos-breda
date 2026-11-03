@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ingvar Neve – Personal trainer Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Ingvar Neve, personal trainer in Breda: gratis proefles en intake.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+/* DESIGN: licht, scherp en technisch, wit met elektrisch blauw en zwart. Kleuren: wit (#FAFAF7), zwart (#0B0C0F), elektrisch blauw (#2447FF), lichtgrijs (#EDEDE8), signaalgroen (#18B26B).
+   Type: Space Grotesk (titels) + IBM Plex Sans (tekst).
+   STRUCTUUR: grote kop met meetbare cijfers, tijdlijn-kiezer voor de gratis proefles: kies een dag en schuif over de uren, ziet direct of Ingvar dan open is, en stuur door. Intake in drie stappen, reviewstrook.
+   MOTION: reveal, tijdlijn met markering, status die live meedraait. */
+:root{--w:#FAFAF7;--k:#0B0C0F;--bl:#2447FF;--g:#EDEDE8;--ok:#18B26B;--acc:#2447FF}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--w);color:var(--k);font-size:17px;line-height:1.62}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.02;letter-spacing:-.03em}
+.demo-bar{background:var(--bl);color:#fff}
+header.top{position:sticky;top:0;z-index:40;background:rgba(250,250,247,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--k)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Space Grotesk';font-weight:700;text-decoration:none;font-size:1.15rem}.logo b{color:var(--bl)}
+.top nav{display:flex;gap:22px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:500;font-size:.93rem}
+.btn{display:inline-block;padding:14px 26px;border-radius:6px;font:inherit;font-weight:600;text-decoration:none;border:2px solid var(--k);cursor:pointer;transition:.2s;background:var(--k);color:#fff}
+.btn:hover{background:var(--bl);border-color:var(--bl)}.btn.b{background:var(--bl);border-color:var(--bl)}.btn.b:hover{background:var(--k);border-color:var(--k)}.btn.l{background:transparent;color:var(--k)}.btn.l:hover{background:var(--k);color:#fff}.top .btn{padding:8px 16px;font-size:.9rem}
+.hero{padding:84px 0 60px}.hero h1{font-size:clamp(3rem,8vw,7.2rem);max-width:10em}.hero h1 span{color:var(--bl)}
+.hero p{max-width:30em;margin:22px 0 28px;font-size:1.15rem}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--k);margin-top:50px}.nums div{padding:18px 18px 18px 0}.nums b{font-family:'Space Grotesk';font-size:2.4rem;display:block;line-height:1}.nums span{font-size:.9rem;opacity:.7}
+section{padding:80px 0}
+.sh{margin-bottom:28px;max-width:34em}.sh h2{font-size:clamp(2.1rem,4.4vw,3.4rem);margin-bottom:8px}
+.box{background:var(--g);padding:40px;display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;border-radius:6px}
+.box h2{font-size:2.2rem;margin-bottom:10px}
+.days{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}.days input{position:absolute;opacity:0}.days label{border:2px solid var(--k);border-radius:6px;padding:8px 14px;cursor:pointer;font-weight:600;transition:.2s}
+.days input:checked+label{background:var(--k);color:#fff}.days input:focus-visible+label{outline:3px solid var(--bl)}
+.tl{position:relative;height:56px;background:#fff;border:2px solid var(--k);border-radius:6px;margin:18px 0 6px;overflow:hidden}
+.tl .op{position:absolute;top:0;bottom:0;background:rgba(24,178,107,.25);border-left:3px solid var(--ok);border-right:3px solid var(--ok);transition:all .4s}
+.tl .mk{position:absolute;top:-2px;bottom:-2px;width:4px;background:var(--bl);transition:left .15s}
+.ax{display:flex;justify-content:space-between;font-size:.78rem;opacity:.7}
+input[type=range]{width:100%;accent-color:var(--bl);margin:12px 0}
+.big{font-family:'Space Grotesk';font-size:2.6rem;line-height:1}.stt{display:inline-block;border-radius:99px;padding:3px 14px;font-size:.88rem;font-weight:600;margin:8px 0}.stt.y{background:var(--ok);color:#fff}.stt.n{background:#d44;color:#fff}
+.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.st3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--k)}.st3 div{padding:22px 22px 22px 0}.st3 b{font-family:'Space Grotesk';font-size:1.3rem;display:block;margin-bottom:4px}
+.rv{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}.rv p{border:1.5px solid var(--k);padding:18px 20px;border-radius:6px}.rv small{display:block;opacity:.6;margin-top:6px}
+.ft{background:var(--k);color:#a8a8b0}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.box,.st3,.rv{grid-template-columns:1fr}.nums{grid-template-columns:1fr 1fr}.box{padding:24px 18px}section{padding:56px 0}.hero{padding:50px 0 40px}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Ingvar Neve. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">Ingvar <b>Neve</b></a><nav><a href="#proefles">Proefles</a><a href="#intake">Intake</a><a class="btn b" href="#proefles">Gratis proefles</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap"><h1 class="reveal">Personal training met <span>resultaat</span>.</h1>
+ <p class="reveal">Persoonlijke programma's, duo-training en voedingsadvies in Breda. Begin met een gratis proefles en een gratis intake.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn b" href="#proefles">Plan je proefles</a><a class="btn l" href="tel:0630368955">06 30 36 89 55</a></div>
+ <div class="nums reveal"><div><b>4,9</b><span>gemiddelde Google-score</span></div><div><b>Gratis</b><span>proefles en intake</span></div><div><b>07 – 22</b><span>uur, ma t/m vr</span></div><div><b>Duo</b><span>training mogelijk</span></div></div></div></section>
+
+<section id="proefles" style="padding-top:0"><div class="wrap"><div class="box reveal">
+ <div><h2>Kies je moment</h2><p>Kies een dag en schuif naar het uur dat je wilt. Je ziet direct of Ingvar dan beschikbaar is.</p><div class="days" id="days"></div></div>
+ <div><div class="big" id="tm"></div><span class="stt" id="stt"></span><div class="tl"><div class="op" id="op"></div><div class="mk" id="mk"></div></div><div class="ax"><span>06</span><span>10</span><span>14</span><span>18</span><span>22</span></div>
+  <input type="range" id="hr" min="6" max="22" step="0.5" value="18" aria-label="Uur"><div class="act"><a class="btn b" id="wa" href="#">Stuur via WhatsApp</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div>
+</div></div></section>
+
+<section id="intake" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Zo begin je</h2></div>
+ <div class="st3"><div class="reveal"><b>1. Gratis proefles</b>Kennismaken met Ingvar en de training.</div><div class="reveal"><b>2. Gratis intake</b>Doelen, blessures en wensen bespreken.</div><div class="reveal"><b>3. Je programma</b>Een persoonlijk schema, ook voor thuis. <span class="tbc">prijzen te bevestigen</span></div></div>
+ <div class="rv"><p class="reveal">Persoonlijk programma en vaste begeleiding.<small>Samenvatting Google-reviews</small></p><p class="reveal">Resultaten door consistent trainen.<small>Samenvatting Google-reviews</small></p><p class="reveal">Voedingsadvies dat past bij je leven.<small>Samenvatting Google-reviews</small></p></div>
+ <p class="reveal" style="margin-top:22px">Zoete inval 29, 4815 HK Breda · info@ingvarneve.nl</p></div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var H={1:[7,22],2:[7,22],3:[7,22],4:[7,22],5:[7,22],6:[8,13]},DN=[['Ma',1],['Di',2],['Wo',3],['Do',4],['Vr',5],['Za',6]],NAME={1:'maandag',2:'dinsdag',3:'woensdag',4:'donderdag',5:'vrijdag',6:'zaterdag'},d=Math.max(1,nlNow().d);if(d===0)d=1;
+ DN.forEach(function(x){$('days').insertAdjacentHTML('beforeend','<input type="radio" name="d" id="d'+x[1]+'"'+(x[1]===d?' checked':'')+'><label for="d'+x[1]+'">'+x[0]+'</label>')});
+ function fmt(h){var m=Math.round((h%1)*60);return ('0'+Math.floor(h)).slice(-2)+':'+('0'+m).slice(-2)}
+ function up(){d=+document.querySelector('input[name=d]:checked').id.slice(1);var h=+$('hr').value,o=H[d],open=h>=o[0]&&h<o[1];
+  $('tm').textContent=fmt(h);$('stt').textContent=open?'Beschikbaar':'Buiten openingstijden';$('stt').className='stt '+(open?'y':'n');
+  $('op').style.left=((o[0]-6)/16*100)+'%';$('op').style.width=((o[1]-o[0])/16*100)+'%';$('mk').style.left=((h-6)/16*100)+'%';
+  var m='Hallo Ingvar, ik wil graag een gratis proefles.\nVoorkeur: '+NAME[d]+' om '+fmt(h)+'.\nKun je laten weten of dat past?';$('wa').href='https://wa.me/31630368955?text='+encodeURIComponent(m);$('cp').onclick=function(){copyTxt(this,m)}}
+ document.querySelector('.box').addEventListener('input',up);up();
+})();
+</script>
+</body>
+</html>
