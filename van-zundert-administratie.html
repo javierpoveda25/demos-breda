@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Van Zundert Administratie – Boekhouder Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Van Zundert Administratie: administratie, loonadministratie en advies voor zzp en mkb in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&display=swap');
+/* DESIGN: sober en betrouwbaar, diep marine met salie en een heldere kopertoon voor cijfers. Kleuren: marine (#12263F), papier (#F7F6F2), salie (#7FA38E), koper (#C1673A), lijn (#D7D6CF).
+   Type: Libre Caslon Text (titels) + Libre Franklin (tekst).
+   STRUCTUUR: kop met drie vertrouwenscijfers, tariefplanner: kies uw situatie en omzet, zie wat het kost per maand (vanaf € 85) met opties, tarieventabel en contact met de boekhouder.
+   MOTION: reveal, tellend maandbedrag, tabelregel-highlight. */
+:root{--mn:#12263F;--pp:#F7F6F2;--sa:#7FA38E;--co:#C1673A;--ln:#D7D6CF;--acc:#C1673A}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Libre Franklin',system-ui,sans-serif;background:var(--pp);color:var(--mn);font-size:17px;line-height:1.65}
+h1,h2,h3{font-family:'Libre Caslon Text',serif;font-weight:400;line-height:1.1}em{color:var(--co)}
+.demo-bar{background:var(--mn);color:#b9c7d8}
+header.top{position:sticky;top:0;z-index:40;background:rgba(247,246,242,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--ln)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Libre Caslon Text';font-size:1.25rem;text-decoration:none}.logo b{font-weight:700}
+.top nav{display:flex;gap:22px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:500;font-size:.93rem}
+.btn{display:inline-block;padding:13px 26px;border-radius:4px;font:inherit;font-weight:600;text-decoration:none;border:1.5px solid var(--mn);cursor:pointer;transition:.2s;background:var(--mn);color:#fff}
+.btn:hover{background:var(--co);border-color:var(--co)}.btn.l{background:transparent;color:var(--mn)}.btn.l:hover{background:var(--mn);color:#fff}.top .btn{padding:8px 16px;font-size:.9rem}
+.hero{padding:84px 0 50px}.hero h1{font-size:clamp(2.8rem,6.8vw,5.8rem);max-width:11em}.hero p{max-width:31em;margin:22px 0 28px;font-size:1.15rem}
+.fig{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--mn);margin-top:44px}.fig div{padding:18px 18px 18px 0}.fig b{font-family:'Libre Caslon Text';font-size:2.4rem;display:block;line-height:1;color:var(--co)}.fig span{font-size:.9rem;opacity:.75}
+section{padding:76px 0}
+.sh{margin-bottom:26px;max-width:34em}.sh h2{font-size:clamp(2.1rem,4.4vw,3.2rem);margin-bottom:8px}
+.pl{background:var(--mn);color:var(--pp);border-radius:8px;padding:44px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px}
+.pl h2{font-size:2.2rem;margin-bottom:10px}.k{font-weight:600;margin:18px 0 8px}
+.ch{display:flex;flex-wrap:wrap;gap:8px}.ch input{position:absolute;opacity:0}.ch label{border:1.5px solid #5a7089;border-radius:4px;padding:8px 16px;cursor:pointer;font-weight:500;transition:.2s}
+.ch input:checked+label{background:var(--pp);color:var(--mn);border-color:var(--pp)}.ch input:focus-visible+label{outline:3px solid var(--co)}
+.sl label{display:flex;justify-content:space-between;font-weight:600}.sl b{color:#f0a67f}input[type=range]{width:100%;accent-color:var(--co);margin-top:8px}
+.qt{background:var(--pp);color:var(--mn);border-radius:6px;padding:28px;align-self:start}
+.qt .p{font-family:'Libre Caslon Text';font-size:4rem;line-height:1;color:var(--co)}.qt .p small{font-size:1rem;color:var(--mn);font-family:'Libre Franklin'}
+.qt ul{list-style:none;margin:14px 0}.qt li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--ln);font-size:.95rem}
+.qt p.f{font-size:.82rem;opacity:.7;margin-bottom:12px}.act{display:flex;gap:8px;flex-wrap:wrap}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--ln)}td,th{padding:14px 18px;text-align:left;border-bottom:1px solid var(--ln)}th{font-family:'Libre Caslon Text';font-weight:400;font-size:1.05rem}td:last-child,th:last-child{text-align:right}tr:hover td{background:#fdf3ec}
+.srv{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1.5px solid var(--mn);margin-bottom:40px}.srv div{padding:20px 20px 20px 0}.srv b{font-family:'Libre Caslon Text';font-size:1.25rem;display:block;margin-bottom:4px}
+.ft{background:var(--mn);color:#b9c7d8}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.pl,.fig,.srv{grid-template-columns:1fr}.srv{grid-template-columns:1fr 1fr}.pl{padding:24px 18px}td,th{padding:10px 8px;font-size:.9rem}section{padding:52px 0}.hero{padding:50px 0 30px}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Van Zundert Administratie. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">Van Zundert <b>Administratie</b></a><nav><a href="#tarief">Wat kost het?</a><a href="#diensten">Diensten</a><a class="btn" href="#tarief">Kennismaken</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap"><h1 class="reveal">Uw administratie <em>in orde</em>, zodat u kunt ondernemen.</h1>
+ <p class="reveal">Boekhouding, loonadministratie en advies voor zzp'ers, eenmanszaken en starters in Breda. Heldere tarieven, geen verrassingen achteraf.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn" href="#tarief">Bereken uw tarief</a><a class="btn l" href="tel:0621262225">06 21 26 22 25</a></div>
+ <div class="fig reveal"><div><b>€ 85</b><span>per maand, vanaf, voor zzp en starters</span></div><div><b>4</b><span>diensten onder één dak</span></div><div><b>Breda</b><span>Seeligsingel, bij het centrum</span></div></div></div></section>
+
+<section id="tarief" style="padding-top:20px"><div class="wrap"><div class="pl reveal">
+ <div><h2>Wat kost uw administratie?</h2><p style="color:#b9c7d8">Kies uw situatie. U ziet een indicatie op basis van de tarieven. Een persoonlijk voorstel volgt na een kennismaking.</p>
+  <div class="k">Uw onderneming</div><div class="ch" id="ty"></div>
+  <div class="sl"><label for="om" class="k">Jaaromzet <b id="ov"></b></label><input type="range" id="om" min="0" max="150000" step="5000" value="40000"></div>
+  <div class="k">Erbij</div><div class="ch" id="ex"></div></div>
+ <div class="qt"><div class="p" id="pr"></div><small id="ps"></small><ul id="ln"></ul><p class="f">Indicatie op basis van de tarieven op de huidige site. Boven € 100.000 omzet rekenen we een uurtarief.</p>
+  <div class="act"><a class="btn" id="ml" href="#">Vraag kennismaking aan</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div>
+</div></div></section>
+
+<section id="diensten" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Wat wij voor u doen</h2></div>
+ <div class="srv reveal"><div><b>Administratie</b>Boekhouding en aangiftes.</div><div><b>Loonadministratie</b>Salarisstroken en loonaangifte.</div><div><b>Bedrijfsadvies</b>Meedenken over uw onderneming.</div><div><b>Belastingadvies</b>Fiscaal helder.</div></div>
+ <div class="reveal"><table><tr><th>Dienst</th><th>Tarief</th></tr><tr><td>ZZP, eenmanszaak of starter</td><td>vanaf € 85,00 p/m</td></tr><tr><td>Uitgebreid rapport</td><td>€ 325,00 extra</td></tr><tr><td>Boekhouding</td><td>€ 75,00 per uur</td></tr><tr><td>Fiscaal en maatwerk</td><td>€ 95,00 per uur</td></tr></table></div>
+ <p class="reveal" style="margin-top:22px">Seeligsingel 1, 4811 CN Breda · lucien@vanzundertadministratie.nl · <span class="tbc">naam en bio van de boekhouder in te vullen</span></p></div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website. Tarieven overgenomen van de huidige site, te bevestigen.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var T=['ZZP of eenmanszaak','Starter','Anders (bv, vof)'],E=['Loonadministratie','Uitgebreid rapport','Belastingadvies'];
+ T.forEach(function(x,i){$('ty').insertAdjacentHTML('beforeend','<input type="radio" name="t" id="t'+i+'"'+(i===0?' checked':'')+'><label for="t'+i+'">'+x+'</label>')});
+ E.forEach(function(x,i){$('ex').insertAdjacentHTML('beforeend','<input type="checkbox" id="e'+i+'"><label for="e'+i+'">'+x+'</label>')});
+ var cur=0,tg=0;function an(){cur+=(tg-cur)*.25;if(Math.abs(tg-cur)<.5)cur=tg;$('pr').innerHTML='€ '+Math.round(cur)+'<small> / maand</small>';if(cur!==tg)requestAnimationFrame(an)}
+ var nf=function(n){return n.toLocaleString('nl-NL')};
+ function up(){var t=+document.querySelector('input[name=t]:checked').id.slice(1),om=+$('om').value,ex=E.map(function(x,i){return $('e'+i).checked}),ln='';$('ov').textContent='€ '+nf(om);
+  var big=om>100000||t===2;if(big){tg=0;$('pr').innerHTML='Op maat';$('ps').textContent='Bij deze situatie maken we een persoonlijk voorstel (uurtarief).';ln='<li><span>Boekhouding</span><span>€ 75 per uur</span></li><li><span>Fiscaal en maatwerk</span><span>€ 95 per uur</span></li>'}
+  else{tg=85;$('ps').textContent='Vanaf, voor '+T[t].toLowerCase()+' tot € 100.000 omzet.';ln='<li><span>Administratie '+T[t].toLowerCase()+'</span><span>€ 85 p/m</span></li>';an()}
+  if(ex[1])ln+='<li><span>Uitgebreid rapport</span><span>€ 325 extra</span></li>';if(ex[0])ln+='<li><span>Loonadministratie</span><span>op offerte</span></li>';if(ex[2])ln+='<li><span>Belastingadvies</span><span>€ 95 per uur</span></li>';$('ln').innerHTML=ln;
+  var m='Hallo, ik wil graag kennismaken over mijn administratie.\nSituatie: '+T[t].toLowerCase()+', omzet ongeveer € '+nf(om)+'.\nGraag ook: '+(E.filter(function(x,i){return ex[i]}).join(', ').toLowerCase()||'niets extra')+'.\nWanneer kunnen we bellen?';
+  $('ml').href='mailto:lucien@vanzundertadministratie.nl?subject='+encodeURIComponent('Kennismaking administratie')+'&body='+encodeURIComponent(m);$('cp').onclick=function(){copyTxt(this,m)}}
+ document.querySelector('.pl').addEventListener('input',up);up();
+})();
+</script>
+</body>
+</html>

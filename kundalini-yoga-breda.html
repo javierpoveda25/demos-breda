@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kundalini Yoga Breda – Yoga bij Zero-Point (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Kundalini Yoga Breda: wekelijkse lessen, workshops en opleidingen bij Zero-Point in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Hind:wght@300;400;500;600&display=swap');
+/* DESIGN: diep indigo met goud en zachte lila, rustig en eigentijds. Kleuren: indigo (#1C1842), nacht (#100E2B), goud (#E0B65A), lila (#C9BFF2), parel (#F5F2FA).
+   Type: Marcellus (titels) + Hind (tekst).
+   STRUCTUUR: volgende-les-teller die live uitrekent wanneer de eerstvolgende les begint (ma 20:30, di 19:00, wo 19:00, za 09:00), weekrooster, wat u meeneemt (afvinkbaar) en workshops en opleiding.
+   MOTION: reveal, aftellende klok, afvinklijst met doorhalen. */
+:root{--in:#1C1842;--nt:#100E2B;--go:#E0B65A;--li:#C9BFF2;--pa:#F5F2FA;--acc:#E0B65A}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Hind',system-ui,sans-serif;background:var(--pa);color:var(--in);font-size:17px;line-height:1.7;font-weight:400}
+h1,h2,h3{font-family:'Marcellus',serif;font-weight:400;line-height:1.08}
+.demo-bar{background:var(--nt);color:var(--go)}
+header.top{position:sticky;top:0;z-index:40;background:rgba(16,14,43,.96);backdrop-filter:blur(8px);color:var(--pa)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Marcellus';font-size:1.3rem;text-decoration:none;letter-spacing:.04em}.logo b{color:var(--go);font-weight:400}
+.top nav{display:flex;gap:22px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:500;font-size:.92rem;color:var(--li)}
+.btn{display:inline-block;padding:13px 28px;border-radius:999px;font:inherit;font-weight:600;text-decoration:none;border:1.5px solid var(--go);cursor:pointer;transition:.25s;background:var(--go);color:var(--nt)}
+.btn:hover{background:transparent;color:var(--go)}.btn.l{background:transparent;color:inherit;border-color:currentColor}.top .btn{padding:7px 18px;font-size:.9rem}
+.hero{background:linear-gradient(180deg,var(--nt),var(--in));color:var(--pa);padding:90px 0 90px}
+.hero h1{font-size:clamp(3rem,7.6vw,6.6rem);max-width:10em}.hero h1 em{font-style:normal;color:var(--go)}.hero p{max-width:30em;margin:22px 0 28px;color:var(--li);font-size:1.15rem}
+section{padding:80px 0}
+.sh{margin-bottom:28px;max-width:34em}.sh h2{font-size:clamp(2.1rem,4.4vw,3.3rem);margin-bottom:8px}
+.nx{background:var(--in);color:var(--pa);border-radius:28px;padding:46px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.nx .lab{color:var(--go);letter-spacing:.16em;text-transform:uppercase;font-size:.8rem}
+.nx .big{font-family:'Marcellus';font-size:clamp(2.4rem,5vw,3.8rem);line-height:1.05;margin:8px 0}
+.clock{display:flex;gap:10px;margin:14px 0}.clock div{background:rgba(255,255,255,.08);border-radius:14px;padding:12px 16px;text-align:center;min-width:76px}.clock b{font-family:'Marcellus';font-size:2rem;display:block;line-height:1}.clock span{font-size:.75rem;color:var(--li);text-transform:uppercase;letter-spacing:.1em}
+.wk{display:grid;gap:8px}.wk button{font:inherit;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.07);border:1.5px solid transparent;color:inherit;border-radius:14px;padding:14px 18px;cursor:pointer;text-align:left;transition:.2s}
+.wk button:hover{border-color:var(--go)}.wk button[aria-pressed=true]{background:var(--go);color:var(--nt)}.wk b{font-family:'Marcellus';font-size:1.2rem;font-weight:400}
+.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.bring{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.cl{list-style:none}.cl li{margin-bottom:8px}.cl input{position:absolute;opacity:0}.cl label{display:flex;gap:12px;align-items:center;background:#fff;border-radius:14px;padding:14px 18px;cursor:pointer;transition:.2s;border:1.5px solid rgba(28,24,66,.12)}
+.cl label::before{content:"";width:22px;height:22px;border-radius:50%;border:2px solid var(--in);flex:none;transition:.2s}
+.cl input:checked+label{opacity:.6;text-decoration:line-through}.cl input:checked+label::before{background:var(--go);border-color:var(--go);box-shadow:inset 0 0 0 4px #fff}.cl input:focus-visible+label{outline:3px solid var(--go)}
+.ws{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.ws div{background:#fff;border:1.5px solid rgba(28,24,66,.12);border-radius:20px;padding:24px;transition:.25s}.ws div:hover{transform:translateY(-4px);border-color:var(--go)}.ws h3{font-size:1.35rem;margin-bottom:6px}
+.ft{background:var(--nt);color:var(--li)}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.nx,.bring,.ws{grid-template-columns:1fr}.nx{padding:26px 18px}.clock div{min-width:0;flex:1;padding:10px 6px}section{padding:56px 0}.hero{padding:56px 0}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Kundalini Yoga Breda. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">Kundalini Yoga <b>Breda</b></a><nav><a href="#les">Volgende les</a><a href="#meenemen">Meenemen</a><a href="#workshops">Workshops</a><a class="btn" href="#les">Proefles</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap"><h1 class="reveal">Kom thuis in <em>jezelf</em>.</h1>
+ <p class="reveal">Wekelijkse kundalini yogalessen, workshops met gongbad en opleidingen bij Zero-Point in Breda. Begin met een vrijblijvende proefles.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn" href="#les">Wanneer is de volgende les?</a><a class="btn l" href="tel:0651925498">06 51 92 54 98</a></div></div></section>
+
+<section id="les"><div class="wrap"><div class="nx reveal">
+ <div><div class="lab">Eerstvolgende les</div><div class="big" id="nb">...</div><p id="nd" style="color:var(--li)"></p><div class="clock" id="ck"></div>
+  <div class="act"><a class="btn" id="ml" href="#">Meld je aan voor een proefles</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div>
+ <div><div class="lab" style="margin-bottom:10px">Weekrooster · Zero-Point, Ceresstraat 29</div><div class="wk" id="wk"></div></div>
+</div></div></section>
+
+<section id="meenemen" style="padding-top:0"><div class="wrap bring"><div class="reveal"><div class="sh"><h2>Wat neem je mee?</h2><p>Vink af wat je klaar hebt. Alles is eenvoudig en comfortabel.</p></div></div>
+ <ul class="cl reveal" id="cl"></ul></div></section>
+
+<section id="workshops" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Verdiepen</h2></div>
+ <div class="ws"><div class="reveal"><h3>Workshops</h3>Kundalini yoga met gongbad en ademcirkels.</div><div class="reveal"><h3>Kundalini Awakening</h3>Een training om jezelf dieper te leren kennen.</div><div class="reveal"><h3>Docentenopleiding</h3>Level 1 Kundalini Yoga Awakening Teacher Training.</div></div>
+ <p class="reveal" style="margin-top:22px">Kundalini Yoga Breda · info@kundaliniyogabreda.nl · Prijzen en inschrijving via Momoyoga <span class="tbc">link en prijzen in te vullen</span></p></div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var S=[[1,'20:30','22:00'],[2,'19:00','20:30'],[3,'19:00','20:30'],[6,'09:00','10:30']],N=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'],sel=null;
+ function nxt(){var n=nlNow(),best=null;S.forEach(function(s,i){var d=(s[0]-n.d+7)%7,m=hm(s[1]),diff=d*1440+m-n.m;if(diff<0)diff+=7*1440;if(best===null||diff<best.diff)best={i:i,diff:diff}});return best}
+ function draw(){var b=nxt(),w=$('wk');w.innerHTML='';S.forEach(function(s,i){var x=document.createElement('button');x.type='button';x.setAttribute('aria-pressed',i===(sel===null?b.i:sel));x.innerHTML='<b>'+N[s[0]][0].toUpperCase()+N[s[0]].slice(1)+'</b><span>'+s[1]+' – '+s[2]+'</span>';x.onclick=function(){sel=i;draw()};w.appendChild(x)});
+  var i=sel===null?b.i:sel,s=S[i];$('nb').textContent=N[s[0]][0].toUpperCase()+N[s[0]].slice(1)+' '+s[1];$('nd').textContent=sel===null?'Dit is de eerstvolgende les.':'Geselecteerde les. Hieronder zie je de eerstvolgende.';
+  var m='Hallo, ik wil graag een proefles volgen op '+N[s[0]]+' om '+s[1]+'.\nNaam: ...\nIs er plek?';$('ml').href='mailto:info@kundaliniyogabreda.nl?subject='+encodeURIComponent('Proefles aanvragen')+'&body='+encodeURIComponent(m);$('cp').onclick=function(){copyTxt(this,m)}}
+ function tick(){var b=nxt(),d=Math.floor(b.diff/1440),h=Math.floor(b.diff%1440/60),mi=b.diff%60;$('ck').innerHTML='<div><b>'+d+'</b><span>dagen</span></div><div><b>'+h+'</b><span>uur</span></div><div><b>'+mi+'</b><span>min</span></div>'}
+ draw();tick();setInterval(tick,30000);
+ ['Een yogamat of handdoek','Een kussen of deken','Comfortabele kleding','Een fles water','Open houding en nieuwsgierigheid'].forEach(function(x,i){$('cl').insertAdjacentHTML('beforeend','<li><input type="checkbox" id="k'+i+'"><label for="k'+i+'">'+x+'</label></li>')});
+})();
+</script>
+</body>
+</html>

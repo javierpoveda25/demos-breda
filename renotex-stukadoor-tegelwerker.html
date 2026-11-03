@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Renotex Stukadoor &amp; Tegelwerker – Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Renotex Stukadoor & Tegelwerker: stucwerk binnen en buiten en tegelwerk in en rond Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Figtree:wght@400;500;600&display=swap');
+/* DESIGN: stoer en ambachtelijk, pleisterkleuren met okergeel en donker staal. Kleuren: pleister (#E9E4DB), ocher (#D9A12B), staal (#232A30), gips (#F7F4EE), kalkgrijs (#BDB7AB).
+   Type: Big Shoulders Display (titels, smal en krachtig) + Figtree (tekst).
+   STRUCTUUR: gestuurde offertebouwer: kies binnen of buiten, afwerking (glad, spachtelputz, sierpleister), schuif het aantal m² en vink tegelwerk aan, zie een samenvatting met werkvolgorde en vraag aan.
+   MOTION: reveal, afwerkingskaarten met textuur, werkvolgorde die opbouwt. */
+:root{--pl:#E9E4DB;--oc:#D9A12B;--st:#232A30;--gi:#F7F4EE;--ka:#BDB7AB;--acc:#D9A12B}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Figtree',system-ui,sans-serif;background:var(--gi);color:var(--st);font-size:17px;line-height:1.62}
+h1,h2,h3{font-family:'Big Shoulders Display',sans-serif;font-weight:800;line-height:.96;text-transform:uppercase;letter-spacing:.01em}
+.demo-bar{background:var(--oc);color:var(--st);font-weight:600}
+header.top{position:sticky;top:0;z-index:40;background:var(--st);color:var(--gi)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Big Shoulders Display';font-weight:800;font-size:1.5rem;text-transform:uppercase;text-decoration:none;letter-spacing:.04em}.logo b{color:var(--oc)}
+.top nav{display:flex;gap:22px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:500;font-size:.92rem;color:#d8d3c8}
+.btn{display:inline-block;padding:14px 26px;font:inherit;font-weight:700;text-decoration:none;border:2px solid var(--oc);cursor:pointer;transition:.2s;background:var(--oc);color:var(--st);text-transform:uppercase;letter-spacing:.04em;font-size:.92rem}
+.btn:hover{background:var(--st);color:var(--oc)}.btn.l{background:transparent;color:inherit;border-color:currentColor}.btn.l:hover{background:var(--st);color:#fff;border-color:var(--st)}.top .btn{padding:8px 16px;font-size:.85rem}
+.hero{background:var(--st);color:var(--gi);padding:76px 0 80px}
+.hero h1{font-size:clamp(3.8rem,10vw,8.5rem);max-width:9em}.hero h1 span{color:var(--oc)}.hero p{max-width:30em;margin:22px 0 28px;color:#c9c3b6;font-size:1.12rem}
+section{padding:76px 0}
+.sh{margin-bottom:26px}.sh h2{font-size:clamp(2.6rem,5.4vw,4.4rem)}
+.bld{background:var(--pl);padding:42px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;border-top:8px solid var(--oc)}
+.bld h2{font-size:2.8rem;margin-bottom:6px}.k{font-weight:700;margin:20px 0 8px}
+.seg{display:flex;gap:0}.seg input{position:absolute;opacity:0}.seg label{flex:1;text-align:center;border:2px solid var(--st);padding:10px 8px;cursor:pointer;font-weight:700;transition:.2s}
+.seg input:checked+label{background:var(--st);color:#fff}.seg input:focus-visible+label{outline:3px solid var(--oc)}
+.fin{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.fin input{position:absolute;opacity:0}
+.fin label{display:block;border:2px solid var(--st);padding:0;cursor:pointer;overflow:hidden;transition:.2s;background:#fff}
+.fin .tx{height:70px;background-color:var(--ka);transition:.3s}.fin label b{display:block;padding:8px 10px 0;font-weight:700}.fin label small{display:block;padding:0 10px 10px;opacity:.75;font-size:.82rem}
+.tx.g{background:linear-gradient(135deg,#efebe3,#d9d3c6)}.tx.s{background-image:radial-gradient(circle at 20% 30%,#b9b2a2 0 2px,transparent 2.5px),radial-gradient(circle at 60% 60%,#b9b2a2 0 2px,transparent 2.5px),radial-gradient(circle at 80% 20%,#b9b2a2 0 2px,transparent 2.5px);background-size:18px 18px;background-color:#d4cdbd}
+.tx.o{background-image:repeating-linear-gradient(115deg,#c9c0ad 0 6px,#ddd5c3 6px 14px);background-color:#d4cdbd}
+.fin input:checked+label{box-shadow:0 0 0 4px var(--oc);transform:translateY(-3px)}.fin input:focus-visible+label{outline:3px solid var(--oc)}
+.sl label{display:flex;justify-content:space-between;font-weight:700}.sl b{color:#a8731a}input[type=range]{width:100%;accent-color:var(--oc);margin-top:8px}
+.tg{display:flex;gap:10px;align-items:center;font-weight:600;cursor:pointer}.tg input{width:22px;height:22px;accent-color:var(--oc)}
+.sm{background:var(--st);color:var(--gi);padding:28px;align-self:start}.sm h3{font-size:2rem;color:var(--oc);margin-bottom:10px}.sm ol{list-style:none;counter-reset:s;margin:10px 0 18px}.sm li{counter-increment:s;padding:8px 0 8px 40px;position:relative;border-top:1px solid #3d4750;animation:fi .4s both}
+.sm li::before{content:counter(s);position:absolute;left:0;top:6px;width:28px;height:28px;background:var(--oc);color:var(--st);font-weight:800;display:grid;place-items:center;font-family:'Big Shoulders Display'}
+@keyframes fi{from{opacity:0;transform:translateX(-10px)}}.sm .big{font-family:'Big Shoulders Display';font-size:2.6rem;font-weight:800;line-height:1;margin-bottom:6px}
+.act{display:flex;gap:8px;flex-wrap:wrap}.sm .btn.l{color:var(--gi)}
+.sv{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--st)}.sv div{padding:26px;border:1px solid var(--st);background:#fff;transition:.25s}.sv div:hover{background:var(--oc)}.sv h3{font-size:1.8rem;margin-bottom:6px}
+.ft{background:var(--st);color:#a8a294}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.bld,.sv{grid-template-columns:1fr}.bld{padding:24px 18px}.fin{grid-template-columns:1fr}.fin .tx{height:44px}section{padding:52px 0}.hero{padding:50px 0}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Renotex Stukadoor &amp; Tegelwerker. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">Renotex <b>Breda</b></a><nav><a href="#offerte">Offerte bouwen</a><a href="#werk">Werk</a><a class="btn" href="tel:0651017012">06 51 01 70 12</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap"><h1 class="reveal">Strak <span>stucwerk</span>. Strak tegelwerk.</h1>
+ <p class="reveal">Stukadoor en tegelwerker voor projecten in en rond Breda. Binnen en buiten, voor particulieren en bedrijven, met een eerlijke offerte.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn" href="#offerte">Bouw uw offerte</a><a class="btn l" href="mailto:info@renotexbreda.nl">Mail ons</a></div></div></section>
+
+<section id="offerte"><div class="wrap"><div class="bld reveal">
+ <div><h2>Bouw uw offerteaanvraag</h2><p>Kies wat u wilt, en wij komen vrijblijvend kijken.</p>
+  <div class="k">Waar?</div><div class="seg" id="wh"></div>
+  <div class="k">Afwerking</div><div class="fin" id="fi"></div>
+  <div class="sl"><label for="m2" class="k" style="margin-bottom:0">Oppervlakte <b id="mv"></b></label><input type="range" id="m2" min="5" max="250" step="5" value="40"></div>
+  <label class="tg k"><input type="checkbox" id="tg">Ook tegelwerk</label></div>
+ <div class="sm"><div class="big" id="bg"></div><h3>Zo pakken wij het aan</h3><ol id="ol"></ol><div class="act"><a class="btn" id="ml" href="#">Vraag offerte aan</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div>
+</div></div></section>
+
+<section id="werk" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Wat wij doen</h2></div>
+ <div class="sv reveal"><div><h3>Stucwerk</h3>Binnen en buiten, wanden en plafonds.</div><div><h3>Tegelwerk</h3>Badkamer, keuken en vloer, met designtegels via een partner.</div><div><h3>Decoratief</h3>Decoratief schilderwerk als specialisme.</div></div>
+ <p class="reveal" style="margin-top:22px">Tervoortseweg 6, 4854 NE Bavel · 06 51 01 70 12 · info@renotexbreda.nl · Reviews en openingstijden <span class="tbc">in te vullen</span></p></div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var W=['Binnen','Buiten'],F=[['Glad stucwerk','Strak en schilderklaar','g'],['Spachtelputz','Fijne structuur','s'],['Sierpleister','Karakter en reliëf','o']];
+ W.forEach(function(x,i){$('wh').insertAdjacentHTML('beforeend','<input type="radio" name="w" id="w'+i+'"'+(i===0?' checked':'')+'><label for="w'+i+'">'+x+'</label>')});
+ F.forEach(function(x,i){$('fi').insertAdjacentHTML('beforeend','<input type="radio" name="f" id="f'+i+'"'+(i===0?' checked':'')+'><label for="f'+i+'"><div class="tx '+x[2]+'"></div><b>'+x[0]+'</b><small>'+x[1]+'</small></label>')});
+ function up(){var w=+document.querySelector('input[name=w]:checked').id.slice(1),f=F[+document.querySelector('input[name=f]:checked').id.slice(1)],m=+$('m2').value,t=$('tg').checked;$('mv').textContent=m+' m²';
+  $('bg').textContent=f[0]+' · '+m+' m²';var st=['Opname ter plaatse en vrijblijvende offerte','Ondergrond voorbereiden en afplakken',w===0?'Binnenwanden stucen: '+f[0].toLowerCase():'Gevel afwerken met '+f[0].toLowerCase()+', geschikt voor buiten'];if(t)st.push('Tegelwerk plannen en uitvoeren');st.push('Netjes opleveren en samen nalopen');
+  $('ol').innerHTML=st.map(function(x,i){return '<li style="animation-delay:'+i*70+'ms">'+x+'</li>'}).join('');
+  var msg='Hallo, ik wil graag een offerte voor: '+f[0].toLowerCase()+' '+W[w].toLowerCase()+', ongeveer '+m+' m²'+(t?', inclusief tegelwerk':'')+'.\nAdres: ...\nKunnen jullie langskomen?';
+  $('ml').href='mailto:info@renotexbreda.nl?subject='+encodeURIComponent('Offerte stucwerk')+'&body='+encodeURIComponent(msg);$('cp').onclick=function(){copyTxt(this,msg)}}
+ document.querySelector('.bld').addEventListener('input',up);up();
+})();
+</script>
+</body>
+</html>
