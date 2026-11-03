@@ -9,8 +9,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap');
 /* DESIGN: degelijk vakbedrijf met één verfgele accentkleur. Kleuren: marine (#12263A), verfgeel (#F2B705), gebroken wit (#F6F3EC), steen (#DAD5C8).
    Type: Bricolage Grotesque (titels) + DM Sans (tekst).
-   STRUCTUUR: offertekaart naast de kop, bento met diensten, kleur-proefpaneel voor kozijnen/deur/muur, tijdlijn werkwijze, offerteformulier.
-   MOTION: scroll-reveal, voortgangsbalk, kleurwissel in het proefpaneel, tijdlijn die zich tekent bij scrollen. */
+   STRUCTUUR: offertekaart naast de kop, bento met diensten, offertepaneel met live aanvraagkaart, tijdlijn werkwijze, offerteformulier.
+   MOTION: scroll-reveal, voortgangsbalk, aanvraagkaart die live meeschrijft, tijdlijn die zich tekent bij scrollen. */
 :root{--navy:#12263A;--acc:#F2B705;--paper:#F6F3EC;--stone:#DAD5C8;--ink:#12263A;--wall:#E9DCC3;--frame:#FFFFFF;--door:#2F5D50}
 html{overflow-x:hidden;scroll-behavior:smooth}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -63,18 +63,6 @@ section{padding:92px 0}
 .bc.a{grid-column:span 3;background:var(--navy);color:#fff}.bc.b{grid-column:span 3;background:var(--acc)}
 .bc.c,.bc.d,.bc.e{grid-column:span 2}.bc.f{grid-column:span 3}.bc.g2{grid-column:span 3;background:var(--stone)}
 .bc.a p{color:#d9d3c2}
-.try{background:var(--navy);color:#fff;clip-path:polygon(0 4%,100% 0,100% 96%,0 100%);padding:130px 0}
-.try .sh p{color:#cdd3da}
-.lab{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
-.house{position:relative;background:#c9d6df;border-radius:18px;padding:28px 28px 0;overflow:hidden;aspect-ratio:4/3.1}
-.house .gr{position:absolute;left:0;right:0;bottom:0;height:12%;background:#6e7a6a}
-.house .wall{position:absolute;left:12%;right:12%;top:20%;bottom:12%;background:var(--wall);transition:background .5s;border-radius:4px 4px 0 0}
-.house .roof{position:absolute;left:7%;right:7%;top:8%;height:14%;background:#58423a;clip-path:polygon(8% 100%,50% 0,92% 100%)}
-.house .win{position:absolute;top:34%;width:20%;height:26%;background:var(--frame);transition:background .5s;padding:6%}
-.house .win::after{content:"";display:block;width:100%;height:100%;background:#9bb4c6}
-.house .w1{left:20%}.house .w2{right:20%}
-.house .door{position:absolute;left:44%;width:12%;bottom:12%;height:34%;background:var(--door);transition:background .5s;border-radius:3px 3px 0 0}
-.house .door::after{content:"";position:absolute;right:12%;top:50%;width:6px;height:6px;border-radius:50%;background:#e9d9a4}
 .part{display:flex;gap:6px;margin-bottom:16px;background:rgba(255,255,255,.1);padding:5px;border-radius:12px;width:max-content;max-width:100%}
 .part button{font:inherit;font-weight:700;background:transparent;color:#fff;border:0;border-radius:8px;padding:9px 16px;cursor:pointer}
 .part button[aria-pressed=true]{background:var(--acc);color:var(--navy)}
@@ -101,20 +89,51 @@ section{padding:92px 0}
 .ct b{display:block;font-family:'Bricolage Grotesque';font-size:1.1rem}
 footer.ft{background:var(--navy);color:#cdd3da}
 @media(max-width:800px){.top nav a:not(.btn){display:none}.hero .g,.lab,.form{grid-template-columns:1fr}.bc.a,.bc.b,.bc.c,.bc.d,.bc.e,.bc.f,.bc.g2{grid-column:span 6}.steps{grid-template-columns:1fr;padding-left:28px;padding-top:0}.steps::before,.steps::after{width:4px;height:100%;top:0;left:7px}.steps::after{height:var(--p,0%);width:4px}.steps div::before{left:-28px;top:6px}.ct{grid-template-columns:1fr}section{padding:64px 0}.try{padding:100px 0}.sw{grid-template-columns:repeat(4,1fr)}}
-</style>
+
+.pn{background:var(--pbg);color:var(--pfg);border-radius:var(--prad,24px);padding:clamp(22px,4vw,44px);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(22px,4vw,44px);position:relative;overflow:hidden}
+.pn h2{font-size:clamp(1.7rem,3.2vw,2.3rem);margin-bottom:4px}
+.pn .gl{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin:22px 0 10px;font-weight:700}
+.pn .tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px}
+.pn .tl button,.pn .cp button{font:inherit;color:inherit;background:var(--pcard);border:2px solid transparent;border-radius:var(--ptr,16px);padding:16px 14px;cursor:pointer;font-weight:700;text-align:left;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,background .25s,color .25s,border-color .25s;position:relative}
+.pn .tl button:hover,.pn .cp button:hover{transform:translateY(-3px)}
+.pn .tl button:active,.pn .cp button:active{transform:scale(.97)}
+.pn .tl button[aria-pressed=true],.pn .cp button[aria-pressed=true]{background:var(--pon);color:var(--ponfg);box-shadow:0 10px 24px -12px var(--pon);border-color:var(--pon)}
+.pn .tl button[aria-pressed=true]::after{content:"";position:absolute;right:12px;top:50%;width:14px;height:8px;margin-top:-6px;border-left:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(-45deg);animation:pk .35s .05s both}
+@keyframes pk{from{opacity:0;transform:rotate(-45deg) scale(.3)}}
+.pn .cp{display:flex;flex-wrap:wrap;gap:8px}.pn .cp button{padding:10px 18px;border-radius:999px;text-align:center}
+.pn .rg{display:flex;align-items:center;gap:16px}.pn .rg b{font-size:2rem;min-width:4.6em;font-variant-numeric:tabular-nums;line-height:1}
+.pn input[type=range]{flex:1;accent-color:var(--pon);height:28px}
+.pn .nm{width:100%;font:inherit;padding:13px 16px;border-radius:var(--ptr,14px);border:2px solid transparent;background:var(--pcard);color:inherit}
+.pn .nm:focus{outline:none;border-color:var(--pon)}
+.pn .tk{background:var(--ptk);color:var(--ptkfg);border-radius:var(--ptr,18px);padding:26px;align-self:start;position:sticky;top:90px;box-shadow:0 24px 48px -28px rgba(0,0,0,.5)}
+.pn .tk h3{font-size:1.35rem;margin-bottom:12px}
+.pn .rw{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px dashed currentColor;border-color:rgba(128,128,128,.4);font-size:.98rem}
+.pn .rw span:first-child{opacity:.65}.pn .rw span:last-child{font-weight:700;text-align:right}
+.pn .rw.up span:last-child{animation:rowIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes rowIn{from{opacity:0;transform:translateY(8px)}}
+.pn .st{margin:14px 0;padding:12px 14px;border-radius:12px;background:rgba(128,128,128,.14);font-weight:700;font-size:.95rem;display:flex;gap:10px;align-items:center}
+.pn .st i{width:9px;height:9px;border-radius:50%;background:var(--pon);flex:none;animation:pl 1.8s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(128,128,128,.5)}70%,100%{box-shadow:0 0 0 9px rgba(128,128,128,0)}}
+.pn .ac{display:grid;gap:8px;margin-top:6px}
+.pn .ac a,.pn .ac button{display:block;text-align:center;font:inherit;font-weight:800;padding:14px 18px;border-radius:var(--pbtn,999px);text-decoration:none;cursor:pointer;border:2px solid var(--pon);background:var(--pon);color:var(--ponfg);transition:transform .25s,filter .25s}
+.pn .ac a:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.pn .ac button{background:transparent;color:inherit;border-color:rgba(128,128,128,.5)}
+@media(max-width:800px){.pn{grid-template-columns:1fr}.pn .tk{position:static}}
+@media (prefers-reduced-motion:reduce){.pn *{animation:none!important;transition:none!important}}
+.pn{--pbg:#12263A;--pfg:#F6F3EC;--pcard:rgba(246,243,236,.09);--pon:#F2B705;--ponfg:#12263A;--ptk:#F6F3EC;--ptkfg:#12263A;--prad:20px;--ptr:12px;--pbtn:10px}</style>
 </head>
 <body>
 <div class="pg" id="pg"></div>
 <div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Vogels Schilderwerken. Geen officiële website.</div>
 <header class="top"><div class="wrap"><a class="logo" href="#top"><i></i>Vogels Schilderwerken</a>
-<nav><a href="#diensten">Diensten</a><a href="#kleur">Kleur proberen</a><a href="#werkwijze">Werkwijze</a><a href="#offerte">Offerte</a><a class="btn btn-y" href="tel:0611223997">06 11 22 39 97</a></nav></div></header>
+<nav><a href="#diensten">Diensten</a><a href="#werkwijze">Werkwijze</a><a href="#offerte">Offerte</a><a class="btn btn-y" href="tel:0611223997">06 11 22 39 97</a></nav></div></header>
 
 <main id="top">
 <section class="hero" style="padding-bottom:0"><div class="wrap">
  <div class="g">
   <div class="reveal"><h1>Schilderwerk in Breda dat <mark>jarenlang</mark> mooi blijft.</h1>
   <p class="lead">Van een enkele kozijnrenovatie tot meerjarig onderhoud voor een VVE. Eén aanspreekpunt, heldere afspraken en een offerte binnen 24 uur.</p>
-  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-y" href="#offerte">Vraag een offerte aan</a><a class="btn" href="#kleur">Probeer eerst een kleur</a></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-y" href="#offerte">Vraag een offerte aan</a><a class="btn" href="tel:0611223997">Bel 06 11 22 39 97</a></div>
   <div class="who"><span>Particulieren</span><span>Aannemers</span><span>VVE</span><span>Bedrijven en instellingen</span></div></div>
   <aside class="quote reveal"><h3>Gratis en vrijblijvend</h3><ul><li>Offerte binnen 24 uur</li><li>Kleuradvies inbegrepen</li><li>Woning schilderen vanaf € 1.250</li></ul><a class="tel" href="tel:0611223997">06 11 22 39 97</a><small>info@vogelsschilderwerken.nl</small></aside>
  </div>
@@ -131,23 +150,10 @@ footer.ft{background:var(--navy);color:#cdd3da}
   <div class="bc d reveal"><h3>Metaalconservering</h3><p>Roestwering en afwerking voor lang behoud.</p></div>
   <div class="bc e reveal"><h3>Beglazing</h3><p>Glas vervangen als onderdeel van het schilderwerk.</p></div>
   <div class="bc f reveal"><h3>Spuitwerk</h3><p>Strak spuitwerk, ook voor meubels en kasten.</p></div>
-  <div class="bc g2 reveal"><h3>Kleuradvies</h3><p>Twijfelt u over de kleur? Probeer het hieronder alvast uit en we denken mee.</p></div>
+  <div class="bc g2 reveal"><h3>Kleuradvies</h3><p>Twijfelt u over de kleur? Wij denken mee, met echte stalen.</p></div>
  </div>
 </div></section>
 
-<section class="try" id="kleur"><div class="wrap">
- <div class="sh reveal"><h2>Kleur proberen voordat we beginnen</h2><p>Kies een onderdeel en een kleur. Stuur uw keuze door en wij geven advies met echte stalen.</p></div>
- <div class="lab">
-  <div class="house reveal" aria-label="Voorbeeld van een woning die van kleur verandert"><div class="roof"></div><div class="wall" id="hw"></div><div class="win w1" id="hf1"></div><div class="win w2" id="hf2"></div><div class="door" id="hd"></div><div class="gr"></div></div>
-  <div class="reveal">
-   <div class="part" id="part"><button type="button" aria-pressed="true" data-p="wall">Muur</button><button type="button" aria-pressed="false" data-p="frame">Kozijnen</button><button type="button" aria-pressed="false" data-p="door">Voordeur</button></div>
-   <div class="sw" id="sw"></div>
-   <p class="pick" id="pick"></p>
-   <input type="text" id="adr" placeholder="Uw adres in Breda (optioneel)" aria-label="Adres">
-   <div class="act"><a class="btn btn-y" id="kmail" href="#">Stuur mijn kleurkeuze</a><button type="button" class="btn btn-o" id="kcopy">Kopieer</button></div>
-  </div>
- </div>
-</div></section>
 
 <section id="werkwijze"><div class="wrap">
  <div class="sh reveal"><h2>Zo werkt het</h2></div>
@@ -159,14 +165,7 @@ footer.ft{background:var(--navy);color:#cdd3da}
  </div>
 </div></section>
 
-<section id="offerte" style="padding-top:20px"><div class="wrap">
- <div class="form reveal">
-  <div><h2 style="font-size:2rem;margin-bottom:8px">Offerte aanvragen</h2><p>Kies wat u wilt laten doen. Het bericht hiernaast kunt u mailen of appen.</p>
-   <div class="opts" id="opts"></div>
-   <input class="t" id="nm" type="text" placeholder="Uw naam" aria-label="Naam"><input class="t" id="ph" type="tel" placeholder="Telefoonnummer" aria-label="Telefoon"></div>
-  <div><b>Uw bericht</b><div class="out" id="out"></div>
-   <div class="act"><a class="btn btn-n" id="omail" href="#">Mail Vogels</a><a class="btn btn-y" id="owa" href="#">WhatsApp</a><button type="button" class="btn" id="ocopy">Kopieer</button></div></div>
- </div>
+<section id="offerte" style="padding-top:20px"><div class="wrap"><div class="pn reveal" id="pn-vg"><div class="lf"><h2>Offerte in 30 seconden</h2><p style="opacity:.75">Tik uw keuzes aan. Binnen 24 uur reactie, gratis en vrijblijvend.</p></div><aside class="tk"><h3>Uw aanvraag</h3><div class="rows"></div><div class="ac"><a class="go" href="#">Stuur via WhatsApp</a><button class="cpy" type="button">Kopieer bericht</button></div></aside></div>
  <div class="ct reveal"><div><b>Bellen</b>06 11 22 39 97</div><div><b>Mailen</b>info@vogelsschilderwerken.nl</div><div><b>Adres</b>Burgemeester van Gilsstraat 71, 4813 PT Breda</div></div>
 </div></section>
 </main>
@@ -184,21 +183,41 @@ function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
 /* H: {dag(0-6): ['09:00','18:00']} */
 function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
 
- var COL=[['Zandsteen','#E9DCC3'],['Wit','#FFFFFF'],['Antraciet','#3A4047'],['Bosgroen','#2F5D50'],['Marineblauw','#1F3B5C'],['Bordeaux','#7B2D3A'],['Okergeel','#D9A441'],['Lichtgrijs','#C9CDD0'],['Terracotta','#B5573B'],['Saliegroen','#9DB09A'],['Roetzwart','#1C1C1C'],['Duifblauw','#8FA7BD']];
- var cur='wall',sel={wall:COL[0],frame:COL[1],door:COL[3]},NAME={wall:'Muur',frame:'Kozijnen',door:'Voordeur'};
- var sw=$('sw');COL.forEach(function(c,i){var b=document.createElement('button');b.type='button';b.style.background=c[1];if(c[1]==='#FFFFFF')b.style.boxShadow='inset 0 0 0 1px #ccc';b.setAttribute('aria-label',c[0]);b.setAttribute('aria-pressed','false');b.onclick=function(){sel[cur]=c;paint()};sw.appendChild(b)});
- function paint(){$('hw').style.background=sel.wall[1];$('hf1').style.background=$('hf2').style.background=sel.frame[1];$('hd').style.background=sel.door[1];
-  [].forEach.call(sw.children,function(b,i){b.setAttribute('aria-pressed',COL[i][0]===sel[cur][0])});
-  $('pick').innerHTML=NAME[cur]+': <b>'+sel[cur][0]+'</b>';var m=text();var s=encodeURIComponent('Kleurkeuze voor mijn woning');$('kmail').href='mailto:info@vogelsschilderwerken.nl?subject='+s+'&body='+encodeURIComponent(m)}
- function text(){return 'Hallo, dit is mijn kleurkeuze'+($('adr').value?' voor '+$('adr').value:'')+':\nMuur: '+sel.wall[0]+'\nKozijnen: '+sel.frame[0]+'\nVoordeur: '+sel.door[0]+'\nKunnen jullie hier advies over geven?'}
- [].forEach.call($('part').children,function(b){b.onclick=function(){cur=b.dataset.p;[].forEach.call($('part').children,function(x){x.setAttribute('aria-pressed',x===b)});paint()}});
- $('adr').addEventListener('input',paint);$('kcopy').onclick=function(){copyTxt(this,text())};paint();
- var W=['Binnen schilderen','Buiten schilderen','Kozijnen','Houtrot herstellen','Spuitwerk','Kleuradvies','VVE-onderhoud'],op=$('opts');
- W.forEach(function(w,i){op.insertAdjacentHTML('beforeend','<input type="checkbox" id="o'+i+'" value="'+w+'"><label for="o'+i+'">'+w+'</label>')});
- function omsg(){var c=[].map.call(op.querySelectorAll('input:checked'),function(x){return x.value});return 'Hallo, ik wil graag een offerte voor: '+(c.length?c.join(', '):'schilderwerk')+'.\nNaam: '+($('nm').value||'-')+'\nTelefoon: '+($('ph').value||'-')+'\nWilt u mij laten weten wanneer u kunt langskomen?'}
- function ou(){var m=omsg();$('out').textContent=m;$('omail').href='mailto:info@vogelsschilderwerken.nl?subject='+encodeURIComponent('Offerteaanvraag')+'&body='+encodeURIComponent(m);$('owa').href='https://wa.me/31611223997?text='+encodeURIComponent(m)}
- document.querySelector('.form').addEventListener('input',ou);ou();$('ocopy').onclick=function(){copyTxt(this,omsg())};
  var st=new IntersectionObserver(function(e){if(e[0].isIntersecting){$('steps').style.setProperty('--p','100%')}},{threshold:.4});st.observe($('steps'));
+
+(function(){
+ var C={id:'vg',groups:[
+{key:'w',label:'Wat laten schilderen?',short:'Werk',type:'tiles',multi:true,opts:['Buiten schilderen','Binnen schilderen','Kozijnen','Houtrot herstellen','Spuitwerk','VVE-onderhoud'],dflt:0},
+{key:'o',label:'Voor wie',short:'Voor',type:'chips',opts:['Woning','VVE','Bedrijf'],dflt:0},
+{key:'s',label:'Wanneer starten?',short:'Start',type:'chips',opts:['Zo snel mogelijk','Binnen 3 maanden','Dit jaar','Nog onzeker'],dflt:1},
+{key:'n',label:'Uw naam',short:'Naam',type:'text',ph:'Naam en telefoonnummer'}],
+msg:function(S){return 'Hallo, ik wil graag een offerte voor: '+(S.w.length?S.w.join(', '):'schilderwerk')+'.\nVoor: '+S.o+'\nStart: '+S.s+'\nNaam/telefoon: '+(S.n||'-')+'\nWanneer kunt u langskomen?'},
+href:function(m){return 'https://wa.me/31611223997?text='+encodeURIComponent(m)}},S={},ST={};
+ var root=$('pn-'+C.id),L=root.querySelector('.lf'),T=root.querySelector('.rows');
+ var DN=['zo','ma','di','wo','do','vr','za'],MN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+ function days(g){var n=nlNow(),d=new Date(),out=[],k=(g.lead||0)+((g.cut!==undefined&&n.m>=g.cut*60)?1:0);var x=new Date(d.getTime());x.setDate(x.getDate()+k);
+  while(out.length<g.count){if(!(g.skipSun&&x.getDay()===0)&&!(g.skipMon&&x.getDay()===1))out.push(DN[x.getDay()]+' '+x.getDate()+' '+MN[x.getMonth()]);x.setDate(x.getDate()+1)}return out}
+ C.groups.forEach(function(g){
+  var h='<div class="gl">'+g.label+'</div>';
+  if(g.type==='days')g.opts=days(g);
+  if(g.type==='tiles'){h+='<div class="tl" data-k="'+g.key+'">'+g.opts.map(function(o){return '<button type="button" aria-pressed="false">'+o+'</button>'}).join('')+'</div>'}
+  else if(g.type==='chips'||g.type==='days'){h+='<div class="cp" data-k="'+g.key+'">'+g.opts.map(function(o){return '<button type="button" aria-pressed="false">'+o+'</button>'}).join('')+'</div>'}
+  else if(g.type==='range'){h+='<div class="rg"><b id="rv-'+g.key+'"></b><input type="range" min="'+g.min+'" max="'+g.max+'" step="'+g.step+'" value="'+g.def+'" aria-label="'+g.label+'"></div>';S[g.key]=g.def}
+  else if(g.type==='text'){h+='<input class="nm" type="text" placeholder="'+g.ph+'" aria-label="'+g.label+'">';S[g.key]=''}
+  var w=document.createElement('div');w.innerHTML=h;while(w.firstChild)L.appendChild(w.firstChild)});
+ var last={};
+ function fmt(g,v){if(g.type==='range')return v+' '+g.unit;if(Array.isArray(v))return v.length?v.join(', '):'-';return v||'-'}
+ function render(first){var h='';C.groups.forEach(function(g){var v=S[g.key],s=fmt(g,v);if(g.type==='text'&&!v)return;h+='<div class="rw'+(!first&&last[g.key]!==s?' up':'')+'"><span>'+g.short+'</span><span>'+s+'</span></div>';last[g.key]=s});T.innerHTML=h;
+  var m=C.msg(S);var a=root.querySelector('.go');a.href=C.href(m);var st=root.querySelector('.stt');if(st&&C.status)st.lastChild.innerHTML=C.status();
+  root.querySelector('.cpy').onclick=function(){copyTxt(this,m,'Kopieer bericht')}}
+ root.addEventListener('click',function(e){var b=e.target.closest('button[aria-pressed]');if(!b)return;var box=b.parentNode,k=box.dataset.k,g=C.groups.filter(function(x){return x.key===k})[0],o=b.textContent;
+  if(g.multi){var a=S[k]||[],i=a.indexOf(o);if(i>-1)a.splice(i,1);else a.push(o);S[k]=a;b.setAttribute('aria-pressed',i===-1)}
+  else{[].forEach.call(box.children,function(x){x.setAttribute('aria-pressed',x===b)});S[k]=o}render()});
+ root.addEventListener('input',function(e){var t=e.target;if(t.type==='range'){var g=C.groups.filter(function(x){return x.type==='range'})[0];S[g.key]=+t.value;$('rv-'+g.key).textContent=t.value+' '+g.unit;render()}else if(t.classList.contains('nm')){var g2=C.groups.filter(function(x){return x.type==='text'})[0];S[g2.key]=t.value;render()}});
+ C.groups.forEach(function(g){if(g.def!==undefined&&g.type==='range')$('rv-'+g.key).textContent=g.def+' '+g.unit;
+  if(g.dflt!==undefined){var box=L.querySelector('[data-k="'+g.key+'"]');var b=box.children[g.dflt];if(b){S[g.key]=g.multi?[b.textContent]:b.textContent;b.setAttribute('aria-pressed','true')}}else if(g.multi)S[g.key]=[]});
+ render(true);if(C.status)setInterval(render,30000);
+})();
 })();
 </script>
 </body>

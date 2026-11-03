@@ -59,16 +59,47 @@ section{padding:86px 0}
 table{width:100%;border-collapse:collapse}td{padding:10px 0;border-bottom:1px solid rgba(58,35,54,.2)}td:last-child{text-align:right}tr.today td{color:var(--olijf);font-weight:700}
 .ft{background:var(--aub);color:var(--roze)}
 @media(max-width:800px){.top nav a:not(.btn){display:none}.hero .g,.adv,.cols{grid-template-columns:1fr}.adv{padding:28px 20px}.it{grid-template-columns:36px 1fr}.it p{grid-column:2}section{padding:58px 0}.hero{padding:50px 0}}
-</style>
+
+.pn{background:var(--pbg);color:var(--pfg);border-radius:var(--prad,24px);padding:clamp(22px,4vw,44px);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(22px,4vw,44px);position:relative;overflow:hidden}
+.pn h2{font-size:clamp(1.7rem,3.2vw,2.3rem);margin-bottom:4px}
+.pn .gl{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin:22px 0 10px;font-weight:700}
+.pn .tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px}
+.pn .tl button,.pn .cp button{font:inherit;color:inherit;background:var(--pcard);border:2px solid transparent;border-radius:var(--ptr,16px);padding:16px 14px;cursor:pointer;font-weight:700;text-align:left;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,background .25s,color .25s,border-color .25s;position:relative}
+.pn .tl button:hover,.pn .cp button:hover{transform:translateY(-3px)}
+.pn .tl button:active,.pn .cp button:active{transform:scale(.97)}
+.pn .tl button[aria-pressed=true],.pn .cp button[aria-pressed=true]{background:var(--pon);color:var(--ponfg);box-shadow:0 10px 24px -12px var(--pon);border-color:var(--pon)}
+.pn .tl button[aria-pressed=true]::after{content:"";position:absolute;right:12px;top:50%;width:14px;height:8px;margin-top:-6px;border-left:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(-45deg);animation:pk .35s .05s both}
+@keyframes pk{from{opacity:0;transform:rotate(-45deg) scale(.3)}}
+.pn .cp{display:flex;flex-wrap:wrap;gap:8px}.pn .cp button{padding:10px 18px;border-radius:999px;text-align:center}
+.pn .rg{display:flex;align-items:center;gap:16px}.pn .rg b{font-size:2rem;min-width:4.6em;font-variant-numeric:tabular-nums;line-height:1}
+.pn input[type=range]{flex:1;accent-color:var(--pon);height:28px}
+.pn .nm{width:100%;font:inherit;padding:13px 16px;border-radius:var(--ptr,14px);border:2px solid transparent;background:var(--pcard);color:inherit}
+.pn .nm:focus{outline:none;border-color:var(--pon)}
+.pn .tk{background:var(--ptk);color:var(--ptkfg);border-radius:var(--ptr,18px);padding:26px;align-self:start;position:sticky;top:90px;box-shadow:0 24px 48px -28px rgba(0,0,0,.5)}
+.pn .tk h3{font-size:1.35rem;margin-bottom:12px}
+.pn .rw{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px dashed currentColor;border-color:rgba(128,128,128,.4);font-size:.98rem}
+.pn .rw span:first-child{opacity:.65}.pn .rw span:last-child{font-weight:700;text-align:right}
+.pn .rw.up span:last-child{animation:rowIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes rowIn{from{opacity:0;transform:translateY(8px)}}
+.pn .st{margin:14px 0;padding:12px 14px;border-radius:12px;background:rgba(128,128,128,.14);font-weight:700;font-size:.95rem;display:flex;gap:10px;align-items:center}
+.pn .st i{width:9px;height:9px;border-radius:50%;background:var(--pon);flex:none;animation:pl 1.8s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(128,128,128,.5)}70%,100%{box-shadow:0 0 0 9px rgba(128,128,128,0)}}
+.pn .ac{display:grid;gap:8px;margin-top:6px}
+.pn .ac a,.pn .ac button{display:block;text-align:center;font:inherit;font-weight:800;padding:14px 18px;border-radius:var(--pbtn,999px);text-decoration:none;cursor:pointer;border:2px solid var(--pon);background:var(--pon);color:var(--ponfg);transition:transform .25s,filter .25s}
+.pn .ac a:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.pn .ac button{background:transparent;color:inherit;border-color:rgba(128,128,128,.5)}
+@media(max-width:800px){.pn{grid-template-columns:1fr}.pn .tk{position:static}}
+@media (prefers-reduced-motion:reduce){.pn *{animation:none!important;transition:none!important}}
+.pn{--pbg:#3A2336;--pfg:#F3EFE8;--pcard:rgba(243,239,232,.09);--pon:#D8A9A0;--ponfg:#3A2336;--ptk:#F3EFE8;--ptkfg:#3A2336;--prad:26px;--ptr:14px;--pbtn:999px}</style>
 </head>
 <body>
 <div class="pg" id="pg"></div>
 <div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Violien by Marie-Louise. Geen officiële website.</div>
-<header class="top"><div class="wrap"><a class="logo" href="#">Violien</a><nav><a href="#collectie">Collectie</a><a class="" href="#advies">Stijladvies</a><a href="#bezoek">Bezoek</a><a class="btn" href="#advies">Vraag advies</a></nav></div></header>
+<header class="top"><div class="wrap"><a class="logo" href="#">Violien</a><nav><a href="#collectie">Collectie</a><a class="" href="#advies">Advies</a><a href="#bezoek">Bezoek</a><a class="btn" href="#advies">Vraag advies</a></nav></div></header>
 <main>
 <section class="hero"><div class="wrap g"><div><h1 class="reveal">Bloemen die uw huis <em>aankleden</em>.</h1>
  <p class="reveal">Zijden en verse bloemen, planten, vazen en interieurstyling in Princenhage. Marie-Louise denkt graag met u mee, van boeket tot hele woonkamer.</p>
- <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn" href="#advies">Krijg uw stijladvies</a><a class="btn l" href="tel:0765226722">076 522 67 22</a></div></div>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn" href="#advies">Vraag advies aan</a><a class="btn l" href="tel:0765226722">076 522 67 22</a></div></div>
  <aside class="sz reveal"><small>Volgende Stijlzaterdag</small><b id="sd">...</b><p id="sdd"></p><p style="margin-top:8px;opacity:.85">Gratis stijladvies in de winkel, elke derde zaterdag van de maand.</p></aside></div></section>
 
 <section id="collectie" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Wat u bij ons vindt</h2></div>
@@ -80,13 +111,7 @@ table{width:100%;border-collapse:collapse}td{padding:10px 0;border-bottom:1px so
   <div class="it"><b>05</b><h3>Interieurstyling</h3><p>Kleur- en stijladvies voor uw woning of bedrijf.</p></div>
  </div></div></section>
 
-<section id="advies" style="padding-top:0"><div class="wrap"><div class="adv reveal">
- <div><h2>Wat past in uw ruimte?</h2><p style="opacity:.9">Drie keuzes, een voorstel van Marie-Louise. Daarna stuurt u het door en komt u langs om het te bekijken.</p>
-  <div class="q">Waar komt het te staan?</div><div class="ch" id="a"></div>
-  <div class="q">Welke sfeer?</div><div class="ch" id="b"></div>
-  <div class="q">Wat zoekt u?</div><div class="ch" id="c"></div></div>
- <div class="card" id="card"></div>
-</div></div></section>
+<section id="advies" style="padding-top:0"><div class="wrap"><div class="pn reveal" id="pn-vi"><div class="lf"><h2>Zoek het juiste stuk</h2><p style="opacity:.75">Vier tikken, daarna advies van Marie-Louise. Gratis, ook op Stijlzaterdag.</p></div><aside class="tk"><h3>Uw wens</h3><div class="rows"></div><div class="ac"><a class="go" href="#">Mail Marie-Louise</a><button class="cpy" type="button">Kopieer bericht</button></div></aside></div></div></section>
 
 <section id="bezoek" style="padding-top:0"><div class="wrap cols">
  <div class="reveal"><div class="sh"><h2>Openingstijden</h2></div><table id="tb"></table><p style="margin-top:12px;font-size:.9rem;opacity:.8">Zondag: showroom gesloten, geen bezorging. <span class="tbc">tijden te bevestigen</span></p></div>
@@ -112,16 +137,40 @@ function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))r
  var now=new Date(),n=third(now.getFullYear(),now.getMonth());if(n<new Date(now.getFullYear(),now.getMonth(),now.getDate()))n=third(now.getFullYear(),now.getMonth()+1);
  var days=Math.round((n-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
  $('sd').textContent=days===0?'Vandaag':days===1?'Morgen':'Over '+days+' dagen';$('sdd').textContent=n.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'});
- var A=['Woonkamer','Entree','Keuken of eethoek','Slaapkamer','Kantoor of praktijk'],B=[['Rustig en neutraal','#D9D2C3'],['Warm en aards','#B5683F'],['Fris en groen','#8F9A74'],['Zacht en romantisch','#D8A9A0']],C=['Zijden boeket','Plant of groen','Pot of vaas','Complete styling'];
- var s=[0,0,0];function mk(id,arr,k){arr.forEach(function(x,i){var t=Array.isArray(x)?x[0]:x;$(id).insertAdjacentHTML('beforeend','<input type="radio" name="'+id+'" id="'+id+i+'"'+(i===0?' checked':'')+'><label for="'+id+i+'">'+t+'</label>')})}
- mk('a',A);mk('b',B);mk('c',C);
- var ADV={0:['Zijden boeket',['Een ruim boeket op de salontafel of dressoir','Zijde blijft jarenlang mooi, zonder water of onderhoud']],1:['Plant of groen',['Een zijden plant in een mooie pot geeft meteen karakter','Geen verzorging, ook in donkere hoeken']],2:['Pot of vaas',['Combineer een vaas met een boeket in dezelfde kleurfamilie','Keramiek van Atelier ROA, LB Ceramics of Serax']],3:['Complete styling',['Marie-Louise komt kijken of denkt mee in de winkel','Kleur-, groen- en interieuradvies in één']]};
- function up(){var a=+document.querySelector('input[name=a]:checked').id.slice(1),b=+document.querySelector('input[name=b]:checked').id.slice(1),c=+document.querySelector('input[name=c]:checked').id.slice(1),r=ADV[c];
-  var c2=$('card');c2.style.animation='none';void c2.offsetWidth;c2.style.animation='';c2.style.setProperty('--sw',B[b][1]);
-  var m='Hallo Marie-Louise, ik zoek '+C[c].toLowerCase()+' voor mijn '+A[a].toLowerCase()+'. Sfeer: '+B[b][0].toLowerCase()+'. Kunt u mij advies geven?';
-  c2.innerHTML='<div class="k">Ons voorstel</div><h3>'+r[0]+' voor uw '+A[a].toLowerCase()+'</h3><p>Sfeer: '+B[b][0].toLowerCase()+'.</p><ul>'+r[1].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul><div class="act"><a class="btn" href="mailto:info@violien.nl?subject='+encodeURIComponent('Stijladvies')+'&body='+encodeURIComponent(m)+'">Mail Marie-Louise</a><button class="btn l" id="cp" type="button">Kopieer</button></div>';
-  $('cp').onclick=function(){copyTxt(this,m)}}
- document.querySelector('.adv').addEventListener('change',up);up();
+
+(function(){
+ var C={id:'vi',groups:[
+{key:'z',label:'Wat zoekt u?',short:'Zoekt',type:'tiles',opts:['Zijden boeket','Plant of groen','Pot of vaas','Complete styling'],dflt:0},
+{key:'a',label:'Waar komt het?',short:'Ruimte',type:'chips',opts:['Woonkamer','Entree','Keuken','Slaapkamer','Kantoor'],dflt:0},
+{key:'b',label:'Budget',short:'Budget',type:'chips',opts:['Tot € 25','€ 25 – 50','€ 50 – 100','Nog open'],dflt:3},
+{key:'k',label:'Langskomen',short:'Langs',type:'chips',opts:['Deze week','Stijlzaterdag','Eerst bellen'],dflt:0}],
+msg:function(S){return 'Hallo Marie-Louise, ik zoek: '+S.z.toLowerCase()+'.\nVoor: '+S.a.toLowerCase()+'\nBudget: '+S.b+'\nLangskomen: '+S.k+'\nKunt u mij advies geven?'},
+href:function(m){return 'mailto:info@violien.nl?subject='+encodeURIComponent('Stijladvies')+'&body='+encodeURIComponent(m)}},S={},ST={};
+ var root=$('pn-'+C.id),L=root.querySelector('.lf'),T=root.querySelector('.rows');
+ var DN=['zo','ma','di','wo','do','vr','za'],MN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+ function days(g){var n=nlNow(),d=new Date(),out=[],k=(g.lead||0)+((g.cut!==undefined&&n.m>=g.cut*60)?1:0);var x=new Date(d.getTime());x.setDate(x.getDate()+k);
+  while(out.length<g.count){if(!(g.skipSun&&x.getDay()===0)&&!(g.skipMon&&x.getDay()===1))out.push(DN[x.getDay()]+' '+x.getDate()+' '+MN[x.getMonth()]);x.setDate(x.getDate()+1)}return out}
+ C.groups.forEach(function(g){
+  var h='<div class="gl">'+g.label+'</div>';
+  if(g.type==='days')g.opts=days(g);
+  if(g.type==='tiles'){h+='<div class="tl" data-k="'+g.key+'">'+g.opts.map(function(o){return '<button type="button" aria-pressed="false">'+o+'</button>'}).join('')+'</div>'}
+  else if(g.type==='chips'||g.type==='days'){h+='<div class="cp" data-k="'+g.key+'">'+g.opts.map(function(o){return '<button type="button" aria-pressed="false">'+o+'</button>'}).join('')+'</div>'}
+  else if(g.type==='range'){h+='<div class="rg"><b id="rv-'+g.key+'"></b><input type="range" min="'+g.min+'" max="'+g.max+'" step="'+g.step+'" value="'+g.def+'" aria-label="'+g.label+'"></div>';S[g.key]=g.def}
+  else if(g.type==='text'){h+='<input class="nm" type="text" placeholder="'+g.ph+'" aria-label="'+g.label+'">';S[g.key]=''}
+  var w=document.createElement('div');w.innerHTML=h;while(w.firstChild)L.appendChild(w.firstChild)});
+ var last={};
+ function fmt(g,v){if(g.type==='range')return v+' '+g.unit;if(Array.isArray(v))return v.length?v.join(', '):'-';return v||'-'}
+ function render(first){var h='';C.groups.forEach(function(g){var v=S[g.key],s=fmt(g,v);if(g.type==='text'&&!v)return;h+='<div class="rw'+(!first&&last[g.key]!==s?' up':'')+'"><span>'+g.short+'</span><span>'+s+'</span></div>';last[g.key]=s});T.innerHTML=h;
+  var m=C.msg(S);var a=root.querySelector('.go');a.href=C.href(m);var st=root.querySelector('.stt');if(st&&C.status)st.lastChild.innerHTML=C.status();
+  root.querySelector('.cpy').onclick=function(){copyTxt(this,m,'Kopieer bericht')}}
+ root.addEventListener('click',function(e){var b=e.target.closest('button[aria-pressed]');if(!b)return;var box=b.parentNode,k=box.dataset.k,g=C.groups.filter(function(x){return x.key===k})[0],o=b.textContent;
+  if(g.multi){var a=S[k]||[],i=a.indexOf(o);if(i>-1)a.splice(i,1);else a.push(o);S[k]=a;b.setAttribute('aria-pressed',i===-1)}
+  else{[].forEach.call(box.children,function(x){x.setAttribute('aria-pressed',x===b)});S[k]=o}render()});
+ root.addEventListener('input',function(e){var t=e.target;if(t.type==='range'){var g=C.groups.filter(function(x){return x.type==='range'})[0];S[g.key]=+t.value;$('rv-'+g.key).textContent=t.value+' '+g.unit;render()}else if(t.classList.contains('nm')){var g2=C.groups.filter(function(x){return x.type==='text'})[0];S[g2.key]=t.value;render()}});
+ C.groups.forEach(function(g){if(g.def!==undefined&&g.type==='range')$('rv-'+g.key).textContent=g.def+' '+g.unit;
+  if(g.dflt!==undefined){var box=L.querySelector('[data-k="'+g.key+'"]');var b=box.children[g.dflt];if(b){S[g.key]=g.multi?[b.textContent]:b.textContent;b.setAttribute('aria-pressed','true')}}else if(g.multi)S[g.key]=[]});
+ render(true);if(C.status)setInterval(render,30000);
+})();
 })();
 </script>
 </body>

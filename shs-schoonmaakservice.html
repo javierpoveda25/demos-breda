@@ -55,7 +55,38 @@ section{padding:80px 0}
 .rv{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}.rv p{border:2px solid var(--ice);border-radius:16px;padding:18px 20px}.rv small{display:block;opacity:.65;margin-top:6px}
 .ft{background:var(--dk);color:#bfe7ec}
 @media(max-width:800px){.top nav a:not(.btn){display:none}.hero .g,.pl,.rv{grid-template-columns:1fr}.tl{grid-template-columns:1fr 1fr}.pl{padding:26px 18px}section{padding:56px 0}.hero{padding:46px 0}}
-</style>
+
+.pn{background:var(--pbg);color:var(--pfg);border-radius:var(--prad,24px);padding:clamp(22px,4vw,44px);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(22px,4vw,44px);position:relative;overflow:hidden}
+.pn h2{font-size:clamp(1.7rem,3.2vw,2.3rem);margin-bottom:4px}
+.pn .gl{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin:22px 0 10px;font-weight:700}
+.pn .tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:10px}
+.pn .tl button,.pn .cp button{font:inherit;color:inherit;background:var(--pcard);border:2px solid transparent;border-radius:var(--ptr,16px);padding:16px 14px;cursor:pointer;font-weight:700;text-align:left;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,background .25s,color .25s,border-color .25s;position:relative}
+.pn .tl button:hover,.pn .cp button:hover{transform:translateY(-3px)}
+.pn .tl button:active,.pn .cp button:active{transform:scale(.97)}
+.pn .tl button[aria-pressed=true],.pn .cp button[aria-pressed=true]{background:var(--pon);color:var(--ponfg);box-shadow:0 10px 24px -12px var(--pon);border-color:var(--pon)}
+.pn .tl button[aria-pressed=true]::after{content:"";position:absolute;right:12px;top:50%;width:14px;height:8px;margin-top:-6px;border-left:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(-45deg);animation:pk .35s .05s both}
+@keyframes pk{from{opacity:0;transform:rotate(-45deg) scale(.3)}}
+.pn .cp{display:flex;flex-wrap:wrap;gap:8px}.pn .cp button{padding:10px 18px;border-radius:999px;text-align:center}
+.pn .rg{display:flex;align-items:center;gap:16px}.pn .rg b{font-size:2rem;min-width:4.6em;font-variant-numeric:tabular-nums;line-height:1}
+.pn input[type=range]{flex:1;accent-color:var(--pon);height:28px}
+.pn .nm{width:100%;font:inherit;padding:13px 16px;border-radius:var(--ptr,14px);border:2px solid transparent;background:var(--pcard);color:inherit}
+.pn .nm:focus{outline:none;border-color:var(--pon)}
+.pn .tk{background:var(--ptk);color:var(--ptkfg);border-radius:var(--ptr,18px);padding:26px;align-self:start;position:sticky;top:90px;box-shadow:0 24px 48px -28px rgba(0,0,0,.5)}
+.pn .tk h3{font-size:1.35rem;margin-bottom:12px}
+.pn .rw{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px dashed currentColor;border-color:rgba(128,128,128,.4);font-size:.98rem}
+.pn .rw span:first-child{opacity:.65}.pn .rw span:last-child{font-weight:700;text-align:right}
+.pn .rw.up span:last-child{animation:rowIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes rowIn{from{opacity:0;transform:translateY(8px)}}
+.pn .st{margin:14px 0;padding:12px 14px;border-radius:12px;background:rgba(128,128,128,.14);font-weight:700;font-size:.95rem;display:flex;gap:10px;align-items:center}
+.pn .st i{width:9px;height:9px;border-radius:50%;background:var(--pon);flex:none;animation:pl 1.8s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(128,128,128,.5)}70%,100%{box-shadow:0 0 0 9px rgba(128,128,128,0)}}
+.pn .ac{display:grid;gap:8px;margin-top:6px}
+.pn .ac a,.pn .ac button{display:block;text-align:center;font:inherit;font-weight:800;padding:14px 18px;border-radius:var(--pbtn,999px);text-decoration:none;cursor:pointer;border:2px solid var(--pon);background:var(--pon);color:var(--ponfg);transition:transform .25s,filter .25s}
+.pn .ac a:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.pn .ac button{background:transparent;color:inherit;border-color:rgba(128,128,128,.5)}
+@media(max-width:800px){.pn{grid-template-columns:1fr}.pn .tk{position:static}}
+@media (prefers-reduced-motion:reduce){.pn *{animation:none!important;transition:none!important}}
+.pn{--pbg:#06485B;--pfg:#fff;--pcard:rgba(255,255,255,.1);--pon:#C6E83A;--ponfg:#06485B;--ptk:#fff;--ptkfg:#06485B;--prad:22px;--ptr:14px;--pbtn:12px}</style>
 </head>
 <body>
 <div class="pg" id="pg"></div>
@@ -67,11 +98,7 @@ section{padding:80px 0}
  <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn q" href="#plan">Stel uw schoonmaakplan samen</a><a class="btn l" href="tel:0618280018">06 18 28 00 18</a></div></div>
  <aside class="dir reveal"><b>Direct contact</b><a href="tel:0618280018">06 18 28 00 18</a><a href="mailto:info@shsservice.nl" style="font-size:1.05rem">info@shsservice.nl</a><small>Ma t/m vr 08:00 – 18:00 · Takkebijsters 57A, Breda</small></aside></div></section>
 
-<section id="plan"><div class="wrap"><div class="pl reveal">
- <div><h2>Uw schoonmaakplan in 3 stappen</h2><p style="color:#dff4f6">Kies wat voor pand u heeft en hoe vaak. U ziet meteen wat wij doen. Daarna vraagt u een gratis proefschoonmaak aan.</p>
-  <div class="k">Type pand</div><div class="ch" id="ty"></div><div class="k">Hoe vaak?</div><div class="ch" id="fq"></div><div class="k">Extra's</div><div class="ch" id="ex"></div></div>
- <div class="plan"><span class="fq" id="fqt"></span><h3 id="pt"></h3><ul id="pu"></ul><input id="nm" type="text" placeholder="Bedrijfsnaam en uw naam" aria-label="Naam"><div class="act"><a class="btn q" id="ml" href="#">Vraag proefschoonmaak</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div>
-</div></div></section>
+<section id="plan"><div class="wrap"><div class="pn reveal" id="pn-sh"><div class="lf"><h2>Uw schoonmaakplan</h2><p style="opacity:.75">Drie tikken en een gratis proefschoonmaak.</p></div><aside class="tk"><h3>Uw plan</h3><div class="rows"></div><div class="ac"><a class="go" href="#">Vraag proefschoonmaak</a><button class="cpy" type="button">Kopieer bericht</button></div></aside></div></div></section>
 
 <section id="diensten" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Wat wij schoonmaken</h2></div>
  <div class="tl"><div class="reveal"><b>Kantoren</b>Dagelijks of wekelijks.</div><div class="reveal"><b>VVE en flats</b>Trappenhuizen en galerijen.</div><div class="reveal"><b>Praktijken</b>Hygiënisch en discreet.</div><div class="reveal"><b>Scholen</b>Buiten lestijd.</div><div class="reveal"><b>Glazenwassen</b>Ook gevelreiniging.</div><div class="reveal"><b>Vloeren</b>Reinigen en onderhouden.</div><div class="reveal"><b>Opleverschoonmaak</b>Na verbouwing.</div><div class="reveal"><b>Cleanroom</b>Op aanvraag.</div></div>
@@ -90,15 +117,40 @@ function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
 /* H: {dag(0-6): ['09:00','18:00']} */
 function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
 
- var T=[['Kantoor',['Prullenbakken legen','Sanitair reinigen','Vloeren stofzuigen en dweilen','Bureaus en werkplekken afnemen','Keuken of koffiehoek schoonmaken']],['VVE of flat',['Trappenhuis en gangen reinigen','Liften en entree schoonmaken','Brievenbussen en deuren afnemen','Ramen in gemeenschappelijke ruimtes']],['Praktijk',['Behandelkamers hygiënisch reinigen','Wachtruimte en sanitair','Contactpunten desinfecteren','Vloeren reinigen']],['School',['Klaslokalen buiten lestijd','Gangen en sanitair','Gymzaal en aula','Ramen en kozijnen']]],F=['Dagelijks','Wekelijks','Maandelijks'],E=['Glazenwassen','Gevelreiniging','Vloer polijsten','Planten verzorgen'];
- T.forEach(function(x,i){$('ty').insertAdjacentHTML('beforeend','<input type="radio" name="t" id="t'+i+'"'+(i===0?' checked':'')+'><label for="t'+i+'">'+x[0]+'</label>')});
- F.forEach(function(x,i){$('fq').insertAdjacentHTML('beforeend','<input type="radio" name="f" id="f'+i+'"'+(i===1?' checked':'')+'><label for="f'+i+'">'+x+'</label>')});
- E.forEach(function(x,i){$('ex').insertAdjacentHTML('beforeend','<input type="checkbox" id="e'+i+'"><label for="e'+i+'">'+x+'</label>')});
- function up(){var t=T[+document.querySelector('input[name=t]:checked').id.slice(1)],f=F[+document.querySelector('input[name=f]:checked').id.slice(1)],ex=E.filter(function(x,i){return $('e'+i).checked});
-  $('fqt').textContent=f;$('pt').textContent='Schoonmaakplan '+t[0].toLowerCase();var l=t[1].concat(ex);$('pu').innerHTML=l.map(function(x,i){return '<li style="animation-delay:'+i*60+'ms">'+x+'</li>'}).join('');
-  var m='Hallo, ik wil graag een gratis proefschoonmaak aanvragen.\nPand: '+t[0].toLowerCase()+'\nFrequentie: '+f.toLowerCase()+(ex.length?'\nExtra: '+ex.join(', ').toLowerCase():'')+'\nBedrijf/naam: '+($('nm').value||'-')+'\nKunnen jullie contact met mij opnemen?';
-  $('ml').href='mailto:info@shsservice.nl?subject='+encodeURIComponent('Proefschoonmaak aanvragen')+'&body='+encodeURIComponent(m);$('cp').onclick=function(){copyTxt(this,m)}}
- document.querySelector('.pl').addEventListener('input',up);up();
+
+(function(){
+ var C={id:'sh',groups:[
+{key:'t',label:'Type pand',short:'Pand',type:'tiles',opts:['Kantoor','VVE of flat','Praktijk','School'],dflt:0},
+{key:'f',label:'Hoe vaak?',short:'Frequentie',type:'chips',opts:['Dagelijks','Wekelijks','Maandelijks'],dflt:1},
+{key:'e',label:'Extra',short:'Extra',type:'chips',multi:true,opts:['Glazenwassen','Gevelreiniging','Vloer polijsten','Planten']},
+{key:'n',label:'Uw naam',short:'Naam',type:'text',ph:'Bedrijfsnaam en uw naam'}],
+msg:function(S){return 'Hallo, ik wil graag een gratis proefschoonmaak aanvragen.\nPand: '+S.t.toLowerCase()+'\nFrequentie: '+S.f.toLowerCase()+(S.e.length?'\nExtra: '+S.e.join(', ').toLowerCase():'')+'\nBedrijf/naam: '+(S.n||'-')+'\nKunnen jullie contact met mij opnemen?'},
+href:function(m){return 'mailto:info@shsservice.nl?subject='+encodeURIComponent('Proefschoonmaak aanvragen')+'&body='+encodeURIComponent(m)}},S={},ST={};
+ var root=$('pn-'+C.id),L=root.querySelector('.lf'),T=root.querySelector('.rows');
+ var DN=['zo','ma','di','wo','do','vr','za'],MN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+ function days(g){var n=nlNow(),d=new Date(),out=[],k=(g.lead||0)+((g.cut!==undefined&&n.m>=g.cut*60)?1:0);var x=new Date(d.getTime());x.setDate(x.getDate()+k);
+  while(out.length<g.count){if(!(g.skipSun&&x.getDay()===0)&&!(g.skipMon&&x.getDay()===1))out.push(DN[x.getDay()]+' '+x.getDate()+' '+MN[x.getMonth()]);x.setDate(x.getDate()+1)}return out}
+ C.groups.forEach(function(g){
+  var h='<div class="gl">'+g.label+'</div>';
+  if(g.type==='days')g.opts=days(g);
+  if(g.type==='tiles'){h+='<div class="tl" data-k="'+g.key+'">'+g.opts.map(function(o){return '<button type="button" aria-pressed="false">'+o+'</button>'}).join('')+'</div>'}
+  else if(g.type==='chips'||g.type==='days'){h+='<div class="cp" data-k="'+g.key+'">'+g.opts.map(function(o){return '<button type="button" aria-pressed="false">'+o+'</button>'}).join('')+'</div>'}
+  else if(g.type==='range'){h+='<div class="rg"><b id="rv-'+g.key+'"></b><input type="range" min="'+g.min+'" max="'+g.max+'" step="'+g.step+'" value="'+g.def+'" aria-label="'+g.label+'"></div>';S[g.key]=g.def}
+  else if(g.type==='text'){h+='<input class="nm" type="text" placeholder="'+g.ph+'" aria-label="'+g.label+'">';S[g.key]=''}
+  var w=document.createElement('div');w.innerHTML=h;while(w.firstChild)L.appendChild(w.firstChild)});
+ var last={};
+ function fmt(g,v){if(g.type==='range')return v+' '+g.unit;if(Array.isArray(v))return v.length?v.join(', '):'-';return v||'-'}
+ function render(first){var h='';C.groups.forEach(function(g){var v=S[g.key],s=fmt(g,v);if(g.type==='text'&&!v)return;h+='<div class="rw'+(!first&&last[g.key]!==s?' up':'')+'"><span>'+g.short+'</span><span>'+s+'</span></div>';last[g.key]=s});T.innerHTML=h;
+  var m=C.msg(S);var a=root.querySelector('.go');a.href=C.href(m);var st=root.querySelector('.stt');if(st&&C.status)st.lastChild.innerHTML=C.status();
+  root.querySelector('.cpy').onclick=function(){copyTxt(this,m,'Kopieer bericht')}}
+ root.addEventListener('click',function(e){var b=e.target.closest('button[aria-pressed]');if(!b)return;var box=b.parentNode,k=box.dataset.k,g=C.groups.filter(function(x){return x.key===k})[0],o=b.textContent;
+  if(g.multi){var a=S[k]||[],i=a.indexOf(o);if(i>-1)a.splice(i,1);else a.push(o);S[k]=a;b.setAttribute('aria-pressed',i===-1)}
+  else{[].forEach.call(box.children,function(x){x.setAttribute('aria-pressed',x===b)});S[k]=o}render()});
+ root.addEventListener('input',function(e){var t=e.target;if(t.type==='range'){var g=C.groups.filter(function(x){return x.type==='range'})[0];S[g.key]=+t.value;$('rv-'+g.key).textContent=t.value+' '+g.unit;render()}else if(t.classList.contains('nm')){var g2=C.groups.filter(function(x){return x.type==='text'})[0];S[g2.key]=t.value;render()}});
+ C.groups.forEach(function(g){if(g.def!==undefined&&g.type==='range')$('rv-'+g.key).textContent=g.def+' '+g.unit;
+  if(g.dflt!==undefined){var box=L.querySelector('[data-k="'+g.key+'"]');var b=box.children[g.dflt];if(b){S[g.key]=g.multi?[b.textContent]:b.textContent;b.setAttribute('aria-pressed','true')}}else if(g.multi)S[g.key]=[]});
+ render(true);if(C.status)setInterval(render,30000);
+})();
 })();
 </script>
 </body>
