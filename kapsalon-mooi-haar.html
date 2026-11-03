@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kapsalon Mooi Haar – Kapper in Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Kapsalon Mooi Haar aan de Fellenoordstraat in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Figtree:wght@400;500;600&display=swap');
+/* DESIGN: warm en rustig salon, crème met pruim en terracotta. Kleuren: crème (#F7EFE6), pruim (#3B1F2B), terracotta (#C4684A), roze (#E9C9C0), salie (#B9C4A8).
+   Type: Playfair Display (titels, cursief als accent) + Figtree (tekst).
+   STRUCTUUR: tweedelige kop met live openingstijden, prijskaarten als losse "labels", samenstel-paneel met lopend totaalbedrag, tabel met vandaag gemarkeerd.
+   MOTION: reveal, tellend prijsbedrag, live open/gesloten, voortgangsbalk. */
+:root{--cream:#F7EFE6;--plum:#3B1F2B;--terra:#C4684A;--rose:#E9C9C0;--sage:#B9C4A8;--acc:#C4684A;--line:rgba(59,31,43,.16)}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Figtree',system-ui,sans-serif;background:var(--cream);color:var(--plum);font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:500;line-height:1.08}
+h1 em,h2 em{color:var(--terra)}
+.demo-bar{background:var(--plum);color:var(--rose)}
+header.top{position:sticky;top:0;z-index:40;background:rgba(247,239,230,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:70px}
+.logo{font-family:'Playfair Display';font-size:1.45rem;font-weight:700;text-decoration:none}.logo span{color:var(--terra)}
+.top nav{display:flex;gap:24px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:500;font-size:.95rem}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;font:inherit;font-weight:600;text-decoration:none;border:1.5px solid var(--plum);cursor:pointer;transition:.2s}
+.btn-p{background:var(--plum);color:#fff}.btn-p:hover{background:var(--terra);border-color:var(--terra)}
+.btn-l:hover{background:var(--plum);color:#fff}.top .btn{padding:9px 18px;font-size:.9rem}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:620px}
+.hero .l{padding:80px 24px 70px max(24px,calc((100vw - 1120px)/2 + 24px));display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:clamp(3rem,6.6vw,5.8rem)}
+.hero .lead{max-width:28em;margin:22px 0 26px;font-size:1.12rem}
+.pill{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:999px;padding:6px 16px;font-size:.92rem;font-weight:500;margin-bottom:22px;width:max-content;background:#fff}
+.pill i{width:9px;height:9px;border-radius:50%;background:#999}.pill.on i{background:#3f9a5a;box-shadow:0 0 0 0 rgba(63,154,90,.6);animation:pl 1.8s infinite}
+@keyframes pl{70%{box-shadow:0 0 0 9px rgba(63,154,90,0)}100%{box-shadow:0 0 0 0 rgba(63,154,90,0)}}
+.hero .r{background:linear-gradient(160deg,var(--rose),var(--terra));position:relative;display:flex;align-items:flex-end;padding:30px}
+.hero .r .big{font-family:'Playfair Display';font-style:italic;color:#fff;font-size:clamp(5rem,12vw,10rem);line-height:.8;opacity:.9}
+.hero .r .tag{position:absolute;top:30px;right:30px;background:var(--cream);border-radius:14px;padding:14px 18px;font-size:.9rem;max-width:190px;transform:rotate(3deg)}
+.hero .r .tag b{font-family:'Playfair Display';font-size:1.4rem;display:block}
+section{padding:88px 0}
+.sh{max-width:34em;margin-bottom:36px}.sh h2{font-size:clamp(2.1rem,4.4vw,3.3rem);margin-bottom:10px}
+.labels{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.lb{background:#fff;border-radius:6px 6px 22px 22px;padding:26px 22px 22px;position:relative;border:1px solid var(--line);transition:transform .3s}
+.lb:hover{transform:translateY(-6px) rotate(-1deg)}
+.lb::before{content:"";position:absolute;top:10px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--cream);border:1px solid var(--line)}
+.lb h3{font-size:1.35rem;margin:16px 0 6px}.lb .pr{font-family:'Playfair Display';font-size:2.2rem;color:var(--terra)}.lb .pr small{font-size:.8rem;font-family:'Figtree';color:var(--plum);opacity:.7}
+.build{background:var(--plum);color:var(--cream);border-radius:28px;padding:46px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px}
+.build h2{font-size:2.3rem;margin-bottom:8px}
+.grp{margin:18px 0 8px;font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;opacity:.7}
+.opt{display:flex;flex-wrap:wrap;gap:8px}.opt input{position:absolute;opacity:0}
+.opt label{border:1.5px solid rgba(247,239,230,.4);border-radius:999px;padding:8px 18px;cursor:pointer;font-weight:500;transition:.2s}
+.opt input:checked+label{background:var(--terra);border-color:var(--terra);color:#fff}.opt input:focus-visible+label{outline:3px solid var(--rose)}
+.tot{background:var(--cream);color:var(--plum);border-radius:20px;padding:26px;align-self:start}
+.tot .n{font-family:'Playfair Display';font-size:4rem;line-height:1;color:var(--terra)}.tot .n small{font-size:1.1rem;color:var(--plum)}
+.tot ul{list-style:none;margin:12px 0;border-top:1px solid var(--line)}.tot li{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line);font-size:.95rem}
+.tot input{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1.5px solid var(--line);margin:4px 0 12px;background:#fff}
+.act{display:flex;gap:8px;flex-wrap:wrap}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+table{width:100%;border-collapse:collapse}td{padding:11px 4px;border-bottom:1px solid var(--line)}td:last-child{text-align:right}
+tr.today td{font-weight:700;color:var(--terra)}
+.rv{display:grid;gap:14px}.rv p{background:#fff;border-radius:16px;padding:18px 20px;border:1px solid var(--line)}.rv small{display:block;opacity:.7;margin-top:6px}
+footer.ft{background:var(--plum);color:var(--rose)}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.hero,.build,.cols{grid-template-columns:1fr}.hero .l{padding:50px 24px}.hero .r{min-height:240px}.labels{grid-template-columns:1fr 1fr}.build{padding:28px 22px}section{padding:60px 0}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Kapsalon Mooi Haar. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">Mooi <span>Haar</span></a><nav><a href="#prijzen">Prijzen</a><a href="#plan">Samenstellen</a><a href="#tijden">Openingstijden</a><a class="btn btn-p" href="#plan">Afspraak maken</a></nav></div></header>
+<main>
+<section style="padding:0"><div class="hero">
+ <div class="l"><div class="pill" id="pill"><i></i><span id="pt">...</span></div>
+  <h1 class="reveal">Even tijd voor <em>uzelf</em>, midden in Breda.</h1>
+  <p class="lead reveal">Knippen en kleuren in een rustige salon aan de Fellenoordstraat. Met een wasmassage, op uw tempo, voor dames, heren en kinderen.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-p" href="#plan">Stel uw bezoek samen</a><a class="btn btn-l" href="tel:0765201955">076 520 19 55</a></div></div>
+ <div class="r"><div class="tag"><b>Donderdag tot 21:00</b>Ook na werktijd welkom</div><div class="big">Mooi</div></div>
+</div></section>
+
+<section id="prijzen"><div class="wrap">
+ <div class="sh reveal"><h2>Heldere prijzen, <em>geen verrassingen</em></h2><p>Alles inclusief wasmassage. Voor extensions en bruidskapsels maken we graag een persoonlijk voorstel.</p></div>
+ <div class="labels">
+  <div class="lb reveal"><h3>Dames</h3><div class="pr">€ 49</div><p>Wasmassage, knippen en drogen.</p></div>
+  <div class="lb reveal"><h3>Heren</h3><div class="pr">€ 39</div><p>Wasmassage, knippen en modelleren.</p></div>
+  <div class="lb reveal"><h3>Kinderen</h3><div class="pr"><small>vanaf</small> € 22,50</div><p>Knippen.</p></div>
+  <div class="lb reveal"><h3>Kleuren</h3><div class="pr"><small>vanaf</small> € 46</div><p>Haarkleuring op maat.</p></div>
+ </div>
+ <p class="reveal" style="margin-top:18px;opacity:.75">Ook: hairextensions (Great Lengths, EuroSocap, Balmain), haarbehandelingen, bruidskapsels met make-up, epileren. <span class="tbc">prijzen te bevestigen</span></p>
+</div></section>
+
+<section id="plan" style="padding-top:20px"><div class="wrap"><div class="build reveal">
+ <div><h2>Stel uw bezoek samen</h2><p style="opacity:.85">Kies wat u wilt en zie meteen wat het kost. Stuur het door via WhatsApp, dan regelen wij de rest.</p>
+  <div class="grp">Wie komt er?</div><div class="opt" id="who"></div>
+  <div class="grp">Erbij</div><div class="opt" id="extra"></div>
+  <div class="grp">Wanneer past het?</div><div class="opt" id="day"></div></div>
+ <div class="tot"><small>Richtprijs</small><div class="n">€ <span id="sum">0</span><small id="from"></small></div>
+  <ul id="lines"></ul><input id="nm" type="text" placeholder="Uw naam" aria-label="Naam">
+  <div class="act"><a class="btn btn-p" id="wa" href="#">Stuur via WhatsApp</a><button class="btn btn-l" id="cp" type="button">Kopieer</button></div></div>
+</div></div></section>
+
+<section id="tijden" style="padding-top:20px"><div class="wrap cols">
+ <div class="reveal"><div class="sh"><h2>Openingstijden</h2></div><table id="tb"></table>
+  <p style="margin-top:16px">Fellenoordstraat 1, 4811 TG Breda<br>076 520 19 55 · afspraak@kapsalonmooihaar.nl</p></div>
+ <div class="reveal"><div class="sh"><h2>Wat klanten waarderen</h2></div>
+  <div class="rv"><p>Een gastvrij onthaal en een prettige wasmassage.<small>Samenvatting van Google-reviews op de huidige site</small></p><p>Rustig geknipt zonder haast, ook voor oudere klanten.<small>Samenvatting van Google-reviews op de huidige site</small></p><p>Elke keer weer een gelijk, mooi resultaat.<small>Samenvatting van Google-reviews op de huidige site</small></p></div></div>
+</div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website. Foto's, teamleden en prijzen te bevestigen met de eigenaar.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var H={2:['09:00','18:00'],3:['09:00','18:00'],4:['09:00','21:00'],5:['09:00','18:00'],6:['09:00','17:00']};
+ var s=openState(H);$('pt').textContent=s.txt;if(s.open)$('pill').classList.add('on');
+ var N=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'],tb='';var td=nlNow().d;
+ [1,2,3,4,5,6,0].forEach(function(d){var h=H[d];tb+='<tr'+(d===td?' class="today"':'')+'><td>'+N[d][0].toUpperCase()+N[d].slice(1)+'</td><td>'+(h?h[0]+' – '+h[1]:'Gesloten')+'</td></tr>'});$('tb').innerHTML=tb;
+ var WHO=[['Dames knippen',49,0],['Heren knippen',39,0],['Kind knippen',22.5,1]],EX=[['Kleuren',46,1],['Hairextensions',0,2],['Bruidskapsel',0,2]],DAY=['Di','Wo','Do (tot 21:00)','Vr','Za'];
+ var wh=0,ex={},dy=2;
+ function mk(id,arr,type,name,chk){arr.forEach(function(a,i){$(id).insertAdjacentHTML('beforeend','<input type="'+type+'" name="'+name+'" id="'+name+i+'"'+(chk(i)?' checked':'')+'><label for="'+name+i+'">'+(Array.isArray(a)?a[0]:a)+'</label>')})}
+ mk('who',WHO,'radio','w',function(i){return i===0});mk('extra',EX,'checkbox','e',function(){return false});mk('day',DAY,'radio','d',function(i){return i===2});
+ var cur=0,tgt=0;function anim(){cur+=(tgt-cur)*.22;if(Math.abs(tgt-cur)<.05)cur=tgt;$('sum').textContent=(Math.round(cur*2)/2).toString().replace('.',',');if(cur!==tgt)requestAnimationFrame(anim)}
+ function msg(){var w=WHO[wh],e=EX.filter(function(x,i){return ex[i]}).map(function(x){return x[0]});return 'Hallo, ik wil graag een afspraak maken.\nBehandeling: '+w[0]+(e.length?' + '+e.join(', '):'')+'\nVoorkeursdag: '+DAY[dy]+'\nNaam: '+($('nm').value||'-')+'\nKunnen jullie een tijd voorstellen?'}
+ function up(){wh=+document.querySelector('input[name=w]:checked').value===undefined?0:+document.querySelector('input[name=w]:checked').id.slice(1);dy=+document.querySelector('input[name=d]:checked').id.slice(1);ex={};EX.forEach(function(x,i){ex[i]=$('e'+i).checked});
+  var t=WHO[wh][1],ln='<li><span>'+WHO[wh][0]+'</span><span>€ '+String(WHO[wh][1]).replace('.',',')+'</span></li>',vs=WHO[wh][2];
+  EX.forEach(function(x,i){if(ex[i]){t+=x[1];ln+='<li><span>'+x[0]+'</span><span>'+(x[1]?'€ '+x[1]:'op offerte')+'</span></li>';if(x[2])vs=1}});
+  $('lines').innerHTML=ln;$('from').textContent=vs?' vanaf':'';tgt=t;anim();var m=msg();$('wa').href='https://wa.me/31765201955?text='+encodeURIComponent(m)}
+ document.querySelector('.build').addEventListener('input',up);up();$('cp').onclick=function(){copyTxt(this,msg())};
+})();
+</script>
+</body>
+</html>

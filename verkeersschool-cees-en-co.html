@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verkeersschool Cees &amp; Co – Rijles in Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Verkeersschool Cees & Co: auto, motor en bromfiets in Breda, rustig en op uw tempo.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Public+Sans:wght@400;500;700&display=swap');
+/* DESIGN: duidelijk en vertrouwd, verkeersblauw met signaalgeel. Kleuren: nachtblauw (#0F2547), geel (#FFC700), wit, lichtgrijs (#EEF1F6), groen (#1E9E5A).
+   Type: Sora (titels) + Public Sans (tekst).
+   STRUCTUUR: kop met wegmarkering als scheidingslijn, trajectkiezer (voertuig dan situatie) met eigen advies, werkwijze in drie stappen, 25 jaar-bewijs, proefles aanvragen.
+   MOTION: lopende middenstreep, reveal, kiezer met animatie van het resultaat. */
+:root{--nav:#0F2547;--y:#FFC700;--g:#EEF1F6;--ok:#1E9E5A;--acc:#FFC700}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Public Sans',system-ui,sans-serif;background:#fff;color:var(--nav);font-size:17px;line-height:1.62}
+h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.08;letter-spacing:-.02em}
+.demo-bar{background:var(--y);color:var(--nav);font-weight:500}
+header.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #dde3ee}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:70px}
+.logo{font-family:'Sora';font-weight:800;font-size:1.15rem;text-decoration:none}.logo span{background:var(--y);padding:1px 8px;border-radius:5px;margin-left:4px}
+.top nav{display:flex;gap:24px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:500;font-size:.93rem}
+.btn{display:inline-block;padding:14px 26px;border-radius:999px;font:inherit;font-weight:700;text-decoration:none;border:2px solid var(--nav);cursor:pointer;transition:.2s;background:var(--nav);color:#fff}
+.btn:hover{transform:translateY(-2px)}.btn.y{background:var(--y);border-color:var(--y);color:var(--nav)}.btn.l{background:transparent;color:inherit;border-color:currentColor}.top .btn{padding:9px 18px;font-size:.9rem}
+.hero{background:var(--nav);color:#fff;padding:84px 0 0;position:relative}
+.hero h1{font-size:clamp(2.8rem,7vw,6rem);max-width:11em}.hero h1 em{font-style:normal;color:var(--y)}
+.hero p{max-width:31em;margin:20px 0 28px;font-size:1.15rem;color:#c8d3e6}
+.road{height:46px;background:#0A1A33;margin-top:70px;position:relative;overflow:hidden}
+.road::before{content:"";position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;background:repeating-linear-gradient(90deg,var(--y) 0 46px,transparent 46px 92px);animation:rd 2.4s linear infinite}
+@keyframes rd{to{transform:translateX(92px)}}.road::before{left:-92px}
+section{padding:90px 0}
+.sh{margin-bottom:34px;max-width:32em}.sh h2{font-size:clamp(2.1rem,4.4vw,3.3rem);margin-bottom:8px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ft1{background:var(--g);border-radius:20px;padding:28px}.ft1 b{font-family:'Sora';font-size:2.6rem;display:block;color:var(--nav)}
+.kz{background:var(--g);border-radius:28px;padding:44px;display:grid;grid-template-columns:.9fr 1.1fr;gap:40px}
+.kz h2{font-size:2.3rem;margin-bottom:10px}
+.tabs{display:flex;gap:6px;background:#fff;padding:5px;border-radius:999px;width:max-content;max-width:100%;margin:16px 0}
+.tabs button{font:inherit;font-weight:700;border:0;background:transparent;padding:10px 20px;border-radius:999px;cursor:pointer;color:var(--nav)}
+.tabs button[aria-pressed=true]{background:var(--nav);color:#fff}
+.sit{display:grid;gap:8px}.sit button{font:inherit;text-align:left;background:#fff;border:2px solid transparent;border-radius:14px;padding:13px 16px;cursor:pointer;font-weight:500;transition:.2s}
+.sit button:hover{border-color:var(--y)}.sit button[aria-pressed=true]{border-color:var(--nav);background:#fff;box-shadow:0 0 0 3px var(--y)}
+.res{background:#fff;border-radius:22px;padding:30px;animation:pop .45s both;align-self:start}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.res .k{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700;color:var(--ok)}
+.res h3{font-size:1.8rem;margin:6px 0 10px}.res ul{margin:10px 0 18px;list-style:none}.res li{padding:6px 0 6px 28px;position:relative;border-top:1px solid var(--g)}
+.res li::before{content:"";position:absolute;left:2px;top:12px;width:14px;height:8px;border-left:3px solid var(--ok);border-bottom:3px solid var(--ok);transform:rotate(-45deg)}
+.res input{width:100%;font:inherit;padding:11px 14px;border-radius:10px;border:1.5px solid #cfd7e6;margin-bottom:10px}
+.act{display:flex;gap:8px;flex-wrap:wrap}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.steps div{counter-increment:s;border-top:4px solid var(--y);padding-top:18px}.steps div::before{content:"0" counter(s);font-family:'Sora';font-weight:800;font-size:1.1rem;color:#7a8bab;display:block;margin-bottom:4px}
+.steps h3{font-size:1.35rem;margin-bottom:4px}
+.rev{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}.rev p{background:var(--g);border-radius:16px;padding:18px 20px}.rev small{display:block;opacity:.65;margin-top:6px}
+.cta{background:var(--y);border-radius:28px;padding:44px;display:flex;justify-content:space-between;gap:24px;align-items:center;flex-wrap:wrap}
+.cta h2{font-size:2.2rem}
+.ft{background:var(--nav);color:#c8d3e6}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.facts,.steps,.rev{grid-template-columns:1fr}.kz{grid-template-columns:1fr;padding:26px 20px}.tabs{width:100%}.tabs button{flex:1;padding:10px 6px}.hero{padding-top:56px}section{padding:60px 0}.cta{padding:28px 22px}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Verkeersschool Cees &amp; Co. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">Cees <span>&amp; Co</span></a><nav><a href="#traject">Uw traject</a><a href="#werkwijze">Werkwijze</a><a href="#contact">Contact</a><a class="btn y" href="#traject">Proefles</a></nav></div></header>
+<main>
+<section class="hero" style="padding-bottom:0"><div class="wrap"><h1 class="reveal">Haal uw rijbewijs in Breda, <em>rustig</em> en op uw tempo.</h1>
+ <p class="reveal">Maurice en Mirella geven al 25 jaar les in Breda, Haagse Beemden, Princenhage en Prinsenbeek. Auto, motor en bromfiets.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn y" href="#traject">Vind uw traject</a><a class="btn l" href="tel:0765449060">076 544 90 60</a></div></div><div class="road" aria-hidden="true"></div></section>
+
+<section style="padding-bottom:20px"><div class="wrap facts">
+ <div class="ft1 reveal"><b>25 jaar</b>ervaring in Breda</div><div class="ft1 reveal"><b>75 min</b>per autoles, ruim genoeg om te oefenen</div><div class="ft1 reveal"><b>Termijnbetaling</b>mogelijk voor autolessen</div>
+</div></section>
+
+<section id="traject"><div class="wrap"><div class="kz reveal">
+ <div><h2>Welk traject past bij u?</h2><p>Twee tikken en u ziet wat wij adviseren. Daarna vraagt u in een bericht een vrijblijvende proefles aan.</p>
+  <div class="tabs" id="tabs"></div><div class="sit" id="sit"></div></div>
+ <div id="res"></div>
+</div></div></section>
+
+<section id="werkwijze" style="padding-top:20px"><div class="wrap">
+ <div class="sh reveal"><h2>Zo gaat het in zijn werk</h2></div>
+ <div class="steps"><div class="reveal"><h3>Proefles</h3><p>Vrijblijvend kennismaken en samen kijken waar u staat.</p></div><div class="reveal"><h3>Lessen op uw tempo</h3><p>Rustig, met een instructeur die uitlegt in plaats van opjaagt.</p></div><div class="reveal"><h3>Examen</h3><p>We bereiden u voor op de examendag. <span class="tbc">slagingscijfers te bevestigen</span></p></div></div>
+ <div class="rev"><p class="reveal">Geduldige instructeurs en een rustig lestempo.<small>Samenvatting Google-reviews</small></p><p class="reveal">Eerste keer geslaagd, mede door de goede voorbereiding.<small>Samenvatting Google-reviews</small></p><p class="reveal">Fijne hulp bij faalangst.<small>Samenvatting Google-reviews</small></p></div>
+</div></section>
+
+<section id="contact" style="padding-top:10px"><div class="wrap"><div class="cta reveal"><div><h2>Eerst proberen?</h2><p>Een proefles is vrijblijvend.<br>Zandoogjes 30, 4814 SB Breda · info@ceesenco.nl</p></div><div class="act"><a class="btn" href="https://wa.me/31614811819?text=Hallo%2C%20ik%20wil%20graag%20een%20proefles%20aanvragen.">WhatsApp 06 14 81 18 19</a><a class="btn l" href="tel:0765449060">Bel 076 544 90 60</a></div></div></div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website. Tarieven en instructeursfoto's te bevestigen met de eigenaar.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var V={Auto:{s:[['Ik begin helemaal opnieuw','Auto','Volledig traject auto',['Proefles om te zien waar u staat','Lessen van 75 minuten','Termijnbetaling mogelijk']],['Ik ben zenuwachtig of bang','Auto met faalangstbegeleiding','Rustig opbouwen met begeleiding',['Extra aandacht voor spanning','Eerst oefenen zonder druk','Vrijblijvende proefles']],['Ik heb rijangst','Rijangstbegeleiding','Rijden zonder angst',['Individuele begeleiding','Stap voor stap oefenen','Eerst een gesprek']],['Ik heb ADHD of autisme','Speciale begeleiding','Les afgestemd op u',['Duidelijke structuur','Aangepaste uitleg','Vaste instructeur, rustig tempo']]]},
+  Motor:{s:[['Ik wil weten of motorrijden iets voor mij is','Motor Experience','Proberen zonder verplichting',['Sessie van 100 minuten','Moderne motor','Beschermende kleding wordt geleverd']],['Ik wil mijn motorrijbewijs halen','Motor AVB of AVD','Van lessen tot examen',['Voorbereiding tot het examen','AVB- en AVD-pakketten','Moderne motoren']]]},
+  Bromfiets:{s:[['Ik ben 16 of ouder en wil een AM-rijbewijs','Bromfiets AM','Snel klaar voor het praktijkexamen',['Gerichte examenvoorbereiding','Vanaf 16 jaar','Vrijblijvend beginnen']]]}};
+ var veh='Auto',si=0,nm='';
+ var tabs=$('tabs');Object.keys(V).forEach(function(k){var b=document.createElement('button');b.type='button';b.textContent=k;b.setAttribute('aria-pressed',k===veh);b.onclick=function(){veh=k;si=0;draw()};tabs.appendChild(b)});
+ function msg(r){return 'Hallo, ik wil graag een proefles aanvragen.\nTraject: '+r[1]+'\nSituatie: '+r[0].toLowerCase()+(nm?'\nNaam: '+nm:'')+'\nKunnen jullie contact met mij opnemen?'}
+ function draw(){[].forEach.call(tabs.children,function(b){b.setAttribute('aria-pressed',b.textContent===veh)});
+  var sit=$('sit');sit.innerHTML='';V[veh].s.forEach(function(r,i){var b=document.createElement('button');b.type='button';b.textContent=r[0];b.setAttribute('aria-pressed',i===si);b.onclick=function(){si=i;draw()};sit.appendChild(b)});
+  var r=V[veh].s[si];$('res').innerHTML='<div class="res"><div class="k">Ons advies</div><h3>'+r[1]+'</h3><p>'+r[2]+'</p><ul>'+r[3].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul><input id="nm" type="text" placeholder="Uw naam" aria-label="Naam" value="'+nm+'"><div class="act"><a class="btn y" id="wa" href="#">Vraag proefles aan</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div>';
+  function u(){nm=$('nm').value;$('wa').href='https://wa.me/31614811819?text='+encodeURIComponent(msg(r))}
+  $('nm').addEventListener('input',u);u();$('cp').onclick=function(){copyTxt(this,msg(r))}}
+ draw();
+})();
+</script>
+</body>
+</html>

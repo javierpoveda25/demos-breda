@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZZ Beauty Support – Schoonheidssalon Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor ZZ Beauty Support: massages, gezichtsbehandelingen en duo-arrangementen in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Nunito+Sans:wght@400;600;700&display=swap');
+/* DESIGN: kalm spa-gevoel in saliegroen en zand met een warme accentkleur. Kleuren: salie (#8C9A82), diep bosgroen (#2C3A33), zand (#F1EBDF), klei (#C08A6B), mist (#DDE3D6).
+   Type: Cormorant Garamond (titels) + Nunito Sans (tekst).
+   STRUCTUUR: brede kop met trust-balk (20+ jaar, 161 reviews, ANBOS), behandelingen als verticale kaarten, weekplanner waar je een dagdeel aantikt, Duo-banner.
+   MOTION: reveal, zachte hover-uitschuif, planner met geselecteerd dagdeel, live open/gesloten. */
+:root{--sage:#8C9A82;--deep:#2C3A33;--sand:#F1EBDF;--clay:#C08A6B;--mist:#DDE3D6;--acc:#C08A6B}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Nunito Sans',system-ui,sans-serif;background:var(--sand);color:var(--deep);font-size:17px;line-height:1.65}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.02}
+.demo-bar{background:var(--deep);color:var(--mist)}
+header.top{position:sticky;top:0;z-index:40;background:rgba(241,235,223,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(44,58,51,.14)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:70px}
+.logo{font-family:'Cormorant Garamond';font-size:1.5rem;font-weight:600;text-decoration:none;letter-spacing:.03em}
+.top nav{display:flex;gap:24px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:600;font-size:.93rem}
+.btn{display:inline-block;padding:13px 26px;border-radius:4px;font:inherit;font-weight:700;text-decoration:none;border:1.5px solid var(--deep);cursor:pointer;transition:.2s;background:var(--deep);color:#fff}
+.btn:hover{background:var(--clay);border-color:var(--clay)}.btn.l{background:transparent;color:var(--deep)}.btn.l:hover{background:var(--deep);color:#fff}.top .btn{padding:9px 18px;font-size:.9rem}
+.hero{background:var(--sage);color:#fff;padding:96px 0 0}
+.hero h1{font-size:clamp(3rem,7.4vw,6.4rem);max-width:10em}
+.hero p{max-width:30em;margin:20px 0 28px;font-size:1.12rem;color:#f4f6ef}
+.hero .btn{background:#fff;color:var(--deep);border-color:#fff}.hero .btn:hover{background:var(--clay);color:#fff;border-color:var(--clay)}.hero .btn.l{background:transparent;color:#fff;border-color:#fff}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);background:var(--deep);margin-top:80px}
+.trust div{padding:22px 24px;border-right:1px solid rgba(255,255,255,.14)}.trust b{display:block;font-family:'Cormorant Garamond';font-size:2rem;color:var(--mist)}.trust span{font-size:.9rem;color:#c9d2c0}
+section{padding:88px 0}
+.sh{margin-bottom:34px;max-width:32em}.sh h2{font-size:clamp(2.2rem,4.6vw,3.6rem);margin-bottom:8px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cd{background:#fff;padding:26px 22px;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;border:1px solid rgba(44,58,51,.12);transition:.3s}
+.cd::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--c)}
+.cd:hover{transform:translateY(-6px);box-shadow:0 18px 34px -22px rgba(44,58,51,.6)}
+.cd h3{font-size:1.7rem;margin-bottom:6px}.cd p{font-size:.95rem}.cd .more{max-height:0;overflow:hidden;transition:max-height .4s;font-size:.9rem;color:var(--sage)}.cd:hover .more,.cd:focus-within .more{max-height:60px}
+.duo{background:var(--deep);color:var(--sand);display:grid;grid-template-columns:1.2fr .8fr;gap:30px;padding:46px;align-items:center;margin-top:20px}
+.duo h3{font-size:2.4rem}.duo p{color:#c9d2c0;margin-top:8px}
+.plan{background:#fff;padding:42px;border:1px solid rgba(44,58,51,.12);display:grid;grid-template-columns:.8fr 1.2fr;gap:40px}
+.plan h2{font-size:2.3rem;margin-bottom:8px}
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}.seg input{position:absolute;opacity:0}.seg label{padding:9px 16px;border:1.5px solid var(--deep);cursor:pointer;font-weight:600;font-size:.93rem;transition:.2s}
+.seg input:checked+label{background:var(--deep);color:#fff}.seg input:focus-visible+label{outline:3px solid var(--clay)}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.dc{border:1px solid rgba(44,58,51,.18);padding:8px 4px;text-align:center;background:var(--sand)}
+.dc h4{font:600 .85rem 'Nunito Sans';margin-bottom:6px}.dc.today h4{color:var(--clay)}
+.dc button{display:block;width:100%;font:inherit;font-size:.78rem;border:0;padding:8px 2px;margin-top:4px;cursor:pointer;background:var(--mist);color:var(--deep);transition:.15s}
+.dc button:hover{background:var(--sage);color:#fff}.dc button[aria-pressed=true]{background:var(--deep);color:#fff}
+.dc.cl{opacity:.45}.dc.cl span{font-size:.75rem}
+.note{font-size:.85rem;margin:10px 0 14px;color:#5d6b60}
+.chosen{background:var(--mist);padding:16px;margin:14px 0;min-height:54px}
+.act{display:flex;gap:8px;flex-wrap:wrap}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+.rv p{background:#fff;padding:18px 20px;margin-bottom:10px;border-left:4px solid var(--sage)}.rv small{display:block;opacity:.65;margin-top:4px}
+.ft{background:var(--deep);color:var(--mist)}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.trust{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}.duo,.plan,.cols{grid-template-columns:1fr}.plan,.duo{padding:26px 20px}.week{grid-template-columns:repeat(4,1fr)}.hero{padding-top:60px}.cd{min-height:200px}.cd .more{max-height:60px}section{padding:60px 0}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor ZZ Beauty Support. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">ZZ Beauty Support</a><nav><a href="#behandelingen">Behandelingen</a><a href="#plan">Plan uw moment</a><a href="#contact">Contact</a><a class="btn" href="#plan">Afspraak</a></nav></div></header>
+<main>
+<section class="hero" style="padding-bottom:0"><div class="wrap"><h1 class="reveal">Even helemaal tot rust komen.</h1>
+ <p class="reveal">Massages, gezichtsbehandelingen en arrangementen voor twee, in het hart van Breda, met gratis parkeren voor de deur.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn" href="#plan">Plan uw moment</a><a class="btn l" href="tel:0611123975">06 11 12 39 75</a></div></div>
+ <div class="trust"><div><b>20+ jaar</b><span>ervaring</span></div><div><b>161</b><span>Google-reviews</span></div><div><b>ANBOS</b><span>aangesloten</span></div><div><b id="st">Open?</b><span id="st2">openingstijden</span></div></div></section>
+
+<section id="behandelingen"><div class="wrap">
+ <div class="sh reveal"><h2>Waar u zich <em style="color:var(--clay)">goed bij voelt</em></h2><p>Kies een behandeling en plan hieronder direct een moment.</p></div>
+ <div class="cards">
+  <div class="cd reveal" style="--c:#8C9A82"><h3>Massage</h3><p>Ontspannen, diep of gericht op uw klachten.</p><div class="more">Ook met acties. <span class="tbc">duur en prijs te bevestigen</span></div></div>
+  <div class="cd reveal" style="--c:#C08A6B"><h3>Gezicht</h3><p>Anti-age, acnebehandeling en de Natuurlijke Facelift Therapy.</p><div class="more">Op maat voor uw huid.</div></div>
+  <div class="cd reveal" style="--c:#2C3A33"><h3>Zwangerschap</h3><p>Arrangementen speciaal voor aanstaande moeders.</p><div class="more">Rustig en veilig.</div></div>
+  <div class="cd reveal" style="--c:#DDE3D6"><h3>Pedicure &amp; hammam</h3><p>Verzorgde voeten en een hammam-ervaring.</p><div class="more">Ook als duo.</div></div>
+ </div>
+ <div class="duo reveal"><div><h3>Duo-arrangementen</h3><p>Samen ontspannen met uw partner, vriendin of moeder. Een cadeaubon is ook mogelijk.</p></div><div><a class="btn" style="background:var(--sand);color:var(--deep);border-color:var(--sand)" href="#plan">Plan een duo-moment</a></div></div>
+</div></section>
+
+<section id="plan" style="padding-top:0"><div class="wrap"><div class="plan reveal">
+ <div><h2>Plan uw moment</h2><p>Kies uw behandeling en tik een dagdeel aan. Wij bevestigen de exacte tijd.</p><div class="seg" id="seg"></div><p class="note">Avond en zondag alleen via WhatsApp of e-mail.</p>
+  <div class="chosen" id="chosen">Nog niets gekozen.</div><div class="act"><a class="btn" id="wa" href="#">Stuur via WhatsApp</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div>
+ <div class="week" id="week"></div>
+</div></div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap cols">
+ <div class="reveal"><div class="sh"><h2>Wat gasten zeggen</h2></div><div class="rv"><p>Warme sfeer en een professionele behandeling.<small>Samenvatting Google-reviews</small></p><p>Een zwangerschapsmassage die echt hielp.<small>Samenvatting Google-reviews</small></p><p>Een duo-massage als cadeau werd heel goed ontvangen.<small>Samenvatting Google-reviews</small></p></div></div>
+ <div class="reveal"><div class="sh"><h2>Contact</h2></div><p>Kronenburgwerf 34, 4812 XR Breda<br>06 11 12 39 75 (ook WhatsApp) · 076 750 68 36<br>info@zzbeautysupport.nl</p><p style="margin-top:14px">KvK 69509123. Prijslijst en teamintroductie voegen we toe zodra u ze aanlevert. <span class="tbc">te bevestigen</span></p></div>
+</div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var H={2:['09:30','16:00'],3:['09:30','16:00'],4:['09:30','20:30'],5:['09:30','16:00'],6:['09:00','19:00'],0:['11:00','16:00']};
+ var s=openState(H);$('st').textContent=s.open?'Nu open':'Gesloten';$('st2').textContent=s.txt;
+ var T=['Massage','Gezicht','Duo-massage','Zwangerschap','Pedicure'],t=0,pick=null;
+ T.forEach(function(x,i){$('seg').insertAdjacentHTML('beforeend','<input type="radio" name="t" id="t'+i+'"'+(i===0?' checked':'')+'><label for="t'+i+'">'+x+'</label>')});
+ var D=[['Ma',1,[]],['Di',2,['Ochtend','Middag']],['Wo',3,['Ochtend','Middag']],['Do',4,['Ochtend','Middag','Avond*']],['Vr',5,['Ochtend','Middag']],['Za',6,['Ochtend','Middag','Avond*']],['Zo',0,['Middag*']]],td=nlNow().d,wk=$('week');
+ D.forEach(function(d){var c=document.createElement('div');c.className='dc'+(d[1]===td?' today':'')+(d[2].length?'':' cl');c.innerHTML='<h4>'+d[0]+'</h4>';
+  if(!d[2].length)c.innerHTML+='<span>Dicht</span>';d[2].forEach(function(p){var b=document.createElement('button');b.type='button';b.textContent=p;b.setAttribute('aria-pressed','false');b.onclick=function(){pick=d[0]+' '+p;[].forEach.call(wk.querySelectorAll('button'),function(x){x.setAttribute('aria-pressed',x===b)});up()};c.appendChild(b)});wk.appendChild(c)});
+ function msg(){return 'Hallo, ik wil graag een afspraak maken.\nBehandeling: '+T[t]+'\nVoorkeur: '+(pick||'nog open')+'\nKunnen jullie een tijd voorstellen?'}
+ function up(){t=+document.querySelector('input[name=t]:checked').id.slice(1);$('chosen').textContent=pick?T[t]+' · '+pick:'Nog niets gekozen.';$('wa').href='https://wa.me/31611123975?text='+encodeURIComponent(msg())}
+ $('seg').addEventListener('change',up);up();$('cp').onclick=function(){copyTxt(this,msg())};
+})();
+</script>
+</body>
+</html>

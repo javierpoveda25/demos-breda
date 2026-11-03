@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vogels Schilderwerken – Schilder in Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Vogels Schilderwerken: schilderwerk, houtrotherstel en kleuradvies in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap');
+/* DESIGN: degelijk vakbedrijf met één verfgele accentkleur. Kleuren: marine (#12263A), verfgeel (#F2B705), gebroken wit (#F6F3EC), steen (#DAD5C8).
+   Type: Bricolage Grotesque (titels) + DM Sans (tekst).
+   STRUCTUUR: offertekaart naast de kop, bento met diensten, kleur-proefpaneel voor kozijnen/deur/muur, tijdlijn werkwijze, offerteformulier.
+   MOTION: scroll-reveal, voortgangsbalk, kleurwissel in het proefpaneel, tijdlijn die zich tekent bij scrollen. */
+:root{--navy:#12263A;--acc:#F2B705;--paper:#F6F3EC;--stone:#DAD5C8;--ink:#12263A;--wall:#E9DCC3;--frame:#FFFFFF;--door:#2F5D50}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05;letter-spacing:-.02em}
+.demo-bar{background:var(--navy);color:#e7dfc8}
+header.top{position:sticky;top:0;z-index:40;background:rgba(246,243,236,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--stone)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:70px}
+.logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.25rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:14px;height:26px;background:var(--acc);display:inline-block;border-radius:3px;transform:skewX(-12deg)}
+.top nav{display:flex;gap:24px;align-items:center}
+.top nav a:not(.btn){text-decoration:none;font-weight:500;font-size:.95rem}
+.top nav a:not(.btn):hover{text-decoration:underline;text-decoration-color:var(--acc);text-decoration-thickness:3px;text-underline-offset:6px}
+.btn{display:inline-block;padding:14px 26px;border-radius:10px;font:inherit;font-weight:700;text-decoration:none;border:2px solid var(--navy);cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
+.btn-y{background:var(--acc);border-color:var(--acc);color:var(--navy)}.btn-y:hover{transform:translateY(-2px);box-shadow:0 8px 0 -2px var(--navy)}
+.btn-n{background:var(--navy);color:#fff}.btn-n:hover{transform:translateY(-2px)}
+.top .btn{padding:9px 18px;font-size:.9rem}
+.hero{padding:64px 0 0}
+.hero .g{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:end}
+.hero h1{font-size:clamp(2.7rem,6.4vw,5.4rem)}
+.hero h1 mark{background:linear-gradient(transparent 62%,var(--acc) 62%);color:inherit;padding:0 .06em}
+.hero p.lead{max-width:30em;margin:22px 0 28px;font-size:1.15rem}
+.quote{background:var(--navy);color:#fff;border-radius:18px;padding:28px;position:relative}
+.quote h3{font-size:1.5rem;margin-bottom:12px}
+.quote li{list-style:none;padding:8px 0 8px 30px;position:relative;border-top:1px solid rgba(255,255,255,.14)}
+.quote li::before{content:"";position:absolute;left:0;top:15px;width:16px;height:9px;border-left:3px solid var(--acc);border-bottom:3px solid var(--acc);transform:rotate(-45deg)}
+.quote .tel{display:block;margin-top:16px;font-family:'Bricolage Grotesque';font-weight:800;font-size:1.5rem;color:var(--acc);text-decoration:none}
+.chips{display:flex;overflow:hidden;margin-top:56px;border-top:1px solid var(--stone)}
+.chips div{flex:1;min-width:120px;height:46px}
+.who{display:flex;gap:10px;flex-wrap:wrap;padding:20px 0 0}
+.who span{border:1.5px solid var(--navy);border-radius:999px;padding:3px 14px;font-size:.92rem;font-weight:500}
+section{padding:92px 0}
+.sh{max-width:34em;margin-bottom:38px}.sh h2{font-size:clamp(2.1rem,4.4vw,3.4rem);margin-bottom:10px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.bc{border-radius:18px;padding:26px;background:#fff;border:1px solid var(--stone);transition:transform .25s,box-shadow .25s}
+.bc:hover{transform:translateY(-4px);box-shadow:0 14px 30px -18px rgba(18,38,58,.5)}
+.bc h3{font-size:1.35rem;margin-bottom:6px}
+.bc.a{grid-column:span 3;background:var(--navy);color:#fff}.bc.b{grid-column:span 3;background:var(--acc)}
+.bc.c,.bc.d,.bc.e{grid-column:span 2}.bc.f{grid-column:span 3}.bc.g2{grid-column:span 3;background:var(--stone)}
+.bc.a p{color:#d9d3c2}
+.try{background:var(--navy);color:#fff;clip-path:polygon(0 4%,100% 0,100% 96%,0 100%);padding:130px 0}
+.try .sh p{color:#cdd3da}
+.lab{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
+.house{position:relative;background:#c9d6df;border-radius:18px;padding:28px 28px 0;overflow:hidden;aspect-ratio:4/3.1}
+.house .gr{position:absolute;left:0;right:0;bottom:0;height:12%;background:#6e7a6a}
+.house .wall{position:absolute;left:12%;right:12%;top:20%;bottom:12%;background:var(--wall);transition:background .5s;border-radius:4px 4px 0 0}
+.house .roof{position:absolute;left:7%;right:7%;top:8%;height:14%;background:#58423a;clip-path:polygon(8% 100%,50% 0,92% 100%)}
+.house .win{position:absolute;top:34%;width:20%;height:26%;background:var(--frame);transition:background .5s;padding:6%}
+.house .win::after{content:"";display:block;width:100%;height:100%;background:#9bb4c6}
+.house .w1{left:20%}.house .w2{right:20%}
+.house .door{position:absolute;left:44%;width:12%;bottom:12%;height:34%;background:var(--door);transition:background .5s;border-radius:3px 3px 0 0}
+.house .door::after{content:"";position:absolute;right:12%;top:50%;width:6px;height:6px;border-radius:50%;background:#e9d9a4}
+.part{display:flex;gap:6px;margin-bottom:16px;background:rgba(255,255,255,.1);padding:5px;border-radius:12px;width:max-content;max-width:100%}
+.part button{font:inherit;font-weight:700;background:transparent;color:#fff;border:0;border-radius:8px;padding:9px 16px;cursor:pointer}
+.part button[aria-pressed=true]{background:var(--acc);color:var(--navy)}
+.sw{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.sw button{aspect-ratio:1;border-radius:12px;border:3px solid transparent;cursor:pointer;transition:transform .2s}
+.sw button:hover{transform:scale(1.08)}.sw button[aria-pressed=true]{border-color:#fff;box-shadow:0 0 0 3px var(--acc)}
+.pick{margin:16px 0;font-size:1.05rem}.pick b{color:var(--acc)}
+.lab input[type=text],.lab input[type=tel]{width:100%;font:inherit;padding:12px 14px;border-radius:10px;border:0;margin-bottom:10px}
+.act{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.btn-o{background:transparent;border-color:#fff;color:#fff}.btn-o:hover{background:#fff;color:var(--navy)}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:34px}
+.steps::before{content:"";position:absolute;top:10px;left:0;height:4px;width:100%;background:var(--stone)}
+.steps::after{content:"";position:absolute;top:10px;left:0;height:4px;width:var(--p,0%);background:var(--acc);transition:width 1.3s ease}
+.steps div{position:relative}.steps div::before{content:"";position:absolute;top:-30px;left:0;width:18px;height:18px;border-radius:50%;background:var(--navy);border:4px solid var(--paper)}
+.steps h3{font-size:1.25rem;margin-bottom:4px}.steps small{font-weight:700;color:#8a6d00}
+.form{background:#fff;border:1px solid var(--stone);border-radius:18px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.opts input{position:absolute;opacity:0}.opts label{border:1.5px solid var(--navy);border-radius:999px;padding:7px 15px;cursor:pointer;font-weight:500;font-size:.95rem}
+.opts input:checked+label{background:var(--navy);color:#fff}.opts input:focus-visible+label{outline:3px solid var(--acc)}
+.form input.t{width:100%;font:inherit;padding:12px 14px;border-radius:10px;border:1.5px solid var(--stone);margin-bottom:10px;background:var(--paper)}
+.out{white-space:pre-wrap;background:var(--paper);border-radius:10px;padding:14px;font-size:.92rem;margin:6px 0 14px;min-height:96px;border:1px dashed var(--stone)}
+.ct{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
+.ct div{padding:20px;border-top:3px solid var(--acc);background:#fff}
+.ct b{display:block;font-family:'Bricolage Grotesque';font-size:1.1rem}
+footer.ft{background:var(--navy);color:#cdd3da}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.hero .g,.lab,.form{grid-template-columns:1fr}.bc.a,.bc.b,.bc.c,.bc.d,.bc.e,.bc.f,.bc.g2{grid-column:span 6}.steps{grid-template-columns:1fr;padding-left:28px;padding-top:0}.steps::before,.steps::after{width:4px;height:100%;top:0;left:7px}.steps::after{height:var(--p,0%);width:4px}.steps div::before{left:-28px;top:6px}.ct{grid-template-columns:1fr}section{padding:64px 0}.try{padding:100px 0}.sw{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Vogels Schilderwerken. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#top"><i></i>Vogels Schilderwerken</a>
+<nav><a href="#diensten">Diensten</a><a href="#kleur">Kleur proberen</a><a href="#werkwijze">Werkwijze</a><a href="#offerte">Offerte</a><a class="btn btn-y" href="tel:0611223997">06 11 22 39 97</a></nav></div></header>
+
+<main id="top">
+<section class="hero" style="padding-bottom:0"><div class="wrap">
+ <div class="g">
+  <div class="reveal"><h1>Schilderwerk in Breda dat <mark>jarenlang</mark> mooi blijft.</h1>
+  <p class="lead">Van een enkele kozijnrenovatie tot meerjarig onderhoud voor een VVE. Eén aanspreekpunt, heldere afspraken en een offerte binnen 24 uur.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-y" href="#offerte">Vraag een offerte aan</a><a class="btn" href="#kleur">Probeer eerst een kleur</a></div>
+  <div class="who"><span>Particulieren</span><span>Aannemers</span><span>VVE</span><span>Bedrijven en instellingen</span></div></div>
+  <aside class="quote reveal"><h3>Gratis en vrijblijvend</h3><ul><li>Offerte binnen 24 uur</li><li>Kleuradvies inbegrepen</li><li>Woning schilderen vanaf € 1.250</li></ul><a class="tel" href="tel:0611223997">06 11 22 39 97</a><small>info@vogelsschilderwerken.nl</small></aside>
+ </div>
+</div>
+<div class="chips" aria-hidden="true"><div style="background:#12263A"></div><div style="background:#F2B705"></div><div style="background:#DAD5C8"></div><div style="background:#2F5D50"></div><div style="background:#B5432F"></div><div style="background:#E9DCC3"></div><div style="background:#5C7A99"></div><div style="background:#F6F3EC"></div></div>
+</section>
+
+<section id="diensten"><div class="wrap">
+ <div class="sh reveal"><h2>Wat we voor u schilderen en herstellen</h2><p>Binnen en buiten, nieuwbouw en onderhoud. Eén bedrijf voor het hele traject.</p></div>
+ <div class="bento">
+  <div class="bc a reveal"><h3>Schilderwerk</h3><p>Binnen en buiten, voor nieuwbouw en onderhoud. Eenmalig of als meerjarig onderhoudsplan.</p></div>
+  <div class="bc b reveal"><h3>Houtrotherstel</h3><p>Rot op tijd aanpakken voorkomt vervanging. We herstellen en schilderen in één keer af.</p></div>
+  <div class="bc c reveal"><h3>Betonrenovatie</h3><p>Beton herstellen en beschermen.</p></div>
+  <div class="bc d reveal"><h3>Metaalconservering</h3><p>Roestwering en afwerking voor lang behoud.</p></div>
+  <div class="bc e reveal"><h3>Beglazing</h3><p>Glas vervangen als onderdeel van het schilderwerk.</p></div>
+  <div class="bc f reveal"><h3>Spuitwerk</h3><p>Strak spuitwerk, ook voor meubels en kasten.</p></div>
+  <div class="bc g2 reveal"><h3>Kleuradvies</h3><p>Twijfelt u over de kleur? Probeer het hieronder alvast uit en we denken mee.</p></div>
+ </div>
+</div></section>
+
+<section class="try" id="kleur"><div class="wrap">
+ <div class="sh reveal"><h2>Kleur proberen voordat we beginnen</h2><p>Kies een onderdeel en een kleur. Stuur uw keuze door en wij geven advies met echte stalen.</p></div>
+ <div class="lab">
+  <div class="house reveal" aria-label="Voorbeeld van een woning die van kleur verandert"><div class="roof"></div><div class="wall" id="hw"></div><div class="win w1" id="hf1"></div><div class="win w2" id="hf2"></div><div class="door" id="hd"></div><div class="gr"></div></div>
+  <div class="reveal">
+   <div class="part" id="part"><button type="button" aria-pressed="true" data-p="wall">Muur</button><button type="button" aria-pressed="false" data-p="frame">Kozijnen</button><button type="button" aria-pressed="false" data-p="door">Voordeur</button></div>
+   <div class="sw" id="sw"></div>
+   <p class="pick" id="pick"></p>
+   <input type="text" id="adr" placeholder="Uw adres in Breda (optioneel)" aria-label="Adres">
+   <div class="act"><a class="btn btn-y" id="kmail" href="#">Stuur mijn kleurkeuze</a><button type="button" class="btn btn-o" id="kcopy">Kopieer</button></div>
+  </div>
+ </div>
+</div></section>
+
+<section id="werkwijze"><div class="wrap">
+ <div class="sh reveal"><h2>Zo werkt het</h2></div>
+ <div class="steps" id="steps">
+  <div class="reveal"><small>Dag 1</small><h3>Offerte</h3><p>U vraagt aan, wij reageren binnen 24 uur met een heldere prijs.</p></div>
+  <div class="reveal"><small>Voor de start</small><h3>Kleuradvies</h3><p>We kijken samen naar kleur en afwerking.</p></div>
+  <div class="reveal"><small>Uitvoering</small><h3>Netjes werken</h3><p>Duidelijke planning, één aanspreekpunt, schone werkplek.</p></div>
+  <div class="reveal"><small>Oplevering</small><h3>Samen controleren</h3><p>We lopen het werk samen na. <span class="tbc">garantie te bevestigen</span></p></div>
+ </div>
+</div></section>
+
+<section id="offerte" style="padding-top:20px"><div class="wrap">
+ <div class="form reveal">
+  <div><h2 style="font-size:2rem;margin-bottom:8px">Offerte aanvragen</h2><p>Kies wat u wilt laten doen. Het bericht hiernaast kunt u mailen of appen.</p>
+   <div class="opts" id="opts"></div>
+   <input class="t" id="nm" type="text" placeholder="Uw naam" aria-label="Naam"><input class="t" id="ph" type="tel" placeholder="Telefoonnummer" aria-label="Telefoon"></div>
+  <div><b>Uw bericht</b><div class="out" id="out"></div>
+   <div class="act"><a class="btn btn-n" id="omail" href="#">Mail Vogels</a><a class="btn btn-y" id="owa" href="#">WhatsApp</a><button type="button" class="btn" id="ocopy">Kopieer</button></div></div>
+ </div>
+ <div class="ct reveal"><div><b>Bellen</b>06 11 22 39 97</div><div><b>Mailen</b>info@vogelsschilderwerken.nl</div><div><b>Adres</b>Burgemeester van Gilsstraat 71, 4813 PT Breda</div></div>
+</div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website. Tekst, openingstijden en referenties te bevestigen met de eigenaar.</div></footer>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var COL=[['Zandsteen','#E9DCC3'],['Wit','#FFFFFF'],['Antraciet','#3A4047'],['Bosgroen','#2F5D50'],['Marineblauw','#1F3B5C'],['Bordeaux','#7B2D3A'],['Okergeel','#D9A441'],['Lichtgrijs','#C9CDD0'],['Terracotta','#B5573B'],['Saliegroen','#9DB09A'],['Roetzwart','#1C1C1C'],['Duifblauw','#8FA7BD']];
+ var cur='wall',sel={wall:COL[0],frame:COL[1],door:COL[3]},NAME={wall:'Muur',frame:'Kozijnen',door:'Voordeur'};
+ var sw=$('sw');COL.forEach(function(c,i){var b=document.createElement('button');b.type='button';b.style.background=c[1];if(c[1]==='#FFFFFF')b.style.boxShadow='inset 0 0 0 1px #ccc';b.setAttribute('aria-label',c[0]);b.setAttribute('aria-pressed','false');b.onclick=function(){sel[cur]=c;paint()};sw.appendChild(b)});
+ function paint(){$('hw').style.background=sel.wall[1];$('hf1').style.background=$('hf2').style.background=sel.frame[1];$('hd').style.background=sel.door[1];
+  [].forEach.call(sw.children,function(b,i){b.setAttribute('aria-pressed',COL[i][0]===sel[cur][0])});
+  $('pick').innerHTML=NAME[cur]+': <b>'+sel[cur][0]+'</b>';var m=text();var s=encodeURIComponent('Kleurkeuze voor mijn woning');$('kmail').href='mailto:info@vogelsschilderwerken.nl?subject='+s+'&body='+encodeURIComponent(m)}
+ function text(){return 'Hallo, dit is mijn kleurkeuze'+($('adr').value?' voor '+$('adr').value:'')+':\nMuur: '+sel.wall[0]+'\nKozijnen: '+sel.frame[0]+'\nVoordeur: '+sel.door[0]+'\nKunnen jullie hier advies over geven?'}
+ [].forEach.call($('part').children,function(b){b.onclick=function(){cur=b.dataset.p;[].forEach.call($('part').children,function(x){x.setAttribute('aria-pressed',x===b)});paint()}});
+ $('adr').addEventListener('input',paint);$('kcopy').onclick=function(){copyTxt(this,text())};paint();
+ var W=['Binnen schilderen','Buiten schilderen','Kozijnen','Houtrot herstellen','Spuitwerk','Kleuradvies','VVE-onderhoud'],op=$('opts');
+ W.forEach(function(w,i){op.insertAdjacentHTML('beforeend','<input type="checkbox" id="o'+i+'" value="'+w+'"><label for="o'+i+'">'+w+'</label>')});
+ function omsg(){var c=[].map.call(op.querySelectorAll('input:checked'),function(x){return x.value});return 'Hallo, ik wil graag een offerte voor: '+(c.length?c.join(', '):'schilderwerk')+'.\nNaam: '+($('nm').value||'-')+'\nTelefoon: '+($('ph').value||'-')+'\nWilt u mij laten weten wanneer u kunt langskomen?'}
+ function ou(){var m=omsg();$('out').textContent=m;$('omail').href='mailto:info@vogelsschilderwerken.nl?subject='+encodeURIComponent('Offerteaanvraag')+'&body='+encodeURIComponent(m);$('owa').href='https://wa.me/31611223997?text='+encodeURIComponent(m)}
+ document.querySelector('.form').addEventListener('input',ou);ou();$('ocopy').onclick=function(){copyTxt(this,omsg())};
+ var st=new IntersectionObserver(function(e){if(e[0].isIntersecting){$('steps').style.setProperty('--p','100%')}},{threshold:.4});st.observe($('steps'));
+})();
+</script>
+</body>
+</html>
