@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloemen Van Gurp – Bloemist Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Bloemen Van Gurp in Breda: boeketten, rouwwerk, bruidswerk en bezorging.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,700;1,500&family=Mulish:wght@400;600;700&display=swap');
+/* DESIGN: helder en bloemrijk, zachte magnolia met diep groen en een intens fuchsia accent. Kleuren: magnolia (#FBF6F1), diep groen (#17402F), fuchsia (#C42D6E), zalm (#F6B8A0), salie (#B8CDB4).
+   Type: Cormorant (titels, cursief) + Mulish (tekst).
+   STRUCTUUR: gelegenheidskiezer (verjaardag, bedankt, liefde, condoleance, bruid) met passende bloemen en sfeer, bezorgteller tot 12:00 voor morgen, bestellen of bellen. Kiyoh-score.
+   MOTION: reveal, gelegenheidskaart die van kleur wisselt, aftelklok. */
+:root{--mg:#FBF6F1;--gr:#17402F;--fu:#C42D6E;--za:#F6B8A0;--sa:#B8CDB4;--tint:#F6B8A0;--acc:#C42D6E}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Mulish',system-ui,sans-serif;background:var(--mg);color:var(--gr);font-size:17px;line-height:1.65}
+h1,h2,h3{font-family:'Cormorant',serif;font-weight:500;line-height:1}em{color:var(--fu)}
+.demo-bar{background:var(--gr);color:var(--sa)}
+header.top{position:sticky;top:0;z-index:40;background:rgba(251,246,241,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(23,64,47,.18)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Cormorant';font-size:1.7rem;font-weight:700;text-decoration:none}.logo em{font-weight:500}
+.top nav{display:flex;gap:22px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:600;font-size:.93rem}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;font:inherit;font-weight:700;text-decoration:none;border:2px solid var(--gr);cursor:pointer;transition:.2s;background:var(--gr);color:#fff}
+.btn:hover{background:var(--fu);border-color:var(--fu)}.btn.f{background:var(--fu);border-color:var(--fu)}.btn.f:hover{background:var(--gr);border-color:var(--gr)}.btn.l{background:transparent;color:var(--gr)}.btn.l:hover{background:var(--gr);color:#fff}.top .btn{padding:8px 18px;font-size:.9rem}
+.hero{padding:80px 0 50px}.hero h1{font-size:clamp(3.6rem,9vw,8rem);max-width:8em}.hero p{max-width:29em;margin:22px 0 28px;font-size:1.15rem}
+.kiy{display:inline-flex;align-items:center;gap:12px;background:#fff;border:1px solid rgba(23,64,47,.18);border-radius:999px;padding:8px 20px;margin-top:6px}.kiy b{font-family:'Cormorant';font-size:1.7rem;color:var(--fu)}
+section{padding:72px 0}
+.sh{margin-bottom:26px;max-width:34em}.sh h2{font-size:clamp(2.4rem,5vw,3.8rem);margin-bottom:8px}
+.occ{display:grid;grid-template-columns:.8fr 1.2fr;gap:0;border-radius:28px;overflow:hidden;border:2px solid var(--gr)}
+.oc{background:var(--gr);padding:34px;display:grid;gap:8px;align-content:start}
+.oc button{font:inherit;font-weight:600;text-align:left;background:transparent;border:2px solid rgba(251,246,241,.35);color:var(--mg);border-radius:14px;padding:13px 18px;cursor:pointer;transition:.2s}
+.oc button:hover{border-color:var(--za)}.oc button[aria-pressed=true]{background:var(--mg);color:var(--gr);border-color:var(--mg)}
+.dt{padding:40px;background:var(--tint);transition:background .6s;min-height:380px;display:flex;flex-direction:column;gap:10px;animation:fd .5s both}
+@keyframes fd{from{opacity:.5}}.dt h3{font-size:2.8rem}.dt .fl{display:flex;gap:8px;flex-wrap:wrap}.dt .fl span{background:rgba(255,255,255,.7);border-radius:99px;padding:4px 16px;font-weight:600;font-size:.92rem}
+.cd{background:#fff;border-radius:16px;padding:14px 18px;font-weight:600;margin-top:auto}.cd b{color:var(--fu)}
+.act{display:flex;gap:8px;flex-wrap:wrap}
+.cols{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.cols div{background:#fff;border:1px solid rgba(23,64,47,.18);border-radius:18px;padding:22px;transition:.25s}.cols div:hover{transform:translateY(-4px)}.cols b{font-family:'Cormorant';font-size:1.5rem;display:block}
+.rv{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}.rv p{background:var(--sa);border-radius:16px;padding:18px 22px}.rv small{display:block;opacity:.7;margin-top:6px}
+.ft{background:var(--gr);color:var(--sa)}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.occ,.rv{grid-template-columns:1fr}.cols{grid-template-columns:1fr 1fr}.oc{padding:20px}.dt{padding:24px 20px;min-height:0}section{padding:52px 0}.hero{padding:46px 0 30px}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Bloemen Van Gurp. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">Bloemen <em>Van Gurp</em></a><nav><a href="#gelegenheid">Gelegenheid</a><a href="#aanbod">Aanbod</a><a class="btn f" href="#gelegenheid">Bloemen bestellen</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap"><h1 class="reveal">Bloemen met een <em>verhaal</em>.</h1>
+ <p class="reveal">Boeketten, bloemstukken, rouwwerk en bruidswerk uit Breda. Voor 12:00 besteld, morgen bezorgd in Breda, Bavel, Dorst, Etten-Leur, Oosterhout en meer.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center" class="reveal"><a class="btn f" href="#gelegenheid">Kies uw gelegenheid</a><a class="btn l" href="tel:0765214470">076 521 44 70</a><span class="kiy"><b>9,4</b>uit 336 reviews op Kiyoh</span></div></div></section>
+
+<section id="gelegenheid" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Voor welke gelegenheid?</h2></div>
+ <div class="occ reveal"><div class="oc" id="oc"></div><div class="dt" id="dt"></div></div></div></section>
+
+<section id="aanbod" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Wat wij maken</h2></div>
+ <div class="cols"><div class="reveal"><b>Boeketten</b>Gift flowers en bloemstukken.</div><div class="reveal"><b>Rouwwerk</b>Rouwboeketten en rouwstukken, met zorg.</div><div class="reveal"><b>Bruidswerk</b>Bruidsboeketten op maat.</div><div class="reveal"><b>Zijde en decoratie</b>Zijdebloemen, kerst, orchideeën en planten.</div></div>
+ <div class="rv"><p class="reveal">Super mooi bloemstuk.<small>Review via Kiyoh, uit de huidige site</small></p><p class="reveal">Prachtige bloemen, goede service.<small>Review via Kiyoh, uit de huidige site</small></p></div>
+ <p class="reveal" style="margin-top:22px">Van de Reijtstraat 82, 4814 NE Breda · info@bloemen-vangurp.nl · Openingstijden <span class="tbc">nog in te vullen</span></p></div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website. Prijzen en bezorgkosten te bevestigen met de eigenaar.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var O=[['Verjaardag','#F6B8A0','Vrolijk en kleurrijk',['Gerbera','Roos','Lisianthus','Zonnebloem'],'Een kleurrijk boeket past altijd.'],['Bedankt','#B8CDB4','Fris en dankbaar',['Tulp','Eucalyptus','Ranonkel'],'Een persoonlijk bedankje blijft hangen.'],['Liefde','#F2A3BD','Romantisch en intens',['Rode roos','Pioenroos','Anjer'],'Voor iemand die u dierbaar is.'],['Condoleance','#D9D4C7','Rustig en waardig',['Witte lelie','Roos','Chrysant'],'Met zorg samengesteld, ook rouwwerk en rouwstukken.'],['Bruid','#F7E3DA','Zacht en tijdloos',['Roos','Gipskruid','Eucalyptus'],'Een bruidsboeket helemaal naar uw wens.']],s=0;
+ function cd(){var n=nlNow(),left=12*60-n.m;if(n.d===0)return 'Op zondag bezorgen we niet. Bestel voor <b>maandag</b> om morgen of overmorgen te laten bezorgen.';return left>0?'Nog <b>'+Math.floor(left/60)+' u '+left%60+' min</b> om te bestellen voor bezorging <b>morgen</b>.':'Na 12:00 besteld? Dan bezorgen we <b>overmorgen</b>.'}
+ function draw(){var oc=$('oc');oc.innerHTML='';O.forEach(function(o,i){var b=document.createElement('button');b.type='button';b.textContent=o[0];b.setAttribute('aria-pressed',i===s);b.onclick=function(){s=i;draw()};oc.appendChild(b)});
+  var o=O[s],d=$('dt');d.style.setProperty('--tint',o[1]);d.style.animation='none';void d.offsetWidth;d.style.animation='';
+  var m='Hallo, ik wil graag een boeket bestellen voor: '+o[0].toLowerCase()+'.\nSfeer: '+o[2].toLowerCase()+'.\nBezorgadres en datum: ...\nBudget: ...';
+  d.innerHTML='<h3>'+o[0]+'</h3><p style="font-size:1.15rem">'+o[4]+'</p><p><b>Sfeer:</b> '+o[2]+'</p><div class="fl">'+o[3].map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><div class="cd">'+cd()+'</div><div class="act"><a class="btn f" href="mailto:info@bloemen-vangurp.nl?subject='+encodeURIComponent('Bloemen bestellen')+'&body='+encodeURIComponent(m)+'">Bestel of vraag advies</a><button class="btn l" id="cp" type="button">Kopieer</button></div>';
+  $('cp').onclick=function(){copyTxt(this,m)}}
+ draw();
+})();
+</script>
+</body>
+</html>
