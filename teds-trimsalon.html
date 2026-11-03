@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ted's Trimsalon – Hondentrimsalon Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Ted's Trimsalon: hondentrimmen op afspraak in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap');
+/* DESIGN: vrolijk maar verzorgd, warm geel en donkerblauw met een zachte creme. Kleuren: honing (#F6B93B), marine (#1B2A41), crème (#FFF7E8), zacht blauw (#CFE3EE), koraal (#E8664E).
+   Type: Baloo 2 (ronde titels) + Nunito (tekst).
+   STRUCTUUR: kop met op-afspraak-label, prijskaart "Teds Keuze", trimplanner: vachttype kiezen, datum laatste trimbeurt invullen en zien wanneer de volgende past, dan appen.
+   MOTION: reveal, schuivende vacht-keuze, datumberekening live. */
+:root{--hon:#F6B93B;--navy:#1B2A41;--cream:#FFF7E8;--sky:#CFE3EE;--co:#E8664E;--acc:#F6B93B}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--cream);color:var(--navy);font-size:17px;line-height:1.62}
+h1,h2,h3{font-family:'Baloo 2',sans-serif;font-weight:800;line-height:1.02}
+.demo-bar{background:var(--navy);color:var(--hon)}
+header.top{position:sticky;top:0;z-index:40;background:rgba(255,247,232,.95);backdrop-filter:blur(8px);border-bottom:2px solid var(--navy)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Baloo 2';font-weight:800;font-size:1.5rem;text-decoration:none}.logo span{background:var(--hon);padding:0 10px;border-radius:999px;margin-left:4px}
+.top nav{display:flex;gap:22px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:700;font-size:.95rem}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;font:inherit;font-weight:800;text-decoration:none;border:2px solid var(--navy);cursor:pointer;transition:.2s;background:var(--navy);color:#fff;box-shadow:0 4px 0 var(--hon)}
+.btn:hover{transform:translateY(2px);box-shadow:0 2px 0 var(--hon)}.btn.h{background:var(--hon);color:var(--navy);box-shadow:0 4px 0 var(--navy)}.btn.l{background:transparent;color:var(--navy);box-shadow:none}.top .btn{padding:8px 18px;font-size:.9rem}
+.hero{padding:72px 0 80px}
+.hero .g{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(3rem,7.4vw,6.2rem)}.hero h1 mark{background:var(--hon);color:inherit;padding:0 .12em;border-radius:.2em}
+.hero p{max-width:28em;margin:20px 0 28px;font-size:1.15rem}
+.price{background:var(--navy);color:#fff;border-radius:28px;padding:30px;transform:rotate(2deg)}
+.price small{color:var(--hon);font-weight:700;letter-spacing:.1em;text-transform:uppercase}.price b{font-family:'Baloo 2';font-size:4.6rem;display:block;line-height:1;color:var(--hon)}
+.price li{list-style:none;padding:5px 0 5px 26px;position:relative;border-top:1px solid rgba(255,255,255,.15)}.price li::before{content:"✓";position:absolute;left:0;color:var(--hon);font-weight:800}
+section{padding:80px 0}
+.sh{margin-bottom:30px;max-width:32em}.sh h2{font-size:clamp(2.2rem,4.6vw,3.5rem);margin-bottom:8px}
+.pl{background:var(--sky);border-radius:32px;padding:44px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px}
+.pl h2{font-size:2.4rem;margin-bottom:8px}
+.coat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.coat input{position:absolute;opacity:0}.coat label{background:#fff;border:2px solid transparent;border-radius:18px;padding:14px 16px;cursor:pointer;transition:.2s;display:block;height:100%}
+.coat label b{display:block;font-family:'Baloo 2';font-size:1.15rem}.coat label small{opacity:.75}
+.coat input:checked+label{border-color:var(--navy);box-shadow:0 4px 0 var(--navy);transform:translateY(-2px)}.coat input:focus-visible+label{outline:3px solid var(--co)}
+.fld{display:grid;gap:6px;margin-bottom:12px}.fld label{font-weight:700}.fld input{font:inherit;padding:12px 14px;border-radius:12px;border:2px solid var(--navy);background:#fff}
+.out{background:#fff;border-radius:24px;padding:28px;align-self:start;border:2px solid var(--navy)}
+.out .k{font-weight:800;color:var(--co);text-transform:uppercase;font-size:.8rem;letter-spacing:.1em}
+.out .d{font-family:'Baloo 2';font-size:2.1rem;line-height:1.1;margin:6px 0 10px}
+.out .w{display:flex;gap:6px;margin:14px 0}.out .w i{flex:1;height:10px;border-radius:99px;background:var(--sky)}.out .w i.on{background:var(--hon);animation:gr .5s both}
+@keyframes gr{from{transform:scaleX(0)}}
+.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.how div{background:#fff;border:2px solid var(--navy);border-radius:24px;padding:24px}.how b{font-family:'Baloo 2';font-size:1.4rem;display:block;margin-bottom:4px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.ft{background:var(--navy);color:var(--hon)}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.hero .g,.pl,.info,.how{grid-template-columns:1fr}.pl{padding:26px 20px}.price{transform:none}.coat{grid-template-columns:1fr 1fr}section{padding:56px 0}.hero{padding:46px 0}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Ted's Trimsalon. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">Ted's <span>Trimsalon</span></a><nav><a href="#planner">Trimplanner</a><a href="#hoe">Hoe het werkt</a><a href="#contact">Contact</a><a class="btn" href="#planner">Afspraak</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap g"><div><h1 class="reveal">Een hond die er <mark>top</mark> uitziet en zich lekker voelt.</h1>
+ <p class="reveal">Rustig trimmen op afspraak aan de Magelhaensstraat in Breda. Wassen, drogen, handmatig knippen, nagels en oren, alles in één keer.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn h" href="#planner">Plan de volgende trimbeurt</a><a class="btn l" href="tel:0615719921">06 15 71 99 21</a></div></div>
+ <aside class="price reveal"><small>Teds Keuze</small><b>€ 90<span style="font-size:1.3rem"> vanaf</span></b><ul><li>Wassen en drogen</li><li>Handmatig knippen</li><li>Nagelverzorging</li><li>Oorreiniging</li></ul></aside></div></section>
+
+<section id="planner" style="padding-top:0"><div class="wrap"><div class="pl reveal">
+ <div><h2>Wanneer is uw hond weer aan de beurt?</h2><p>Kies het vachttype en vul in wanneer uw hond voor het laatst getrimd is. U ziet direct een advies, en stuurt de aanvraag door.</p>
+  <div class="coat" id="coat"></div>
+  <div class="fld"><label for="last">Laatste trimbeurt</label><input type="date" id="last"></div>
+  <div class="fld"><label for="nm">Naam van uw hond</label><input type="text" id="nm" placeholder="Bijv. Fenna"></div></div>
+ <div class="out"><div class="k">Advies</div><div class="d" id="dd">...</div><p id="pp"></p><p style="font-size:.82rem;opacity:.7;margin-top:8px">Indicatieve intervallen, <span class="tbc">af te stemmen met Ted</span></p><div class="w" id="wk"></div>
+  <div class="act"><a class="btn h" id="wa" href="#">Stuur via WhatsApp</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div>
+</div></div></section>
+
+<section id="hoe" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Zo gaat een trimbeurt</h2></div>
+ <div class="how"><div class="reveal"><b>1. Aanmelden</b>U maakt een afspraak. We trimmen alleen op afspraak.</div><div class="reveal"><b>2. Verwennen</b>Bad, droogkap, knippen met de hand, nagels en oren.</div><div class="reveal"><b>3. Ophalen</b>Een schone, ontspannen hond. <span class="tbc">foto's graag aanleveren</span></div></div></div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap info"><div class="reveal"><h2 style="font-size:2.4rem;margin-bottom:10px">Contact</h2><p>Magelhaensstraat 6, 4812 RE Breda<br>06 15 71 99 21 · info@tedstrimsalon.nl</p><p style="margin-top:10px"><b>Op afspraak</b>, maandag t/m vrijdag 08:30 – 17:30. Zaterdag en zondag gesloten.</p></div>
+ <div class="reveal" style="background:var(--hon);border-radius:24px;padding:26px"><b style="font-family:'Baloo 2';font-size:1.4rem">Geen stress voor de hond</b><p>Rust voorop: een hond die zich veilig voelt, trimt het mooist. Reviews: 5,0 op basis van 4 Google-reviews.</p></div></div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website. Overige tarieven en foto's te bevestigen met de eigenaar.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var C=[['Krullend of wollig','elke 6 weken',6,'Poedel, doodle of bichon: de vacht klit snel.'],['Lang haar','elke 8 weken',8,'Regelmatig trimmen voorkomt klitten en knopen.'],['Kort haar','elke 10 weken',10,'Een frisse beurt houdt de vacht gezond.'],['Ruwhaar','elke 12 weken',12,'Handmatig trimmen houdt de vachtstructuur.']];
+ C.forEach(function(c,i){$('coat').insertAdjacentHTML('beforeend','<input type="radio" name="c" id="c'+i+'"'+(i===0?' checked':'')+'><label for="c'+i+'"><b>'+c[0]+'</b><small>'+c[1]+'</small></label>')});
+ var t=new Date();t.setDate(t.getDate()-35);$('last').value=t.toISOString().slice(0,10);
+ function up(){var i=+document.querySelector('input[name=c]:checked').id.slice(1),c=C[i],v=$('last').value,n=$('nm').value||'uw hond';
+  var d=new Date((v||new Date().toISOString().slice(0,10))+'T12:00');d.setDate(d.getDate()+c[2]*7);while(d.getDay()===0||d.getDay()===6)d.setDate(d.getDate()+1);
+  var s=d.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'});$('dd').textContent=s;$('pp').textContent='Voor '+n+' raden wij '+c[1]+' aan. '+c[3];
+  $('wk').innerHTML='';for(var k=0;k<c[2];k++)$('wk').insertAdjacentHTML('beforeend','<i class="on" style="animation-delay:'+k*40+'ms"></i>');
+  var m='Hallo, ik wil graag een trimafspraak voor '+n+' rond '+s+'.\nVachttype: '+c[0].toLowerCase()+'.\nKunnen jullie een tijd voorstellen?';$('wa').href='https://wa.me/31615719921?text='+encodeURIComponent(m);$('cp').onclick=function(){copyTxt(this,m)}}
+ document.querySelector('.pl').addEventListener('input',up);up();
+})();
+</script>
+</body>
+</html>

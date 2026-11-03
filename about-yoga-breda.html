@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Yoga Breda – Yogalessen in Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor About Yoga Breda: groepslessen en individuele yoga aan de Hoornwerkstraat in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap');
+/* DESIGN: warm en aards, terracotta en zand met een donkere olijf. Kleuren: zand (#F2E8DA), terracotta (#B8573A), olijf (#2F3A2B), perzik (#F2C6A5), salie (#A9B39A).
+   Type: Instrument Serif (titels, cursief) + Outfit (tekst).
+   STRUCTUUR: grote kop met ademritme-bol die in- en uitzet (CSS, geen tekening), rooster met alle lessen per dag en filters, prijskaartjes, proefles in twee tikken.
+   MOTION: ademende cirkel, reveal, rooster dat filtert met zachte overgang. */
+:root{--sand:#F2E8DA;--terra:#B8573A;--olive:#2F3A2B;--peach:#F2C6A5;--sage:#A9B39A;--acc:#B8573A}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--sand);color:var(--olive);font-size:17px;line-height:1.65;font-weight:400}
+h1,h2,h3{font-family:'Instrument Serif',serif;font-weight:400;line-height:1.02}
+em{color:var(--terra)}
+.demo-bar{background:var(--olive);color:var(--peach)}
+header.top{position:sticky;top:0;z-index:40;background:rgba(242,232,218,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(47,58,43,.16)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:70px}
+.logo{font-family:'Instrument Serif';font-size:1.6rem;text-decoration:none}
+.top nav{display:flex;gap:24px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:500;font-size:.93rem}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;font:inherit;font-weight:500;text-decoration:none;border:1.5px solid var(--olive);cursor:pointer;transition:.2s;background:var(--olive);color:#fff}
+.btn:hover{background:var(--terra);border-color:var(--terra)}.btn.l{background:transparent;color:var(--olive)}.btn.l:hover{background:var(--olive);color:#fff}.top .btn{padding:8px 18px;font-size:.9rem}
+.hero{padding:76px 0 80px}.hero .g{max-width:880px}
+.hero h1{font-size:clamp(3.2rem,8vw,7rem)}.hero p{max-width:29em;margin:20px 0 28px;font-size:1.12rem}
+.breath{aspect-ratio:1;max-width:340px;margin:0 auto;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--peach),var(--terra));display:grid;place-items:center;color:#fff;font-family:'Instrument Serif';font-size:1.8rem;animation:br 8s ease-in-out infinite;width:100%}
+@keyframes br{0%,100%{transform:scale(.82)}50%{transform:scale(1)}}
+.breath span::after{content:"adem in";animation:tx 8s steps(1) infinite}@keyframes tx{50%{content:"adem uit"}}
+section{padding:84px 0}
+.sh{margin-bottom:30px;max-width:32em}.sh h2{font-size:clamp(2.3rem,4.8vw,3.7rem);margin-bottom:8px}
+.flt{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}.flt input{position:absolute;opacity:0}.flt label{border:1.5px solid var(--olive);border-radius:999px;padding:7px 18px;cursor:pointer;font-weight:500;font-size:.95rem;transition:.2s}
+.flt input:checked+label{background:var(--olive);color:#fff}.flt input:focus-visible+label{outline:3px solid var(--terra)}
+.tt{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.dy{background:rgba(255,255,255,.55);border-radius:18px;padding:14px 10px;min-height:120px}.dy h3{font-size:1.3rem;text-align:center;margin-bottom:8px}.dy.t h3{color:var(--terra)}
+.sl{display:block;width:100%;font:inherit;font-size:.85rem;text-align:center;border:0;border-radius:12px;padding:9px 4px;margin-bottom:6px;cursor:pointer;transition:opacity .3s,transform .2s,background .2s;color:#fff}
+.sl.g{background:var(--olive)}.sl.i{background:var(--terra)}.sl:hover{transform:translateY(-2px)}.sl[aria-pressed=true]{outline:3px solid var(--peach);outline-offset:2px}.sl.off{opacity:.15;pointer-events:none}
+.sl small{display:block;opacity:.85}
+.legend{display:flex;gap:16px;margin-top:14px;font-size:.88rem}.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px}
+.book{background:var(--olive);color:var(--sand);border-radius:28px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:30px}
+.book h3{font-size:2.2rem;margin-bottom:8px}.book .p{font-family:'Instrument Serif';font-size:3.4rem;color:var(--peach);line-height:1}
+.book input{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:0;margin:6px 0 10px}
+.act{display:flex;gap:8px;flex-wrap:wrap}.book .btn{background:var(--terra);border-color:var(--terra)}.book .btn.l{background:transparent;border-color:var(--sand);color:var(--sand)}
+.pr{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.pr div{background:#fff;border-radius:20px;padding:22px}.pr b{font-family:'Instrument Serif';font-size:2.3rem;color:var(--terra);display:block;line-height:1}
+.ft{background:var(--olive);color:var(--peach)}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.hero .g,.book,.pr{grid-template-columns:1fr}.pr{grid-template-columns:1fr 1fr}.tt{grid-template-columns:1fr 1fr}.breath{max-width:220px}.book{padding:26px 20px}section{padding:56px 0}.hero{padding:46px 0}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor About Yoga Breda. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">About Yoga Breda</a><nav><a href="#rooster">Rooster</a><a href="#tarieven">Tarieven</a><a href="#contact">Contact</a><a class="btn" href="#rooster">Proefles</a></nav></div></header>
+<main>
+<section class="hero"><div class="wrap g"><div><h1 class="reveal">Yoga met <em>aandacht</em>, in het hart van Breda.</h1>
+ <p class="reveal">Groepslessen en individuele sessies van 90 minuten aan de Hoornwerkstraat, ook in het Engels en vroeg in de ochtend. Begin met een proefles.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn" href="#rooster">Kies uw proefles</a><a class="btn l" href="tel:0652400278">06 52 40 02 78</a></div></div>
+</div></section>
+
+<section id="rooster" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Het weekrooster</h2><p>Filter op wat u zoekt en tik een les aan om uw proefles te plannen.</p></div>
+ <div class="flt reveal" id="flt"></div><div class="tt reveal" id="tt"></div>
+ <div class="legend"><span><i style="background:var(--olive)"></i>Groepsles</span><span><i style="background:var(--terra)"></i>Individueel</span></div>
+ <div class="book reveal"><div><h3 id="bt">Kies een les</h3><div class="p" id="bp"></div><p id="bd" style="opacity:.85;margin-top:8px"></p></div>
+  <div><label for="nm" style="font-weight:500">Uw naam</label><input id="nm" type="text" placeholder="Voornaam"><div class="act"><a class="btn" id="ml" href="#">Mail Ilse</a><a class="btn" id="wa" href="#">WhatsApp</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div></div>
+</div></section>
+
+<section id="tarieven" style="padding-top:0"><div class="wrap"><div class="sh reveal"><h2>Tarieven</h2></div>
+ <div class="pr"><div class="reveal"><b>€ 18,50</b>Proefles groep, 90 minuten</div><div class="reveal"><b>€ 45</b>Proefles individueel, 90 minuten</div><div class="reveal"><b>€ 182</b>Kwartaal groep: 13 lessen, € 14 per les</div><div class="reveal"><b>€ 45</b>Individuele les, 90 minuten</div></div></div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap"><div class="reveal" style="max-width:34em"><div class="sh"><h2>Welkom op de mat</h2></div><p>Hoornwerkstraat 1S, Breda<br>Ilse · 06 52 40 02 78 · ilse@aboutyogabreda.nl</p><p style="margin-top:10px">Maak kennis met Ilse en de les. <span class="tbc">foto's en achtergrond te bevestigen</span></p></div></div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var D=[['Ma',1],['Di',2],['Wo',3],['Do',4],['Vr',5],['Za',6]];
+ var L=[[1,'19:30','g',['en']],[2,'19:30','g',[]],[3,'07:00','g',['vroeg']],[3,'19:30','g',[]],[4,'19:30','g',[]],[5,'09:00','g',[]],[6,'09:00','g',[]],
+  [1,'09:00','i',[]],[1,'11:00','i',[]],[2,'09:00','i',[]],[2,'11:00','i',[]],[3,'09:00','i',[]],[3,'11:00','i',[]],[6,'11:00','i',[]]];
+ var F=[['Alles','all'],['Groepsles','g'],['Individueel','i'],['English','en'],['Vroeg','vroeg']],f='all',sel=null;
+ F.forEach(function(x,i){$('flt').insertAdjacentHTML('beforeend','<input type="radio" name="f" id="f'+i+'"'+(i===0?' checked':'')+'><label for="f'+i+'">'+x[0]+'</label>')});
+ var NM={1:'maandag',2:'dinsdag',3:'woensdag',4:'donderdag',5:'vrijdag',6:'zaterdag'},td=nlNow().d;
+ function end(t){var a=t.split(':');var m=(+a[0])*60+(+a[1])+90;return ('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2)}
+ function draw(){var h='';D.forEach(function(d){h+='<div class="dy'+(d[1]===td?' t':'')+'"><h3>'+d[0]+'</h3>';L.filter(function(l){return l[0]===d[1]}).sort(function(a,b){return a[1]<b[1]?-1:1}).forEach(function(l,i){var id=l[0]+l[1]+l[2],off=!(f==='all'||f===l[2]||l[3].indexOf(f)>-1);
+   h+='<button type="button" class="sl '+l[2]+(off?' off':'')+'" data-id="'+id+'" aria-pressed="'+(sel===id)+'">'+l[1]+'<small>'+(l[2]==='g'?'Groep':'Individueel')+(l[3].indexOf('en')>-1?' · EN':'')+'</small></button>'});h+='</div>'});$('tt').innerHTML=h;
+  [].forEach.call($('tt').querySelectorAll('.sl'),function(b){b.onclick=function(){sel=b.dataset.id;draw();up()}})}
+ function cur(){return L.filter(function(l){return l[0]+l[1]+l[2]===sel})[0]}
+ function msg(){var l=cur();if(!l)return '';return 'Hallo Ilse, ik wil graag een proefles volgen: '+(l[2]==='g'?'groepsles':'individuele les')+' op '+NM[l[0]]+' om '+l[1]+'.\nNaam: '+($('nm').value||'-')+'\nKunt u bevestigen of er plek is?'}
+ function up(){var l=cur();if(!l){$('bt').textContent='Kies een les';$('bp').textContent='';$('bd').textContent='Tik een les aan in het rooster.';$('ml').style.display=$('wa').style.display=$('cp').style.display='none';return}
+  $('ml').style.display=$('wa').style.display=$('cp').style.display='';
+  $('bt').textContent=NM[l[0]][0].toUpperCase()+NM[l[0]].slice(1)+' '+l[1]+' – '+end(l[1]);$('bp').textContent=l[2]==='g'?'€ 18,50':'€ 45';$('bd').textContent=(l[2]==='g'?'Proefles groep':'Proefles individueel')+' · 90 minuten';
+  var m=msg();$('ml').href='mailto:ilse@aboutyogabreda.nl?subject='+encodeURIComponent('Proefles aanvragen')+'&body='+encodeURIComponent(m);$('wa').href='https://wa.me/31652400278?text='+encodeURIComponent(m);$('cp').onclick=function(){copyTxt(this,m)}}
+ $('flt').addEventListener('change',function(){f=F[+document.querySelector('input[name=f]:checked').id.slice(1)][1];draw()});
+ $('nm').addEventListener('input',up);draw();up();
+})();
+</script>
+</body>
+</html>

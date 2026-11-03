@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Van Wonderen Tegelwerken – Tegelzetter Breda (demo)</title>
+<meta name="description" content="Demo-ontwerp voor Van Wonderen Tegelwerken: badkamers, vloeren en wanden in Breda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500;75..125,700;75..125,800&family=Work+Sans:wght@400;500;600&display=swap');
+/* DESIGN: strak en ambachtelijk, betonkleur met een diepe teal en een koperoranje accent. Kleuren: beton (#E4E2DD), grafiet (#222629), teal (#0F5C63), koper (#D4733A), wit.
+   Type: Archivo (titels, gecomprimeerd) + Work Sans (tekst).
+   STRUCTUUR: kop met tegelraster als typografisch patroon, specialisaties als tegelkaarten, tegelcalculator (afmetingen, formaat, snijverlies) met live rooster, offerte via WhatsApp of telefoon.
+   MOTION: reveal, tegelrooster dat zich opbouwt bij wijziging, live berekening. */
+:root{--bt:#E4E2DD;--gr:#222629;--teal:#0F5C63;--cu:#D4733A;--acc:#D4733A}
+html{overflow-x:hidden;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}img{max-width:100%}
+:focus-visible{outline:3px solid var(--acc,#06f);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--acc,#06f);z-index:90}
+.demo-bar{font-size:.82rem;text-align:center;padding:8px 16px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.reveal.is-visible{opacity:1;transform:none}
+.tbc{display:inline-block;background:rgba(128,128,128,.16);border-radius:6px;padding:1px 8px;font-size:.82em}
+footer.ft{padding:30px 0;font-size:.85rem;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+
+body{font-family:'Work Sans',system-ui,sans-serif;background:#F6F5F2;color:var(--gr);font-size:17px;line-height:1.62}
+h1,h2,h3{font-family:'Archivo',sans-serif;font-weight:800;line-height:1;letter-spacing:-.01em;text-transform:uppercase}
+.demo-bar{background:var(--gr);color:#cfc9bd}
+header.top{position:sticky;top:0;z-index:40;background:rgba(246,245,242,.96);backdrop-filter:blur(8px);border-bottom:2px solid var(--gr)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Archivo';font-weight:800;text-transform:uppercase;text-decoration:none;font-size:1.05rem;letter-spacing:.02em}.logo b{color:var(--cu)}
+.top nav{display:flex;gap:22px;align-items:center}.top nav a:not(.btn){text-decoration:none;font-weight:600;font-size:.92rem}
+.btn{display:inline-block;padding:14px 26px;font:inherit;font-weight:700;text-decoration:none;border:2px solid var(--gr);cursor:pointer;transition:.2s;background:var(--gr);color:#fff}
+.btn:hover{background:var(--cu);border-color:var(--cu)}.btn.c{background:var(--cu);border-color:var(--cu)}.btn.c:hover{background:var(--gr);border-color:var(--gr)}.btn.l{background:transparent;color:var(--gr)}.btn.l:hover{background:var(--gr);color:#fff}.top .btn{padding:9px 18px;font-size:.9rem}
+.hero{padding:70px 0 0;overflow:hidden}
+.hero h1{font-size:clamp(3.2rem,9vw,8rem);max-width:8em}.hero h1 span{color:var(--teal)}
+.hero p{max-width:30em;margin:22px 0 28px;font-size:1.12rem}
+.grid8{display:grid;grid-template-columns:repeat(8,1fr);margin-top:64px;height:80px}
+.grid8 i{border:1px solid rgba(34,38,41,.25);margin:-1px 0 0 -1px;background:var(--bt);transition:background .4s}
+.grid8 i:nth-child(3n){background:var(--teal)}.grid8 i:nth-child(5n){background:var(--cu)}.grid8 i:nth-child(7n){background:var(--gr)}
+section{padding:90px 0}
+.sh{margin-bottom:32px;max-width:32em}.sh h2{font-size:clamp(2.2rem,5vw,3.8rem);margin-bottom:10px}
+.tl{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--gr)}
+.tc{padding:26px;border:1px solid var(--gr);background:#fff;transition:.25s}.tc:hover{background:var(--teal);color:#fff}.tc h3{font-size:1.4rem;margin-bottom:8px}
+.calc{background:var(--gr);color:#fff;padding:46px;display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.calc h2{font-size:2.4rem;margin-bottom:10px}
+.sl{margin:16px 0}.sl label{display:flex;justify-content:space-between;font-weight:600;margin-bottom:6px}.sl b{color:var(--cu)}
+input[type=range]{width:100%;accent-color:var(--cu)}
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px}.seg input{position:absolute;opacity:0}.seg label{border:2px solid #fff;padding:8px 14px;cursor:pointer;font-weight:600;font-size:.92rem;transition:.2s}
+.seg input:checked+label{background:var(--cu);border-color:var(--cu)}.seg input:focus-visible+label{outline:3px solid #fff}
+.viz{background:#fff;color:var(--gr);padding:26px;align-self:start}
+.floor{border:3px solid var(--gr);margin:0 auto 18px;display:grid;background:var(--bt);max-width:100%;transition:all .4s}
+.floor i{border:1px solid rgba(34,38,41,.35);background:linear-gradient(135deg,#f3f1ec,#d9d5cb);animation:ti .5s both}
+@keyframes ti{from{opacity:0;transform:scale(.6)}}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:10px}.res div{border-top:3px solid var(--gr);padding-top:8px}.res b{font-family:'Archivo';font-size:2rem;display:block;line-height:1}
+.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.fine{font-size:.82rem;opacity:.7;margin-top:10px}
+.cta{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.ct{display:grid;gap:10px}.ct div{border-left:4px solid var(--cu);padding:6px 0 6px 14px}
+.ft{background:var(--bt)}
+@media(max-width:800px){.top nav a:not(.btn){display:none}.tl,.calc,.cta{grid-template-columns:1fr}.calc{padding:26px 20px}.grid8{height:50px}section{padding:60px 0}.hero{padding-top:46px}}
+</style>
+</head>
+<body>
+<div class="pg" id="pg"></div>
+<div class="demo-bar">Demo-ontwerp, gemaakt als voorstel voor Van Wonderen Tegelwerken. Geen officiële website.</div>
+<header class="top"><div class="wrap"><a class="logo" href="#">Van Wonderen <b>Tegelwerken</b></a><nav><a href="#werk">Werk</a><a href="#calc">Tegelcalculator</a><a href="#contact">Contact</a><a class="btn c" href="#contact">Offerte</a></nav></div></header>
+<main>
+<section class="hero" style="padding-bottom:0"><div class="wrap"><h1 class="reveal">Tegels die <span>strak</span> liggen.</h1>
+ <p class="reveal">Badkamers, vloeren, wanden en buitentegelwerk in Breda en omgeving. Netjes gelegd, strak gevoegd en schoon opgeleverd door Jaap van Wonderen.</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap" class="reveal"><a class="btn c" href="#calc">Bereken uw tegels</a><a class="btn l" href="tel:0618249249">06 18 24 92 49</a></div></div><div class="grid8" id="g8" aria-hidden="true"></div></section>
+
+<section id="werk"><div class="wrap"><div class="sh reveal"><h2>Wat we leggen</h2></div>
+ <div class="tl"><div class="tc reveal"><h3>Badkamer renovatie</h3>Van sloop tot oplevering.</div><div class="tc reveal"><h3>Vloertegelwerk</h3>Woonkamer, keuken, hal.</div><div class="tc reveal"><h3>Wandtegels</h3>Inclusief wandafwerking.</div><div class="tc reveal"><h3>Buitentegelwerk</h3>Terras, balkon, trap.</div><div class="tc reveal"><h3>Kit- en voegwerk</h3>Waterdicht en strak.</div><div class="tc reveal"><h3>Maatwerk</h3>Decoratief en patroonwerk.</div></div>
+ <p class="reveal" style="margin-top:14px;font-size:.92rem">5,0 gemiddeld op basis van 7 Google-reviews. Eenmanszaak, KvK 86555499.</p></div></section>
+
+<section id="calc" style="padding-top:0"><div class="wrap"><div class="calc reveal">
+ <div><h2>Hoeveel tegels heb ik nodig?</h2><p style="color:#cfc9bd">Vul de afmetingen van uw ruimte in. U ziet het aantal tegels, inclusief snijverlies. Stuur het resultaat mee met uw offerteaanvraag.</p>
+  <div class="sl"><label for="L">Lengte <b id="Lv"></b></label><input type="range" id="L" min="1" max="12" step="0.1" value="4"></div>
+  <div class="sl"><label for="B">Breedte <b id="Bv"></b></label><input type="range" id="B" min="1" max="10" step="0.1" value="3"></div>
+  <b>Tegelformaat</b><div class="seg" id="sz"></div><b>Legpatroon</b><div class="seg" id="pt"></div></div>
+ <div class="viz"><div class="floor" id="fl"></div><div class="res"><div><b id="r1">0</b>tegels (incl. verlies)</div><div><b id="r2">0</b>m² totaal</div></div><p class="fine" id="fn"></p>
+  <div class="act"><a class="btn c" id="wa" href="#">Stuur naar Jaap</a><button class="btn l" id="cp" type="button">Kopieer</button></div></div>
+</div></div></section>
+
+<section id="contact" style="padding-top:0"><div class="wrap cta"><div class="reveal"><div class="sh"><h2>Offerte aanvragen</h2><p>Bel of app. Vermeld de afmetingen en de plek, en stuur gerust foto's mee.</p></div></div>
+ <div class="ct reveal"><div><b>Telefoon / WhatsApp</b><br>06 18 24 92 49</div><div><b>E-mail</b><br>wonderentegelwerken@gmail.com</div><div><b>Adres</b><br>Leistraat 19, 4818 NA Breda</div></div></div></section>
+</main>
+<footer class="ft"><div class="wrap">Demo-ontwerp, geen officiële website. Projectfoto's en openingstijden te bevestigen met de eigenaar.</div></footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var pg=$('pg');addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el,k){el.style.setProperty('--i',k%4);io.observe(el)});
+function copyTxt(btn,txt,label){var d=function(){btn.textContent='Gekopieerd';setTimeout(function(){btn.textContent=label||'Kopieer'},1800)};if(navigator.clipboard){navigator.clipboard.writeText(txt).then(d,d)}else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);d()}}
+function nlNow(){var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Amsterdam',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});var dm={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return{d:dm[o.weekday],m:(+o.hour%24)*60+(+o.minute)}}
+function hm(s){var a=s.split(':');return(+a[0])*60+(+a[1])}
+/* H: {dag(0-6): ['09:00','18:00']} */
+function openState(H){var n=nlNow(),h=H[n.d];if(h&&n.m>=hm(h[0])&&n.m<hm(h[1]))return{open:true,txt:'Nu open tot '+h[1]};for(var k=0;k<8;k++){var dd=(n.d+k)%7,x=H[dd];if(x&&(k>0||n.m<hm(x[0]))){var nm=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'][dd];return{open:false,txt:'Gesloten, open '+(k===0?'vandaag':k===1?'morgen':nm)+' om '+x[0]}}}return{open:false,txt:'Gesloten'}}
+
+ var g=$('g8');for(var i=0;i<24;i++)g.appendChild(document.createElement('i'));
+ var SZ=[['30×30',.3,.3],['60×60',.6,.6],['30×60',.3,.6],['60×120',.6,1.2]],PT=[['Recht',.07],['Verspringend',.12],['Diagonaal',.15]];
+ SZ.forEach(function(s,i){$('sz').insertAdjacentHTML('beforeend','<input type="radio" name="s" id="s'+i+'"'+(i===1?' checked':'')+'><label for="s'+i+'">'+s[0]+' cm</label>')});
+ PT.forEach(function(s,i){$('pt').insertAdjacentHTML('beforeend','<input type="radio" name="p" id="p'+i+'"'+(i===0?' checked':'')+'><label for="p'+i+'">'+s[0]+'</label>')});
+ var nf=function(n){return n.toLocaleString('nl-NL',{maximumFractionDigits:1})};
+ function up(){var L=+$('L').value,B=+$('B').value,s=SZ[+document.querySelector('input[name=s]:checked').id.slice(1)],p=PT[+document.querySelector('input[name=p]:checked').id.slice(1)];
+  $('Lv').textContent=nf(L)+' m';$('Bv').textContent=nf(B)+' m';var m2=L*B,n=Math.ceil(m2/(s[1]*s[2])*(1+p[1]));
+  $('r1').textContent=n;$('r2').textContent=nf(m2*(1+p[1]));
+  var cols=Math.max(1,Math.round(L/s[1])),rows=Math.max(1,Math.round(B/s[2])),fl=$('fl');cols=Math.min(cols,16);rows=Math.min(rows,12);
+  fl.style.gridTemplateColumns='repeat('+cols+',1fr)';fl.style.aspectRatio=L+'/'+B;fl.style.width=Math.min(100,L/12*100+30)+'%';fl.innerHTML='';
+  for(var k=0;k<cols*rows;k++){var t=document.createElement('i');t.style.animationDelay=Math.min(k*8,500)+'ms';fl.appendChild(t)}
+  $('fn').textContent='Rekening gehouden met '+Math.round(p[1]*100)+'% snijverlies ('+p[0].toLowerCase()+'). Indicatie, geen offerte.';
+  var m='Hallo Jaap, ik wil graag een offerte voor tegelwerk.\nRuimte: '+nf(L)+' x '+nf(B)+' m ('+nf(m2)+' m²)\nTegels: '+s[0]+' cm, '+p[0].toLowerCase()+' gelegd, circa '+n+' stuks.\nKunnen jullie langskomen of een prijs geven?';
+  $('wa').href='https://wa.me/31618249249?text='+encodeURIComponent(m);$('cp').onclick=function(){copyTxt(this,m)}}
+ document.querySelector('.calc').addEventListener('input',up);up();
+})();
+</script>
+</body>
+</html>
